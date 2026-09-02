@@ -9,100 +9,7 @@
 <meta property="og:description" content="Training-free logical anomaly detection. 93.2 AUROC on MVTec-LOCO with three references.">
 <meta property="og:image" content="assets/teaser.jpg">
 <meta property="og:type" content="website">
-<style>
-:root{
-  --bg:#fbfbfa; --panel:#fff; --ink:#1a1a18; --muted:#6b6b66; --line:#e4e3df;
-  --accent:#8a3324; --accent-soft:#f5ece9; --code-bg:#f4f3f0;
-  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
-  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
-}
-@media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]){
-    --bg:#16161a; --panel:#1d1d22; --ink:#e8e7e3; --muted:#9a9a94; --line:#2f2f36;
-    --accent:#e0876f; --accent-soft:#2a1e1b; --code-bg:#232329;
-  }
-}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);
-     line-height:1.65;-webkit-font-smoothing:antialiased}
-.wrap{max-width:900px;margin:0 auto;padding:0 24px}
-
-/* ---------- header ---------- */
-header{padding:64px 0 40px;text-align:center;border-bottom:1px solid var(--line)}
-h1{font-family:var(--serif);font-size:clamp(2.1rem,5.5vw,3.1rem);line-height:1.15;
-   margin:0 0 6px;letter-spacing:-.02em}
-h1 .name{color:var(--accent)}
-.sub{font-family:var(--serif);font-size:clamp(1.05rem,2.4vw,1.3rem);color:var(--muted);
-     margin:0 auto 26px;max-width:34ch;font-style:italic}
-.authors{font-size:1.02rem;margin:0 0 4px}
-.authors a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line)}
-.authors a:hover{border-color:var(--accent);color:var(--accent)}
-.affil{color:var(--muted);font-size:.94rem;margin:0 0 6px}
-.venue{display:inline-block;margin-top:14px;padding:4px 12px;border-radius:999px;
-       background:var(--accent-soft);color:var(--accent);font-size:.85rem;font-weight:600;
-       letter-spacing:.04em}
-
-/* ---------- buttons ---------- */
-.links{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:28px 0 0}
-.btn{display:inline-flex;align-items:center;gap:8px;padding:9px 18px;border-radius:8px;
-     background:var(--ink);color:var(--bg);text-decoration:none;font-size:.94rem;
-     font-weight:500;transition:transform .12s ease,opacity .12s ease}
-.btn:hover{transform:translateY(-1px);opacity:.88}
-.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
-.btn.ghost:hover{border-color:var(--accent);color:var(--accent)}
-.btn svg{width:16px;height:16px;fill:currentColor}
-
-/* ---------- sections ---------- */
-section{padding:52px 0;border-bottom:1px solid var(--line)}
-section:last-of-type{border-bottom:none}
-h2{font-family:var(--serif);font-size:1.6rem;margin:0 0 18px;letter-spacing:-.01em}
-h3{font-size:1.02rem;margin:26px 0 8px;letter-spacing:.01em}
-p{margin:0 0 15px}
-.lede{font-size:1.08rem}
-figure{margin:0 0 8px}
-figure img{width:100%;height:auto;display:block;border-radius:10px;
-           border:1px solid var(--line);background:var(--panel)}
-figcaption{font-size:.9rem;color:var(--muted);margin-top:11px;line-height:1.55}
-figcaption b{color:var(--ink);font-weight:600}
-
-/* ---------- the two-scaffold cards ---------- */
-.cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:22px 0 6px}
-@media (max-width:640px){.cards{grid-template-columns:1fr}}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px 20px}
-.card h4{margin:0 0 6px;font-size:1rem}
-.card .tag{display:inline-block;font-size:.74rem;letter-spacing:.07em;text-transform:uppercase;
-           color:var(--accent);font-weight:700;margin-bottom:7px}
-.card p{margin:0;font-size:.93rem;color:var(--muted)}
-
-/* ---------- table ---------- */
-.scroll{overflow-x:auto;margin:18px 0 10px}
-table{border-collapse:collapse;width:100%;font-size:.9rem;min-width:520px}
-th,td{padding:8px 10px;text-align:right;border-bottom:1px solid var(--line);
-      font-variant-numeric:tabular-nums}
-th:first-child,td:first-child{text-align:left}
-thead th{font-size:.78rem;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);
-         border-bottom:1.5px solid var(--line)}
-tbody tr.ours{background:var(--accent-soft)}
-tbody tr.ours td{font-weight:700;color:var(--accent);border-bottom-color:var(--accent)}
-tbody td.backbone{color:var(--muted);font-size:.85rem;text-align:left}
-.rule-top td{border-top:1.5px solid var(--line)}
-
-/* ---------- code ---------- */
-pre{background:var(--code-bg);border:1px solid var(--line);border-radius:9px;
-    padding:15px 17px;overflow-x:auto;font-family:var(--mono);font-size:.85rem;
-    line-height:1.6;margin:14px 0}
-code{font-family:var(--mono);font-size:.88em;background:var(--code-bg);
-     padding:1px 5px;border-radius:4px}
-pre code{background:none;padding:0;font-size:1em}
-.c{color:var(--muted)}
-
-/* ---------- footer ---------- */
-footer{padding:38px 0 60px;font-size:.86rem;color:var(--muted)}
-footer a{color:var(--muted)}
-footer p{margin:0 0 9px}
-a{color:var(--accent)}
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -123,7 +30,7 @@ a{color:var(--accent)}
         <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.4 7.4 0 014 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
         Code
       </a>
-      <a class="btn ghost" href="#results">Results</a>
+      <a class="btn ghost" href="supplement.html">Supplementary</a>
       <a class="btn ghost" href="#bibtex">BibTeX</a>
     </div>
   </div>

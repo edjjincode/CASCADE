@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CASCADE — Supplementary Material</title>
+<meta name="description" content="Material cut from the CASCADE paper for space: the calibration grid solver with proofs, reference sensitivity, and the full three-backbone probes.">
+<link rel="stylesheet" href="style.css">
+<script>
+MathJax = {tex:{inlineMath:[['\\(','\\)']], displayMath:[['\\[','\\]']]},
+           options:{skipHtmlTags:['script','noscript','style','textarea','pre','code']}};
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+<header class="slim">
+  <div class="wrap">
+    <p class="crumb"><a href="./">CASCADE</a> &nbsp;/&nbsp; Supplementary</p>
+    <h1>Supplementary Material</h1>
+    <p class="sub">What did not fit in ten pages.</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+<section>
+  <p class="lede">A conference paper has a page limit; a project page does not. Everything below
+    was written for the paper and cut for space — the grid solver's proofs, the reference
+    sensitivity study's figure, and the versions of two probes that were run on three backbones
+    rather than the one the paper had room to print.</p>
+  <p class="note">Notation follows the paper: \(w\) is the grid's cell width, \(a\) its offset,
+    \(m\) the reading margin and \(w_{\min}\) the legibility floor. Two of the figures were
+    drawn before the notation settled and still label the cell width \(\Delta\); it is the same
+    quantity as \(w\).</p>
+</section>
+
+<section id="solver">
+  <h2>A &nbsp;·&nbsp; Calibration grid solver</h2>
+  <p>The paper states the single-group case in closed form,
+    \(w^{\ast} = \max(w_{\min},\, \rho + 2m)\), and gives the algorithm that generalises it.
+    The two propositions that justify the algorithm — why a feasible offset forms an interval,
+    and why the search over \(w\) can be bracketed — were cut. They are the reason the solver
+    can scan a small range and stop at the first feasible width rather than optimise.</p>
+
+  <h3>Setup</h3>
+  <p>For each axis, let each edge group \(g\) collect \(K\) reference coordinates with range
+    \(R(g) = \max_i r_i - \min_i r_i\). The margin \(m\) absorbs the model's reading noise. A
+    grid \((w, a)\) partitions the axis into cells
+    \(B_k = [\,a + kw,\; a + (k{+}1)w\,)\).</p>
+
+  <div class="prop">
+    <p class="prop-head">Proposition 1 &nbsp;<span>(per-group feasibility)</span></p>
+    <p>The offsets \(a \in [0, w)\) that place every coordinate of group \(g\) in one cell with
+      margin \(m\) form the circular interval</p>
+    \[ I_g(w) \;=\; \bigl[\,\max_i r_i - w + m,\;\; \min_i r_i - m\,\bigr] \pmod{w}, \]
+    <p>of length \(w - R(g) - 2m\), non-empty if and only if \(w \ge R(g) + 2m\).</p>
+    <p class="proof"><b>Proof.</b> Containment requires
+      \(a + kw + m \le r_i \le a + (k{+}1)w - m\) for all \(i\). The lower bound gives
+      \(a + kw \le \min_i r_i - m\); the upper bound gives
+      \(a + kw \ge \max_i r_i - w + m\). Reducing modulo \(w\) yields the stated interval, whose
+      length is \(w - R(g) - 2m\). <span class="qed">∎</span></p>
+  </div>
+
+  <div class="prop">
+    <p class="prop-head">Proposition 2 &nbsp;<span>(bracketing \(w^{\ast}\))</span></p>
+    <p>Let \(W_g := R(g) + 2m\) and define</p>
+    \[ w_{\mathrm{lb}} := \max\bigl(w_{\min},\, \max_g W_g\bigr), \qquad
+       w_{\mathrm{ub}} := \max_{\mathrm{ax}} \sum_{g \in G_{\mathrm{ax}}} W_g \;+\; 1. \]
+    <p>Every \(w < w_{\mathrm{lb}}\) is infeasible, and every \(w \ge w_{\mathrm{ub}}\) is
+      feasible.</p>
+    <p class="proof"><b>Proof.</b> If \(w < \max_g W_g\), the tightest group has negative
+      interval length, so by Proposition 1 no offset works. If
+      \(w \ge \sum_g W_g + 1\), the interval lengths sum to more than \(w\) on \([0, w)\), which
+      guarantees a non-empty intersection. <span class="qed">∎</span></p>
+  </div>
+
+  <p>The optimal \(w^{\ast}\) is therefore found by scanning
+    \([w_{\mathrm{lb}},\, w_{\mathrm{ub}}]\) and returning the first width admitting an offset
+    on both axes — at most about 50 values in practice. Total cost is \(O(K \times J)\) over
+    \(K\) references and \(J\) constraints, effectively constant for \(K = 3\), \(J \le 5\).</p>
+
+  <h3>Algorithm 2 &nbsp;<span class="light">Calibration grid solver</span></h3>
+<pre class="algo"><b>Require:</b> \(\{r_k^{g}\}\) for all groups \(g\) on both axes, \(w_{\min}\), \(m\)
+<b>Ensure:</b>  \((w^{\ast},\, a_x^{\ast},\, a_y^{\ast})\)
+
+ 1  <b>for</b> each group \(g\) <b>do</b>
+ 2      \(W_g \gets R(g) + 2m\)
+ 3  \(w_{\mathrm{lb}} \gets \max(w_{\min},\, \max_g W_g)\)
+ 4  \(w_{\mathrm{ub}} \gets \max_{\mathrm{ax}} \sum_{g \in G_{\mathrm{ax}}} W_g + 1\)
+ 5  <b>for</b> \(w = w_{\mathrm{lb}}\) <b>to</b> \(w_{\mathrm{ub}}\) <b>do</b>
+ 6      <b>for</b> each axis \(\mathrm{ax} \in \{x, y\}\) <b>do</b>
+ 7          \(I_{\mathrm{ax}} \gets \bigcap_{g \in G_{\mathrm{ax}}}
+                 \bigl[\max_k r_k^{g} - w + m,\; \min_k r_k^{g} - m\bigr] \bmod w\)
+ 8      <b>if</b> \(I_x \ne \emptyset\) <b>and</b> \(I_y \ne \emptyset\) <b>then</b>
+ 9          <b>return</b> \((w,\; a_x \in I_x,\; a_y \in I_y)\)</pre>
+
+  <p class="note">The released implementation of this solver is
+    <a href="https://github.com/edjjincode/CASCADE/blob/main/cascade/calibrate.py"><code>cascade/calibrate.py</code></a>.
+    It follows the same bracket-and-scan structure and adds the bookkeeping a real image needs —
+    assigning boundary pixels to edges, discarding excursions, and handling an object that
+    shifts bodily between references.</p>
+</section>
+
+<section id="sensitivity">
+  <h2>B &nbsp;·&nbsp; Reference sensitivity</h2>
+  <p>The grid estimates its cell width from \(K\) references, so \(K\) governs how reliably the
+    normal range is recovered. The disambiguation scaffold takes its configuration from the
+    constraint text and is unaffected by \(K\), so this study covers calibration constraints
+    only. The paper reports the numbers; the figure was cut.</p>
+
+  <figure>
+    <img src="assets/ksens.jpg" alt="Two line charts against number of references K on the x-axis, for five calibration constraints. Left: balanced accuracy rises steeply from K=1 to K=3 and then flattens. Right: estimated cell width rises from K=1 and converges by K=3 toward its full-reference value, with shaded variance contracting.">
+    <figcaption><b>Accuracy and the estimated cell width both converge by \(K = 3\).</b>
+      Shaded bands are the spread across reference sets. The dashed line marks the value used
+      throughout the paper; open markers at the right are the full-reference limit.</figcaption>
+  </figure>
+
+  <p>At \(K = 1\) a single reference cannot span the normal range, so the width is
+    underestimated, the grid comes out too narrow, and normal queries are misread as violations.
+    JB-Fruit reaches only \(70.7\) balanced accuracy with a standard deviation of \(22.5\)
+    across reference sets, and BB-Cereal only \(71.8 \pm 12.6\).</p>
+  <p>As \(K\) rises to 3 the estimated width converges toward its full-reference value and the
+    spread contracts sharply; accuracy follows, with JB-Fruit rising to \(94.4 \pm 3.9\) and
+    BB-Cereal to \(82.9 \pm 4.0\). The margin \(m\) absorbs what remains of estimating a range
+    from finitely many references, which is why the parameter converging translates into stable
+    accuracy. Beyond \(K = 3\), going to 5 or 10 yields negligible gain, so we fix
+    \(K = 3\) — the point where reference acquisition cost and accuracy balance.</p>
+</section>
+
+<section id="backbones">
+  <h2>C &nbsp;·&nbsp; The probes, on all three backbones</h2>
+  <p>Two of the analysis probes were run on three backbones. The paper had room for one panel
+    each and printed GPT-5-image-mini. The full versions are below, and they matter for a
+    reason the single panel cannot show: the failure being diagnosed is a property of the
+    <em>task</em>, not of one model's quirks.</p>
+
+  <h3>Counting identical instances</h3>
+  <figure>
+    <img src="assets/count3.jpg" alt="Three line charts, one per backbone, of counting accuracy against number of instances n. In each, the identical-instance curve falls away sharply beyond about nine instances while the distinct-colour curve stays near the top.">
+    <figcaption><b>Counting collapses on identical instances, and colour holds it up — on every
+      backbone.</b> Accuracy on identical objects (solid) falls away as the count grows, while
+      the same objects given distinct colours (dashed) stay near ceiling. The onset differs by
+      backbone, but the shape does not.</figcaption>
+  </figure>
+
+  <h3>Grid form under a shrinking violation</h3>
+  <figure>
+    <img src="assets/grid3.jpg" alt="Three line charts, one per backbone, of balanced accuracy against the violation margin in pixels. The object-centric grid line stays near the top and flat in all three panels, while the comparison, pixel and patch lines fluctuate well below it.">
+    <figcaption><b>Only the object-centric grid holds as the violation shrinks.</b> Comparison,
+      pixel-coordinate and patch forms fluctuate across margins and across backbones; the
+      object-anchored grid stays flat and near ceiling on all three.</figcaption>
+  </figure>
+
+  <p class="note">These are the probes behind the paper's two design claims — that instance
+    conflation is what the disambiguation scaffold has to fix, and that an object-anchored
+    discrete grid is the form the alignment scaffold has to take. Seeing them replicate across
+    three backbones is the evidence that the scaffolds are addressing the task rather than one
+    model.</p>
+</section>
+
+<footer>
+  <p><a href="./">← Back to the project page</a> &nbsp;·&nbsp;
+     <a href="assets/cascade_icdm2026.pdf">Paper</a> &nbsp;·&nbsp;
+     <a href="https://github.com/edjjincode/CASCADE">Code</a></p>
+  <p>Figures derive from the
+    <a href="https://www.mvtec.com/company/research/datasets/mvtec-loco">MVTec LOCO AD</a>
+    dataset (Bergmann et al., IJCV 2022), CC BY-NC-SA 4.0.</p>
+</footer>
+
+</div>
+</body>
+</html>
