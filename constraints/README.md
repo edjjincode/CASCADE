@@ -16,7 +16,17 @@ nothing else — no code, no derived artifacts. Two files:
 - arXiv: https://arxiv.org/abs/2503.20252
 - upstream dataset: MVTec LOCO AD (Bergmann et al., IJCV 2022, 'Beyond Dents and Scratches')
 
-Verbatim copy of LogicQA's bulleted per-class rules. Template slots {fruit}, {color} are kept as-is; they are specialized per-image at runtime.
+Verbatim copy of LogicQA's bulleted per-class rules, template slots and all.
+
+Four units carry a slot — `{fruit}` in JB-L1a, JB-L2b and JB-L2c, `{color}`
+in SC-L2 — because the rule is about whichever variant the image shows.
+This repository does not fill them in: the slot reaches the model as
+written, and the segmentation phrases Stage 2 chose are the ones it chose
+for the reference image's variant. Grounding a slotted rule against a
+different variant is therefore weaker than grounding an unslotted one.
+`run.py show` says which rules this affects. Rewriting the wording would
+be the easy fix and the wrong one — the point of taking LogicQA's
+sentences verbatim is that every method is given the same input.
 
 We do not write our own constraints. Using LogicQA's wording verbatim keeps
 every vision-language method on the same constraint input.

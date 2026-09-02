@@ -19,6 +19,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -100,6 +101,12 @@ def cmd_show(args) -> None:
 
     u = unit(args.constraint_id)
     print(f"{u['id']}  ({u['category']})\n  {u['text']}\n")
+    slots = re.findall(r"\{(\w+)\}", u["text"])
+    if slots:
+        print(f"  note     this rule names a variant it does not fix "
+              f"({', '.join('{' + s + '}' for s in slots)}). The slot is sent "
+              f"as written, and the\n           segmentation phrases below "
+              f"were chosen for the reference image's variant.\n")
 
     entry = load_calibration().get(u["id"])
     if entry is None:
@@ -140,12 +147,42 @@ def cmd_scaffold(args) -> None:
         sys.exit(f"{args.constraint_id} is not calibrated. "
                  f"Run: python run.py calibrate <category>")
 
-    picture = Pipeline().scaffold(entry, args.image)
+    pipeline = Pipeline()
+    picture  = pipeline.scaffold(entry, args.image)
     out = Path(args.out or config.OUT_ROOT /
                f"{args.constraint_id}_{Path(args.image).stem}.png")
     out.parent.mkdir(parents=True, exist_ok=True)
     cv2.imwrite(str(out), picture)
     print(f"wrote {out}")
+    for line in role_report(pipeline, entry, args.image):
+        print(f"  {line}")
+
+
+def role_report(pipeline, entry, image) -> list[str]:
+    """What the scaffold was drawn from, and what it could not draw.
+
+    A scaffold is only as good as the masks under it. When a role a rule
+    pairs on is not found, the drawing still succeeds — it just stops
+    showing the correspondence the rule is about, and nothing in the
+    picture says so. Counting the roles out loud is what keeps a scaffold
+    from looking more informative than it is.
+    """
+    from cascade.detect import assign_roles
+
+    decomposition = entry.decomposition
+    roles = assign_roles(pipeline.masks, image, decomposition.targets)
+    lines = ["found  " + ", ".join(f"{role}×{len(items)}"
+                                   for role, items in roles.items())]
+
+    spec = decomposition.comprehend.masking_spec
+    if spec:
+        missing = sorted({role for pair in spec.role_pairs for role in pair
+                          if not roles.get(role)})
+        if missing:
+            lines.append(f"NOT DRAWN: {', '.join(missing)} — no instance was "
+                         f"found, so the correspondence this rule is about is "
+                         f"not in the picture")
+    return lines
 
 
 def cmd_check(args) -> None:

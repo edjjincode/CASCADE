@@ -337,6 +337,17 @@ def test_the_question_quotes_the_measured_interval():
 # ═════════════════════════════════════════════════════════════════════
 # Masks and scoring
 # ═════════════════════════════════════════════════════════════════════
+def test_a_regrouped_dataset_still_finds_its_masks():
+    """A copy of the dataset filed into extra subfolders names the same
+    photographs; the grouping is that copy's filing, not the image's
+    identity."""
+    assert detect.relax("juice_bottle/test/logical_anomalies/orange/134") \
+        == "juice_bottle/test/logical_anomalies/134"
+    # already flat, and short keys, are left alone
+    assert detect.relax("pushpins/train/good/000") == "pushpins/train/good/000"
+    assert detect.relax("pushpins/000") == "pushpins/000"
+
+
 def test_run_length_encoding_round_trips():
     rng  = np.random.default_rng(0)
     mask = rng.random((37, 53)) > 0.7

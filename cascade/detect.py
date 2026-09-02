@@ -68,6 +68,25 @@ class MaskPack(MaskSource):
     def __post_init__(self):
         self.root = Path(self.root)
         self._cache: dict[str, dict] = {}
+        self._index_cache: dict[str, dict] = {}
+
+    def _index(self, category: str) -> dict:
+        """Every key this pack answers to, exact and relaxed.
+
+        A dataset is not always laid out the way it was published. Ours
+        groups two categories' test splits into `orange/`, `blue/` and so
+        on, and someone else may sort theirs differently again. The pack
+        is keyed by MVTec-LOCO's own layout, and looking up the relaxed
+        form as well — split plus file name, with any extra grouping
+        dropped — lets the same pack serve either.
+        """
+        if category not in self._index_cache:
+            index = {}
+            for key in self._pack(category)["images"]:
+                index.setdefault(relax(key), key)
+                index[key] = key
+            self._index_cache[category] = index
+        return self._index_cache[category]
 
     def _pack(self, category: str) -> dict:
         if category not in self._cache:
@@ -88,12 +107,15 @@ class MaskPack(MaskSource):
         image = Path(image)
         pack  = self._pack(category_of(image))
         key   = pack_key(image)
-        entry = pack["images"].get(key)
+        index = self._index(category_of(image))
+        entry = pack["images"].get(index.get(key) or index.get(relax(key), ""))
         if entry is None:
             raise KeyError(
                 f"{key!r} is not in the mask pack for {pack['category']}. "
-                f"The pack is keyed by path relative to the dataset root; "
-                f"check CASCADE_DATA (currently {config.DATA_ROOT})."
+                f"The packs cover the three train/good references and a "
+                f"sample of the test split — see masks/README.md, and "
+                f"MaskPack.covers({pack['category']!r}) for the list. "
+                f"(CASCADE_DATA is {config.DATA_ROOT}.)"
             )
 
         height, width = entry["size"]
@@ -140,6 +162,19 @@ def pack_key(image: str | Path, root: Path | None = None) -> str:
         category = category_of(image)
         relative = Path(*parts[len(parts) - 1 - parts[::-1].index(category):])
     return relative.with_suffix("").as_posix()
+
+
+def relax(key: str) -> str:
+    """A pack key with any extra grouping levels dropped.
+
+    `juice_bottle/test/logical_anomalies/orange/134` and
+    `juice_bottle/test/logical_anomalies/134` name the same photograph;
+    the `orange/` is one dataset copy's own filing, not part of the
+    image's identity. Keeping category, split and file name discards
+    exactly that.
+    """
+    parts = key.split("/")
+    return "/".join(parts[:3] + parts[-1:]) if len(parts) > 4 else key
 
 
 # ═════════════════════════════════════════════════════════════════════
