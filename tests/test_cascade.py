@@ -89,6 +89,14 @@ def test_an_ambiguous_role_name_is_dropped_not_guessed():
                               ["fruit_icon", "fruit_icon_label"]) == []
 
 
+def test_a_role_is_never_paired_with_itself():
+    """`fruit_icon` has no target of its own once the icon was found as
+    `banana_icon`, and it would otherwise resolve to the label its
+    partner already is."""
+    assert plan.resolve_roles([["fruit_icon", "fruit_icon_label"]],
+                              ["banana_icon", "fruit_icon_label"]) == []
+
+
 def test_a_surplus_object_survives_role_assignment():
     """The extra pushpin *is* the anomaly. Trimming the pool to the count
     a normal image has would delete the evidence before it is drawn."""

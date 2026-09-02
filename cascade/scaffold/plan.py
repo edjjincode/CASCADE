@@ -28,8 +28,16 @@ def resolve_roles(role_pairs: list, target_names: list[str]) -> list:
 
     So a role resolves to the target whose name it equals, or failing
     that to the one target whose name contains it as a word. A role that
-    matches nothing, or matches ambiguously, is dropped. This compares
-    words with words; it knows nothing about what they denote.
+    matches nothing, or matches ambiguously, is dropped, and so is a pair
+    whose two roles land on the same target: `fruit_icon` and
+    `fruit_icon_label` both resolve to the label when the icon itself was
+    found as `banana_icon`, and matching a set against itself would draw
+    a correspondence that is not there. Dropping costs the relational
+    scaffold and falls back to colouring by type, which says less but
+    says nothing false.
+
+    This compares words with words; it knows nothing about what they
+    denote.
     """
     def words(name: str) -> set:
         return set(str(name).lower().replace("-", "_").split("_"))
@@ -48,7 +56,7 @@ def resolve_roles(role_pairs: list, target_names: list[str]) -> list:
             contained = [name for name in target_names if words(role) <= words(name)]
             if len(contained) == 1:
                 mapped.append(contained[0])
-        if len(mapped) == 2:
+        if len(mapped) == 2 and mapped[0] != mapped[1]:
             resolved.append(mapped)
     return resolved
 

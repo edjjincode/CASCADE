@@ -116,6 +116,11 @@ def cmd_show(args) -> None:
         spec = d.comprehend.masking_spec
         print(f"  matching {spec.matching_criterion} -> "
               f"{' '.join(p.op for p in spec.matching_program) or '(none)'}")
+        if spec.binding_type == "relational":
+            pairs = " ".join("+".join(pair) for pair in spec.role_pairs)
+            print(f"  pairs    {pairs or '(none resolved — the roles Stage 1 named '
+                  f'did not line up with what Stage 2 found, so the scaffold '
+                  f'colours by type instead)'}")
         print(f"  drawn as {spec.color_scheme} + {spec.id_scheme}")
     if entry.grid:
         print(f"  grid     spacing {entry.grid.spacing:.0f}px, "

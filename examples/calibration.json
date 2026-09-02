@@ -399,35 +399,8 @@
         "masking_spec": {
           "binding_type": "relational",
           "matching_criterion": "spatial_rank",
-          "role_pairs": [
-            [
-              "fruit_icon",
-              "fruit_icon_label"
-            ]
-          ],
-          "matching_program": [
-            {
-              "op": "sort",
-              "args": {
-                "target": "fruit_icon",
-                "key": "y"
-              }
-            },
-            {
-              "op": "sort",
-              "args": {
-                "target": "fruit_icon_label",
-                "key": "y"
-              }
-            },
-            {
-              "op": "zip_align",
-              "args": {
-                "a": "fruit_icon",
-                "b": "fruit_icon_label"
-              }
-            }
-          ],
+          "role_pairs": [],
+          "matching_program": [],
           "color_scheme": "shared_per_match",
           "id_scheme": "match_index",
           "primary_axis": null,
@@ -711,7 +684,7 @@
           "role_pairs": [
             [
               "compartment",
-              "pushpin"
+              "yellow_pushpin"
             ]
           ],
           "matching_program": [
@@ -719,7 +692,7 @@
               "op": "nn_match",
               "args": {
                 "a": "compartment",
-                "b": "pushpin",
+                "b": "yellow_pushpin",
                 "metric": "spatial"
               }
             }
@@ -947,22 +920,8 @@
         "masking_spec": {
           "binding_type": "relational",
           "matching_criterion": "nn_match",
-          "role_pairs": [
-            [
-              "splicing_connector",
-              "cable"
-            ]
-          ],
-          "matching_program": [
-            {
-              "op": "nn_match",
-              "args": {
-                "a": "splicing_connector",
-                "b": "cable",
-                "metric": "spatial"
-              }
-            }
-          ],
+          "role_pairs": [],
+          "matching_program": [],
           "color_scheme": "shared_per_match",
           "id_scheme": "match_index",
           "primary_axis": null,
