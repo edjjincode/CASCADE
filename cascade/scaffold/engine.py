@@ -7,16 +7,14 @@ where instances are, how they are ordered, which is nearest to which.
 None of them knows what the objects are, and none of them calls a model,
 so the same masks and the same program always give the same scaffold.
 
-Eight primitives, each grounded in one structure:
+Five primitives, each grounded in one structure, and each one that some
+strategy in the closed vocabulary actually compiles to:
 
     sort            a total order
     sort_lex        a product order, for reading order across a grid
     zip_align       a rank-wise bijection
     reflect         a group action, for mirror symmetry
-    rotate          a group action, for rotational symmetry
     nn_match        nearest neighbour in a metric space
-    group_by        equivalence classes
-    explicit_pair   a correspondence given outright
 
 Their output is a correspondence between instances. Two schemes then turn
 that correspondence into what the viewer actually sees: a colour and a
@@ -85,21 +83,6 @@ def op_reflect(instances: list[Instance], axis: str) -> list[Instance]:
     return out
 
 
-def op_rotate(instances: list[Instance], angle: float) -> list[Instance]:
-    """Turn instances about the image centre, for rotational symmetry."""
-    import numpy as np
-    out = []
-    for i in instances:
-        turns = int(round(angle / 90)) % 4
-        mask  = np.rot90(i.mask, -turns)
-        height, width = i.mask.shape[:2]
-        x0, y0, x1, y1 = i.bbox
-        for _ in range(turns):                # each quarter turn, clockwise
-            x0, y0, x1, y1 = height - y1, x0, height - y0, x1
-            height, width = width, height
-        out.append(Instance(i.role, mask, (x0, y0, x1, y1)))
-    return out
-
 
 def op_nn_match(a: list[Instance], b: list[Instance],
                 metric: str = "spatial") -> list[tuple]:
@@ -121,38 +104,15 @@ def op_nn_match(a: list[Instance], b: list[Instance],
     return pairs
 
 
-def op_group_by(instances: list[Instance], key: str,
-                n_bins: int = 2) -> dict[int, list[Instance]]:
-    """Split instances into equal bands along an axis."""
-    if not instances:
-        return {}
-    coords = [_key(i, key) for i in instances]
-    low, high = min(coords), max(coords)
-    if high - low < 1e-6:
-        return {0: list(instances)}
-    width  = (high - low) / n_bins
-    groups: dict[int, list[Instance]] = {}
-    for instance, coord in zip(instances, coords):
-        band = min(int((coord - low) / width), n_bins - 1)
-        groups.setdefault(band, []).append(instance)
-    return groups
-
-
-def op_explicit_pair(a: list[Instance], b: list[Instance],
-                     pairs: list) -> list[tuple]:
-    """Pair by index, when the correspondence is simply given."""
-    return [(a[i], b[j]) for i, j in pairs
-            if 0 <= i < len(a) and 0 <= j < len(b)]
 
 
 PRIMITIVES = {
     "sort": op_sort, "sort_lex": op_sort_lex, "zip_align": op_zip_align,
-    "reflect": op_reflect, "rotate": op_rotate, "nn_match": op_nn_match,
-    "group_by": op_group_by, "explicit_pair": op_explicit_pair,
+    "reflect": op_reflect, "nn_match": op_nn_match,
 }
 
-_REORDER = ("sort", "sort_lex", "reflect", "rotate", "group_by")
-_PAIR    = ("zip_align", "nn_match", "explicit_pair")
+_REORDER = ("sort", "sort_lex", "reflect")
+_PAIR    = ("zip_align", "nn_match")
 
 
 # ═════════════════════════════════════════════════════════════════════
@@ -178,8 +138,6 @@ def run_program(program: list[Primitive], roles: Roles) -> list[tuple[Key, Key]]
             role = args.pop("target")
             keys, instances = zip(*tagged[role]) if tagged[role] else ((), ())
             result = PRIMITIVES[step.op](list(instances), **args)
-            if isinstance(result, dict):                 # group_by
-                result = [i for band in sorted(result) for i in result[band]]
             lookup = {id(instance): key for key, instance in tagged[role]}
             # A primitive may return new objects (reflect, rotate); those
             # carry no identity, so fall back to position.

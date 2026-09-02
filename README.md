@@ -150,9 +150,11 @@ edge                 top | bottom | left | right | major | minor | length | diam
 ```
 
 One of those words — `matching_criterion` — is compiled by
-`scaffold/plan.py` into a program over eight primitives (`sort`,
-`sort_lex`, `zip_align`, `reflect`, `rotate`, `nn_match`, `group_by`,
-`explicit_pair`), which `scaffold/engine.py` executes as pure geometry.
+`scaffold/plan.py` into a program over five primitives (`sort`,
+`sort_lex`, `zip_align`, `reflect`, `nn_match`), which
+`scaffold/engine.py` executes as pure geometry. Five and not more: the
+set is exactly what the criteria compile to, so every primitive in the
+engine is one some rule can actually reach.
 So `mirror` always becomes the same two steps:
 
 ```python
