@@ -1,3 +1,44 @@
+CASCADE — licensing
+===================
+
+This repository contains material under two different licences. Which one
+applies depends on the file, and the difference matters: one of them
+carries a share-alike obligation.
+
+  Source code, prompts, and documentation        MIT (below)
+      everything under cascade/, tests/, scripts/, calibration/,
+      prompts/, run.py, and the README files.
+
+  Derived from MVTec LOCO AD                     CC BY-NC-SA 4.0
+      masks/*.json.gz          instance masks computed from the images
+      examples/*/scaffold.png  a scaffold drawn on one of the images
+
+      These are derivative works of a dataset published under
+      Creative Commons Attribution-NonCommercial-ShareAlike 4.0, so they
+      inherit that licence in full: attribution required, non-commercial
+      use only, and anything derived from them must be shared alike.
+      They are NOT covered by the MIT licence below.
+
+          Bergmann, Batzner, Fauser, Sattlegger and Steger,
+          "Beyond Dents and Scratches: Logical Constraints in
+          Unsupervised Anomaly Detection and Localization",
+          International Journal of Computer Vision, 2022.
+          https://www.mvtec.com/company/research/datasets/mvtec-loco
+
+      The dataset images themselves are not redistributed here; see
+      scripts/download_mvtec_loco.py.
+
+  Constraint text                                quoted, with citation
+      constraints/logicqa_bullets.json reproduces the normality
+      definitions published in LogicQA, verbatim and unaltered, so that
+      every method is evaluated on the same constraint wording.
+
+          Kwon et al., "LogicQA: Logical Anomaly Detection with
+          Vision Language Model Generated Questions",
+          ACL 2025 Industry Track.
+          https://aclanthology.org/2025.acl-industry.29.pdf
+
+
 MIT License
 
 Copyright (c) 2026 the CASCADE authors

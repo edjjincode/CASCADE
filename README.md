@@ -244,4 +244,11 @@ in a format string.
 }
 ```
 
-The MVTec-LOCO dataset is CC BY-NC-SA 4.0 and is not redistributed here.
+## Licence
+
+The code is MIT. The shipped mask packs and the example scaffold are
+derived from MVTec LOCO AD and carry that dataset's CC BY-NC-SA 4.0 —
+attribution, non-commercial, share-alike — so they are not MIT and cannot
+be relicensed. The dataset images are not redistributed; the constraint
+wording is quoted from LogicQA with citation. `LICENSE` says which file
+falls under which.
