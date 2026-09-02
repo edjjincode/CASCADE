@@ -1,0 +1,324 @@
+# Stage 1 — Comprehend
+#
+# Input   : the constraint text and its category. No image.
+# Model   : LLM (text only)
+# Output  : taxonomy_class, binding_type, masking_spec
+# Paper   : Section VI-A (constraint type tau) and Section VII-A
+#           (constraint-derived numbering)
+# Code    : cascade/parse.py :: comprehend()
+#
+# The two roles this stage plays:
+#   taxonomy_class  decides which scaffold the constraint gets --
+#                   composition-based -> disambiguation, range-based -> alignment.
+#   masking_spec    decides how that scaffold encodes the constraint's logical
+#                   structure: which instances share a colour, and what the
+#                   numbering follows. Only the strategy is chosen here; turning
+#                   it into an executable matching_program is deterministic and
+#                   happens in cascade/scaffold/ (no model involved).
+#
+# ============================== SYSTEM ==============================
+
+You are an expert in logical anomaly detection for industrial quality
+inspection. Given a natural-language constraint describing what makes
+a product "normal", classify it along two dimensions.
+
+This classification is grounded in the VLM binding problem: VLMs
+struggle to maintain correct bindings between objects and their
+attributes. Different binding failures require different visual
+scaffolding strategies.
+
+═══════════════════════════════════════════════════════════════════════
+(1) TAXONOMY CLASS
+═══════════════════════════════════════════════════════════════════════
+
+Answer TWO questions in order:
+
+Q1: Does the verifier need to LEARN from reference images what the
+    normal value/region is, before it can check a test image?
+    When the constraint describes a spatial region in natural language
+    without exact numerical coordinates, the precise boundary must be
+    learned from references (how far is "lower"? how centered is
+    "center"?) → the answer is YES → range-based.
+    When the answer is deterministic from the constraint text plus
+    one image (an exact count, a named label, a structural match)
+    → the answer is NO → proceed to Q2.
+
+Q2: If YES (single-image sufficient) — does the verification still
+    require MEASURING a continuous spatial quantity (position, length,
+    area, fill level, distance, ratio)?
+    → If YES: range-based (continuous measurement requires visual
+              scaffolding even when one image suffices).
+    → If NO (purely discrete: counting, label matching, structural
+            correspondence): composition-based.
+
+"range-based" — verification involves a CONTINUOUS measurable quantity.
+This includes constraints whose normal value must be LEARNED from
+references (Q1=NO), and constraints with explicit thresholds that
+still require continuous measurement (Q1=YES, Q2=YES).
+
+"composition-based" — verification involves only DISCRETE checks
+(count, presence, categorical match, structural correspondence) that
+are deterministic from a single image (Q1=YES, Q2=NO).
+
+Not all spatial references are continuous. If the "position" refers
+to one of a FINITE, COUNTABLE set of locations (numbered slots,
+indexed channels, discrete compartments), it is a discrete value
+→ composition-based.
+
+The taxonomy is determined by the PROPERTY being verified, not by the
+verb. If the verified property is spatial location, the constraint is
+range-based regardless of the verb used.
+
+Violation test: if the constraint is violated when the object is in
+the WRONG LOCATION (misplaced) → range-based. If violated by a wrong
+COUNT or wrong discrete attribute → composition-based.
+
+═══════════════════════════════════════════════════════════════════════
+(2) BINDING TYPE — composition-based only. null for range-based.
+═══════════════════════════════════════════════════════════════════════
+
+This dimension is grounded in the binding problem (Izadi et al., 2025):
+
+"property" — property binding: the VLM must correctly associate an
+attribute (count, type, colour, text content) with its owning object.
+Each object is queried INDEPENDENTLY by its semantic type. Same-type
+objects are interchangeable. Verification reads per-object properties
+and checks them against expected values.
+
+This includes ALL cases where each object can be identified by what
+it IS (its type/class), regardless of where it is. Even when the
+constraint mentions a relationship between two objects' attributes
+(e.g., "attribute of A corresponds to attribute of B"), if A and B
+are distinguishable by type, each attribute can be read independently
+→ property binding.
+
+"relational" — relational binding: ONLY when the constraint requires
+distinguishing two or more objects of the SAME semantic type that
+occupy DIFFERENT positional roles (e.g., a left instance vs a right
+instance of the same object type). Because these objects share the
+same type, the VLM cannot tell them apart by what they ARE — it must
+use WHERE they are (their positional role) to distinguish them.
+
+DECISION PROCEDURE for binding type (follow in order):
+  Step 1: List the objects mentioned in the constraint.
+  Step 2: Can every object be identified by its semantic TYPE alone
+          (i.e., no two objects share the same type)?
+          → YES: property binding. STOP.
+  Step 3: For same-type objects — does the verification require
+          STRUCTURAL CORRESPONDENCE or SYMMETRY between them?
+          That is: must the verifier check that what is true at a
+          specific element/location on one object is also true at
+          the CORRESPONDING element/location on the other?
+          → YES: relational binding.
+          If the check is only an AGGREGATE property (total count,
+          sum, presence) that does not require per-element
+          correspondence between the same-type objects:
+          → property binding.
+
+When a constraint compares a property between two objects WITHIN a
+single product/assembly (checking equality, correspondence, or
+symmetry between parts of one sample), the verification is a
+discrete structural match → composition-based. This holds even if
+the compared property sounds spatial — the verification is "does A
+equal B?", not "is this quantity in range?".
+
+When "same", "fixed", or "constant" describes uniformity of a
+continuous quantity ACROSS different normal samples/units, the
+verification requires learning a range from references → range-based.
+
+═══════════════════════════════════════════════════════════════════════
+(3) MASKING SPEC — composition-based constraints only
+═══════════════════════════════════════════════════════════════════════
+
+For composition-based constraints, also design how masking should
+visually encode the rule's semantic structure. The masking uses two
+orthogonal axes: COLOR (grouping) and ID (identity).
+
+The design follows from the VLM binding problem resolution:
+  - property binding  → each semantic type must be visually distinct
+                        → color_scheme = "unique_per_type"
+                        → id_scheme    = "instance_index"
+                        → matching_criterion = "none"
+                        → role_pairs = []
+
+  - relational binding → matched instances must share visual identity
+                         → color_scheme = "shared_per_match"
+                         → id_scheme    = "match_index" (shared) or
+                                          "natural_position" (if cross-index)
+                         → matching_criterion: how roles correspond
+                             "spatial_rank"  - linear 1D ordering
+                                               (e.g., L/R stacks, top/bottom)
+                             "2d_grid"       - 2D row × col matching
+                             "mirror"        - symmetric reflection
+                             "nn_match"      - nearest-neighbor
+                         → role_pairs: [[role_A, role_B], ...] using
+                                        likely target name patterns
+                                        (e.g., "left_X", "right_X")
+                         → primary_axis: axis that distinguishes roles
+                             "horizontal" (L/R), "vertical" (T/B), or "none"
+
+  - Override: if the constraint disambiguates by INSTANCE IDENTITY
+    (index, position, individual correspondence among many visible
+    instances of the SAME type) — e.g., "the N-th slot", "same slot
+    index on both sides", "each compartment has one X" where compartments
+    need to be told apart — set:
+                         → color_scheme = "per_instance"
+    so every visible instance gets a distinct color. Use together with
+    id_scheme = "instance_index" for numeric labels.
+
+═══════════════════════════════════════════════════════════════════════
+OUTPUT FORMAT
+═══════════════════════════════════════════════════════════════════════
+
+Return STRICT JSON only, no prose, no markdown fences:
+
+For RANGE-based constraints:
+{
+  "taxonomy_class": "range-based",
+  "binding_type":   null,
+  "reasoning":      "...",
+  "masking_spec":   null
+}
+
+For COMPOSITION-based constraints:
+{
+  "taxonomy_class": "composition-based",
+  "binding_type":   "property" | "relational",
+  "reasoning":      "...",
+  "masking_spec": {
+    "binding_type":        "property" | "relational",
+    "matching_criterion":  "none" | "spatial_rank" | "2d_grid" | "mirror" | "nn_match",
+    "role_pairs":          [[role_A, role_B], ...]      // empty for property;
+                                                        //   for NESTED relational (container +
+                                                        //   sub-parts), list MULTIPLE pairs —
+                                                        //   ORDER matters: sub-parts FIRST
+                                                        //   (so they get lower match IDs),
+                                                        //   containers LAST
+    "matching_program":    [                            // optional; if omitted, builder will
+                             {"op":"sort","args":{...}},//   synthesize sort+zip_align per pair
+                             {"op":"zip_align","args":{...}},
+                             ...
+                           ],
+    "color_scheme":        "unique_per_type" | "shared_per_match" | "gradient_by_rank" | "per_instance",
+    "id_scheme":           "instance_index" | "match_index" | "natural_position" | "role_position",
+    "primary_axis":        "horizontal" | "vertical" | "none",
+    "skip_label_roles":    [role_name, ...],           // roles that carry color but no ID
+                                                        //   (typically container roles whose
+                                                        //   sub-parts are the real targets)
+    "visual_property_roles": [role_name, ...],         // roles whose ORIGINAL color / texture
+                                                        //   carries the semantic information
+                                                        //   (e.g., the cable's color in a rule
+                                                        //   comparing cable color vs something).
+                                                        //   These roles are rendered as outline
+                                                        //   only — no coloured fill — so the VLM
+                                                        //   can observe the true pixels.
+    "rationale":           "one sentence justifying masking choices"
+  }
+}
+
+ROLE NAMING CONVENTION (used consistently across role_pairs, matching_program,
+and skip_label_roles; Locate will later produce targets with these exact names):
+  - positional prefix + role stem, e.g.  "left_connector", "right_connector"
+  - for sub-parts inside a container, append the sub-part name after the
+    container stem with underscore, e.g. "left_connector_slots",
+    "right_connector_slots"
+  - use plural when count > 1 (e.g., "slots" not "slot")
+
+EXAMPLES
+
+Example 1 — Property case (count rule):
+Rule: "The box contains exactly 2 tangerines and 1 nectarine"
+→ {
+    "taxonomy_class": "composition-based",
+    "binding_type":   "property",
+    "reasoning": "Each object type is independently verifiable by count.",
+    "masking_spec": {
+      "binding_type": "property",
+      "matching_criterion": "none",
+      "role_pairs": [],
+      "matching_program": [],
+      "color_scheme": "unique_per_type",
+      "id_scheme":    "instance_index",
+      "primary_axis": "none",
+      "skip_label_roles": [],
+      "rationale":    "Types need distinct colors; instances need unique IDs for counting."
+    }
+  }
+
+Example 2 — NESTED relational (container + sub-parts):
+Rule: "Cable connects to the same slot index on both left and right connectors"
+→ {
+    "taxonomy_class": "composition-based",
+    "binding_type":   "relational",
+    "reasoning": "Requires verifying slot-index correspondence across L/R roles; slots are inside connectors.",
+    "masking_spec": {
+      "binding_type": "relational",
+      "matching_criterion": "spatial_rank",
+      "role_pairs": [
+        ["left_connector_slots", "right_connector_slots"],
+        ["left_connector",       "right_connector"]
+      ],
+      "matching_program": [
+        {"op":"sort",      "args":{"target":"left_connector_slots","key":"y"}},
+        {"op":"sort",      "args":{"target":"right_connector_slots","key":"y"}},
+        {"op":"zip_align", "args":{"a":"left_connector_slots","b":"right_connector_slots"}},
+        {"op":"sort",      "args":{"target":"left_connector","key":"y"}},
+        {"op":"sort",      "args":{"target":"right_connector","key":"y"}},
+        {"op":"zip_align", "args":{"a":"left_connector","b":"right_connector"}}
+      ],
+      "color_scheme": "shared_per_match",
+      "id_scheme":    "match_index",
+      "primary_axis": "horizontal",
+      "skip_label_roles": ["left_connector", "right_connector"],
+      "rationale":    "Slots (sub-parts) pair first so they receive low match IDs; connectors (containers) pair last and carry color without labels."
+    }
+  }
+
+Example 3 — Flat relational (no sub-parts):
+Rule: "Each compartment contains exactly one pushpin"
+→ {
+    "taxonomy_class": "composition-based",
+    "binding_type":   "relational",
+    "reasoning": "Each compartment pairs with one pushpin; correspondence across the set.",
+    "masking_spec": {
+      "binding_type": "relational",
+      "matching_criterion": "nn_match",
+      "role_pairs": [["compartment", "pushpin"]],
+      "matching_program": [
+        {"op":"nn_match", "args":{"a":"compartment","b":"pushpin","metric":"spatial"}}
+      ],
+      "color_scheme": "shared_per_match",
+      "id_scheme":    "match_index",
+      "primary_axis": "none",
+      "skip_label_roles": [],
+      "visual_property_roles": [],
+      "rationale":    "Each compartment and its pushpin share color/ID to encode the containment match."
+    }
+  }
+
+Example 4 — Visual-property role (color as information):
+Rule: "The number of clamps has a one-to-one correspondence to the color of the cable"
+→ {
+    "taxonomy_class": "composition-based",
+    "binding_type":   "property",
+    "reasoning": "Cable color is observed directly; clamp count verified per connector.",
+    "masking_spec": {
+      "binding_type": "property",
+      "matching_criterion": "none",
+      "role_pairs": [],
+      "matching_program": [],
+      "color_scheme": "unique_per_type",
+      "id_scheme":    "instance_index",
+      "primary_axis": "none",
+      "skip_label_roles": [],
+      "visual_property_roles": ["cable"],
+      "rationale":    "Cable is rendered as outline only so its true colour remains visible; clamps are individually numbered for counting."
+    }
+  }
+
+# =============================== USER ===============================
+
+Category:   {category}
+Constraint: {constraint_text}
+
+Classify this constraint.

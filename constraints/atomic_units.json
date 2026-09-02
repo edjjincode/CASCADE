@@ -1,0 +1,206 @@
+{
+  "_meta": {
+    "description": "Atomic constraint units actually evaluated. Compound LogicQA bullets are split where clause-level taxonomy differs, so that each unit yields a single binary verdict.",
+    "derived_from": "logicqa_bullets.json",
+    "split_policy": "Multi-aspect bullets split where clause-level taxonomy differs. 5 bullets split: BB-L1→kept, SC-L1→a/b, JB-L1→a/b, JB-L2→a/b/c, JB-L3→a/b. BB-L3 added from existing GT.",
+    "taxonomy": {
+      "range-based": "continuous measurable quantity verified against a range/threshold",
+      "composition/property": "property binding — attribute bound to object independently, type-based masking",
+      "composition/relational": "relational binding — spatial relationship across object roles, role-aware masking"
+    },
+    "count": 19,
+    "reference_labels_note": "taxonomy/binding here are reference annotations for inspection only. At run time the pipeline re-derives them from the constraint text (cascade/parse.py, Stage 1), and the derived value may differ."
+  },
+  "units": [
+    {
+      "id": "BB-L1",
+      "category": "breakfast_box",
+      "text": "The breakfast box contains exactly two tangerines and one nectarine.",
+      "from_bullet": "BB-L1",
+      "reference_labels": {
+        "taxonomy": "composition-based",
+        "binding": "property"
+      }
+    },
+    {
+      "id": "BB-L2",
+      "category": "breakfast_box",
+      "text": "The ratio and relative position of the cereals and the mix of banana chips and almonds on the right-hand side are fixed.",
+      "from_bullet": "BB-L2",
+      "reference_labels": {
+        "taxonomy": "range-based",
+        "binding": null
+      }
+    },
+    {
+      "id": "BB-L3",
+      "category": "breakfast_box",
+      "text": "The right compartment contains cereal and a mix of banana chips and almonds.",
+      "from_bullet": "BB-L3 (from existing GT)",
+      "reference_labels": {
+        "taxonomy": "composition-based",
+        "binding": "property"
+      }
+    },
+    {
+      "id": "SB-L1",
+      "category": "screw_bag",
+      "text": "A screw bag contains exactly two washers, two nuts, one long screw, and one short screw.",
+      "from_bullet": "SB-L1",
+      "reference_labels": {
+        "taxonomy": "composition-based",
+        "binding": "property"
+      }
+    },
+    {
+      "id": "SB-L2",
+      "category": "screw_bag",
+      "text": "The long screw and the short screw are each longer than 3 times the diameter of the washer.",
+      "from_bullet": "SB-L2",
+      "reference_labels": {
+        "taxonomy": "range-based",
+        "binding": null
+      }
+    },
+    {
+      "id": "PP-L1",
+      "category": "pushpins",
+      "text": "Each compartment of the box of pushpins contains exactly one pushpin.",
+      "from_bullet": "PP-L1",
+      "reference_labels": {
+        "taxonomy": "composition-based",
+        "binding": "relational"
+      }
+    },
+    {
+      "id": "SC-L1a",
+      "category": "splicing_connectors",
+      "text": "Exactly two splicing connectors are linked by exactly one cable.",
+      "from_bullet": "SC-L1",
+      "reference_labels": {
+        "taxonomy": "composition-based",
+        "binding": "relational"
+      }
+    },
+    {
+      "id": "SC-L1b",
+      "category": "splicing_connectors",
+      "text": "The two splicing connectors have the same number of cable clamps.",
+      "from_bullet": "SC-L1",
+      "reference_labels": {
+        "taxonomy": "composition-based",
+        "binding": "relational"
+      }
+    },
+    {
+      "id": "SC-L2",
+      "category": "splicing_connectors",
+      "text": "The number of clamps has a one-to-one correspondence to the {color} of the cable.",
+      "from_bullet": "SC-L2",
+      "reference_labels": {
+        "taxonomy": "composition-based",
+        "binding": "property"
+      }
+    },
+    {
+      "id": "SC-L3",
+      "category": "splicing_connectors",
+      "text": "The cable connects to the same slot index on both the left connector and the right connector.",
+      "from_bullet": "SC-L3",
+      "reference_labels": {
+        "taxonomy": "composition-based",
+        "binding": "relational"
+      }
+    },
+    {
+      "id": "SC-L4",
+      "category": "splicing_connectors",
+      "text": "The cable length is roughly longer than the length of the splicing connector terminal block.",
+      "from_bullet": "SC-L4",
+      "reference_labels": {
+        "taxonomy": "range-based",
+        "binding": null
+      }
+    },
+    {
+      "id": "JB-L1a",
+      "category": "juice_bottle",
+      "text": "The juice bottle is filled with {fruit} juice.",
+      "from_bullet": "JB-L1",
+      "reference_labels": {
+        "taxonomy": "composition-based",
+        "binding": "property"
+      }
+    },
+    {
+      "id": "JB-L1b",
+      "category": "juice_bottle",
+      "text": "The juice bottle carries exactly two labels.",
+      "from_bullet": "JB-L1",
+      "reference_labels": {
+        "taxonomy": "composition-based",
+        "binding": "property"
+      }
+    },
+    {
+      "id": "JB-L2a",
+      "category": "juice_bottle",
+      "text": "The fruit icon label is attached to the center of the bottle.",
+      "from_bullet": "JB-L2",
+      "reference_labels": {
+        "taxonomy": "range-based",
+        "binding": null
+      }
+    },
+    {
+      "id": "JB-L2b",
+      "category": "juice_bottle",
+      "text": "The {fruit} icon is positioned exactly at the center of the fruit icon label.",
+      "from_bullet": "JB-L2",
+      "reference_labels": {
+        "taxonomy": "composition-based",
+        "binding": "relational"
+      }
+    },
+    {
+      "id": "JB-L2c",
+      "category": "juice_bottle",
+      "text": "The {fruit} icon clearly indicates the type of {fruit} juice.",
+      "from_bullet": "JB-L2",
+      "reference_labels": {
+        "taxonomy": "composition-based",
+        "binding": "property"
+      }
+    },
+    {
+      "id": "JB-L3a",
+      "category": "juice_bottle",
+      "text": "The text label is attached to the lower part of the bottle.",
+      "from_bullet": "JB-L3",
+      "reference_labels": {
+        "taxonomy": "range-based",
+        "binding": null
+      }
+    },
+    {
+      "id": "JB-L3b",
+      "category": "juice_bottle",
+      "text": "The text label reads \"100% Juice\".",
+      "from_bullet": "JB-L3",
+      "reference_labels": {
+        "taxonomy": "composition-based",
+        "binding": "property"
+      }
+    },
+    {
+      "id": "JB-L5",
+      "category": "juice_bottle",
+      "text": "The juice fills at least 90% of the bottle, but not 100%.",
+      "from_bullet": "JB-L5",
+      "reference_labels": {
+        "taxonomy": "range-based",
+        "binding": null
+      }
+    }
+  ]
+}

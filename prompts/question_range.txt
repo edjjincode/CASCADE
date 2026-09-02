@@ -1,0 +1,121 @@
+# Verification — range-based constraint
+#
+# Input   : the alignment scaffold (one image) and this text.
+# Model   : VLM (1 image + text)
+# Output  : YES / NO, read out of "Status: [...]"
+# Paper   : Section VI-C and Section VII-B (the reference-calibrated grid)
+# Code    : cascade/question.py :: build()
+#
+# The difference from the composition case is where the comparison happens.
+# The normal range is computed in code from the K references at calibration
+# time and written into the question as an integer range. The model is never
+# asked to measure the references, and never asked whether something looks
+# right. It is asked to read one coordinate off the overlay and say whether it
+# falls in a stated range -- which is the whole point of the alignment
+# scaffold: an unstable measurement becomes a repeatable reading.
+#
+# Because the range is already stated, the question has no natural-language
+# form to fall back on. Its shape follows the edge type Stage 3 settled on:
+#
+#   horizontal    a single fill line       "Is the {target} level positioned
+#                                           at row A~B?"
+#   rectangular   a placed rigid object    "Does the {target} occupy
+#                                           row_start=A~B, row_end=C~D,
+#                                           col_start=E~F, col_end=G~H?"
+#   contour       a self-contained extent  "Does the {target} occupy A~B tick
+#                                           marks?"
+#
+# A~B collapses to a single number when the references agree exactly. When no
+# calibrated range is available the builder falls back to the plain
+# interrogative, which is the composition-style question without a range.
+#
+# TWO TEMPLATES, because there are two rulers and they are read differently.
+# A grid is *read* -- the model finds the labelled intersection nearest the
+# edge and reports its row. Ticks are *counted* -- the model counts the marks
+# lying along the object. Telling a model to count the marks on a grid, or to
+# read a row off a row of ticks, describes an image it was not given; the
+# builder picks the section matching the scaffold that was actually drawn.
+#
+# The **Visual Cues** block likewise describes only marks that were drawn.
+# The instruction against reading background patterns as the overlay is there
+# because several of these products are photographed on mesh or inside a
+# plastic bag, and a regular background texture is easy to mistake for it.
+#
+# Answer convention: YES means the reading fell in the calibrated range, so
+# YES is normal, and code inverts it the same way as the composition case.
+#
+# ================================ GRID ==============================
+
+**Visual Information:**
+A coordinate grid is overlaid on the image. Each intersection is labelled
+(row, col), counting from 1 at the top-left of the framed region.
+
+**Visual Cues:**
+{visual_cues}
+
+**Question:** {question}
+
+**Instructions:**
+Read the grid label nearest the edge in question, and report its row or
+column as the question asks.
+Use only the explicitly drawn (row, col) labels. Do NOT read a background
+pattern (mesh, plastic bag, packaging texture) as the grid.
+Answer YES if the reading falls in the stated range, NO otherwise.
+Explain your reasoning before giving the final answer.
+
+**Answer Format:**
+(Reasoning) [Your step-by-step analysis]
+Status: [YES/NO]
+
+# ================================ TICKS =============================
+
+**Visual Information:**
+Numbered tick marks are drawn along each target's long axis, counting
+outward from its centre.
+
+**Visual Cues:**
+{visual_cues}
+
+**Question:** {question}
+
+**Instructions:**
+Count the numbered tick marks that lie along the target.
+Use only the explicitly drawn marks. Do NOT count a background pattern
+(mesh, plastic bag, packaging texture).
+Answer YES if the count falls in the stated range, NO otherwise.
+Explain your reasoning before giving the final answer.
+
+**Answer Format:**
+(Reasoning) [Your step-by-step analysis]
+Status: [YES/NO]
+
+# =========================== RENDERED EXAMPLE =======================
+#
+# JB-L5, "The juice fills at least 90% of the bottle, but not 100%."
+# -- range-based, anchor = bottle, edge type = horizontal, so the GRID
+# section is used. The three references all read row 4, so the calibrated
+# range is the single row 4.
+
+**Visual Information:**
+A coordinate grid is overlaid on the image. Each intersection is labelled
+(row, col), counting from 1 at the top-left of the framed region.
+
+**Visual Cues:**
+A coordinate grid is overlaid on the image. Each intersection is labelled (row, col).
+  - target: pale_liquid (pale liquid)
+The grid is positioned relative to 'bottle'.
+Do not read any background pattern as the grid — only the numbered marks that are explicitly drawn.
+
+**Question:** Is the pale liquid level positioned at row 4?
+
+**Instructions:**
+Read the grid label nearest the edge in question, and report its row or
+column as the question asks.
+Use only the explicitly drawn (row, col) labels. Do NOT read a background
+pattern (mesh, plastic bag, packaging texture) as the grid.
+Answer YES if the reading falls in the stated range, NO otherwise.
+Explain your reasoning before giving the final answer.
+
+**Answer Format:**
+(Reasoning) [Your step-by-step analysis]
+Status: [YES/NO]

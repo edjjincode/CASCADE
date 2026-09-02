@@ -1,0 +1,1337 @@
+{
+  "BB-L1": {
+    "decomposition": {
+      "constraint": {
+        "constraint_id": "BB-L1",
+        "category": "breakfast_box",
+        "text": "The breakfast box contains exactly two tangerines and one nectarine."
+      },
+      "comprehend": {
+        "taxonomy_class": "composition-based",
+        "binding_type": "property",
+        "masking_spec": {
+          "binding_type": "property",
+          "matching_criterion": "none",
+          "role_pairs": [],
+          "matching_program": [],
+          "color_scheme": "unique_per_type",
+          "id_scheme": "instance_index",
+          "primary_axis": null,
+          "rationale": "Types need distinct colors; instances need unique IDs for counting.",
+          "skip_label_roles": [],
+          "visual_property_roles": []
+        },
+        "reasoning": "Each object type is independently verifiable by count."
+      },
+      "locate": {
+        "targets": [
+          {
+            "name": "tangerine",
+            "prompts": [
+              "tangerine",
+              "mandarin orange",
+              "small orange fruit",
+              "round orange"
+            ],
+            "expected_count": 2,
+            "generic_prompt": "citrus"
+          },
+          {
+            "name": "nectarine",
+            "prompts": [
+              "nectarine",
+              "red-yellow fruit",
+              "stone fruit",
+              "smooth peach"
+            ],
+            "expected_count": 1,
+            "generic_prompt": "stone fruit"
+          }
+        ],
+        "anchor": null,
+        "reasoning": "The left compartment shows two small orange citrus fruits (tangerines) and one red-yellow stone fruit (nectarine), matching the constraint."
+      },
+      "compare": {
+        "free_edges": []
+      },
+      "edge_type": null
+    },
+    "grid": null
+  },
+  "BB-L2": {
+    "decomposition": {
+      "constraint": {
+        "constraint_id": "BB-L2",
+        "category": "breakfast_box",
+        "text": "The ratio and relative position of the cereals and the mix of banana chips and almonds on the right-hand side are fixed."
+      },
+      "comprehend": {
+        "taxonomy_class": "range-based",
+        "binding_type": null,
+        "masking_spec": null,
+        "reasoning": "The constraint describes a fixed ratio and relative position that must be learned from reference images, indicating continuous spatial relationships."
+      },
+      "locate": {
+        "targets": [
+          {
+            "name": "granola",
+            "prompts": [
+              "granola",
+              "oat clusters",
+              "brown granola pile",
+              "toasted oats cluster"
+            ],
+            "expected_count": null,
+            "generic_prompt": "cereal"
+          },
+          {
+            "name": "banana_almond_mix",
+            "prompts": [
+              "banana chips",
+              "almonds",
+              "banana almond mix",
+              "dried banana cluster"
+            ],
+            "expected_count": null,
+            "generic_prompt": "fruit_nut_mix"
+          }
+        ],
+        "anchor": {
+          "name": "right_compartment",
+          "prompts": [
+            "right compartment",
+            "right tray section",
+            "right hand compartment",
+            "granola compartment"
+          ]
+        },
+        "reasoning": "The constraint references items 'on the right-hand side', so the right compartment of the tray is the anchor. The two referenced entities are the cereal (granola) pile and the mixed region of banana chips plus almonds within that compartment."
+      },
+      "compare": {
+        "free_edges": [
+          {
+            "target": "granola",
+            "edge": "top",
+            "reason": "recorded from the reference measurement this run performed"
+          },
+          {
+            "target": "granola",
+            "edge": "bottom",
+            "reason": "recorded from the reference measurement this run performed"
+          },
+          {
+            "target": "granola",
+            "edge": "left",
+            "reason": "recorded from the reference measurement this run performed"
+          },
+          {
+            "target": "granola",
+            "edge": "right",
+            "reason": "recorded from the reference measurement this run performed"
+          },
+          {
+            "target": "banana_almond_mix",
+            "edge": "top",
+            "reason": "recorded from the reference measurement this run performed"
+          },
+          {
+            "target": "banana_almond_mix",
+            "edge": "bottom",
+            "reason": "recorded from the reference measurement this run performed"
+          },
+          {
+            "target": "banana_almond_mix",
+            "edge": "left",
+            "reason": "recorded from the reference measurement this run performed"
+          },
+          {
+            "target": "banana_almond_mix",
+            "edge": "right",
+            "reason": "recorded from the reference measurement this run performed"
+          }
+        ]
+      },
+      "edge_type": "rectangular"
+    },
+    "grid": null
+  },
+  "BB-L3": {
+    "decomposition": {
+      "constraint": {
+        "constraint_id": "BB-L3",
+        "category": "breakfast_box",
+        "text": "The right compartment contains cereal and a mix of banana chips and almonds."
+      },
+      "comprehend": {
+        "taxonomy_class": "composition-based",
+        "binding_type": "property",
+        "masking_spec": {
+          "binding_type": "property",
+          "matching_criterion": "none",
+          "role_pairs": [],
+          "matching_program": [],
+          "color_scheme": "unique_per_type",
+          "id_scheme": "instance_index",
+          "primary_axis": null,
+          "rationale": "Each type needs a distinct color, and instances need unique IDs for verification.",
+          "skip_label_roles": [],
+          "visual_property_roles": []
+        },
+        "reasoning": "Each object type (cereal, banana chips, almonds) can be verified independently by presence in the right compartment."
+      },
+      "locate": {
+        "targets": [
+          {
+            "name": "cereal",
+            "prompts": [
+              "granola",
+              "granola pile",
+              "oat clusters",
+              "brown cereal"
+            ],
+            "expected_count": null,
+            "generic_prompt": "cereal"
+          },
+          {
+            "name": "banana_chips_and_almonds",
+            "prompts": [
+              "banana chips",
+              "dried banana slices",
+              "almonds",
+              "almond nuts",
+              "banana and almond mix"
+            ],
+            "expected_count": null,
+            "generic_prompt": "fruit_and_nuts"
+          }
+        ],
+        "anchor": null,
+        "reasoning": "Constraint refers to two components in the right compartment: a pile of cereal (granola) and an intermixed region of banana chips with almonds; mapped those two visible regions accordingly."
+      },
+      "compare": {
+        "free_edges": []
+      },
+      "edge_type": null
+    },
+    "grid": null
+  },
+  "JB-L1a": {
+    "decomposition": {
+      "constraint": {
+        "constraint_id": "JB-L1a",
+        "category": "juice_bottle",
+        "text": "The juice bottle is filled with {fruit} juice."
+      },
+      "comprehend": {
+        "taxonomy_class": "composition-based",
+        "binding_type": "property",
+        "masking_spec": {
+          "binding_type": "property",
+          "matching_criterion": "none",
+          "role_pairs": [],
+          "matching_program": [],
+          "color_scheme": "unique_per_type",
+          "id_scheme": "instance_index",
+          "primary_axis": null,
+          "rationale": "Each juice type needs a distinct color for identification, and instances are uniquely indexed.",
+          "skip_label_roles": [],
+          "visual_property_roles": []
+        },
+        "reasoning": "The juice type can be verified independently by matching the label on the bottle."
+      },
+      "locate": {
+        "targets": [
+          {
+            "name": "liquid",
+            "prompts": [
+              "liquid inside bottle",
+              "opaque pale liquid",
+              "beige juice"
+            ],
+            "expected_count": null,
+            "generic_prompt": "liquid"
+          },
+          {
+            "name": "banana_icon",
+            "prompts": [
+              "banana icon",
+              "banana graphic",
+              "yellow banana label"
+            ],
+            "expected_count": null,
+            "generic_prompt": "label"
+          }
+        ],
+        "anchor": null,
+        "reasoning": "To verify 'filled with {fruit} juice' we must detect the bottle's interior liquid (the juice) and the fruit identity depicted (banana graphic on the label). Anchor is omitted because taxonomy is composition-based."
+      },
+      "compare": {
+        "free_edges": []
+      },
+      "edge_type": null
+    },
+    "grid": null
+  },
+  "JB-L1b": {
+    "decomposition": {
+      "constraint": {
+        "constraint_id": "JB-L1b",
+        "category": "juice_bottle",
+        "text": "The juice bottle carries exactly two labels."
+      },
+      "comprehend": {
+        "taxonomy_class": "composition-based",
+        "binding_type": "property",
+        "masking_spec": {
+          "binding_type": "property",
+          "matching_criterion": "none",
+          "role_pairs": [],
+          "matching_program": [],
+          "color_scheme": "unique_per_type",
+          "id_scheme": "instance_index",
+          "primary_axis": null,
+          "rationale": "Labels need distinct colors; instances need unique IDs for counting.",
+          "skip_label_roles": [],
+          "visual_property_roles": []
+        },
+        "reasoning": "Each label can be counted independently, and the total count is determinable from a single image."
+      },
+      "locate": {
+        "targets": [
+          {
+            "name": "label",
+            "prompts": [
+              "label",
+              "yellow label",
+              "rectangular label",
+              "bottle sticker"
+            ],
+            "expected_count": 2,
+            "generic_prompt": "label"
+          }
+        ],
+        "anchor": null,
+        "reasoning": "Composition-based constraint checks for labels on the bottle. The image shows two rectangular yellow labels (one with a banana graphic and one reading '100% Juice'), so the target is the bottle labels and anchor is null."
+      },
+      "compare": {
+        "free_edges": []
+      },
+      "edge_type": null
+    },
+    "grid": null
+  },
+  "JB-L2a": {
+    "decomposition": {
+      "constraint": {
+        "constraint_id": "JB-L2a",
+        "category": "juice_bottle",
+        "text": "The fruit icon label is attached to the center of the bottle."
+      },
+      "comprehend": {
+        "taxonomy_class": "range-based",
+        "binding_type": null,
+        "masking_spec": null,
+        "reasoning": "The constraint describes a spatial region (center of the bottle) that must be learned from reference images."
+      },
+      "locate": {
+        "targets": [
+          {
+            "name": "banana_icon_label",
+            "prompts": [
+              "banana sticker",
+              "yellow square sticker",
+              "banana icon label",
+              "square fruit label"
+            ],
+            "expected_count": 1,
+            "generic_prompt": "label"
+          }
+        ],
+        "anchor": {
+          "name": "bottle",
+          "prompts": [
+            "glass bottle",
+            "transparent bottle",
+            "tall narrow bottle",
+            "bottle body"
+          ]
+        },
+        "reasoning": "The bottle serves as the spatial reference (range-based). The constraint's 'fruit icon label' maps to the single square yellow sticker showing a banana on the bottle front, so one label is expected."
+      },
+      "compare": {
+        "free_edges": [
+          {
+            "target": "banana_icon_label",
+            "edge": "top",
+            "reason": "recorded from the reference measurement this run performed"
+          },
+          {
+            "target": "banana_icon_label",
+            "edge": "bottom",
+            "reason": "recorded from the reference measurement this run performed"
+          },
+          {
+            "target": "banana_icon_label",
+            "edge": "left",
+            "reason": "recorded from the reference measurement this run performed"
+          },
+          {
+            "target": "banana_icon_label",
+            "edge": "right",
+            "reason": "recorded from the reference measurement this run performed"
+          }
+        ]
+      },
+      "edge_type": "rectangular"
+    },
+    "grid": null
+  },
+  "JB-L2b": {
+    "decomposition": {
+      "constraint": {
+        "constraint_id": "JB-L2b",
+        "category": "juice_bottle",
+        "text": "The {fruit} icon is positioned exactly at the center of the fruit icon label."
+      },
+      "comprehend": {
+        "taxonomy_class": "composition-based",
+        "binding_type": "relational",
+        "masking_spec": {
+          "binding_type": "relational",
+          "matching_criterion": "spatial_rank",
+          "role_pairs": [
+            [
+              "fruit_icon",
+              "fruit_icon_label"
+            ]
+          ],
+          "matching_program": [
+            {
+              "op": "sort",
+              "args": {
+                "target": "fruit_icon",
+                "key": "y"
+              }
+            },
+            {
+              "op": "sort",
+              "args": {
+                "target": "fruit_icon_label",
+                "key": "y"
+              }
+            },
+            {
+              "op": "zip_align",
+              "args": {
+                "a": "fruit_icon",
+                "b": "fruit_icon_label"
+              }
+            }
+          ],
+          "color_scheme": "shared_per_match",
+          "id_scheme": "match_index",
+          "primary_axis": null,
+          "rationale": "The fruit icon and its label share color and ID to indicate their positional relationship.",
+          "skip_label_roles": [],
+          "visual_property_roles": []
+        },
+        "reasoning": "The verification requires checking the positional correspondence of the fruit icon relative to the label, as both are of the same type."
+      },
+      "locate": {
+        "targets": [
+          {
+            "name": "banana_icon",
+            "prompts": [
+              "banana icon",
+              "banana drawing",
+              "small banana graphic",
+              "black-outlined banana"
+            ],
+            "expected_count": 1,
+            "generic_prompt": "icon"
+          },
+          {
+            "name": "fruit_icon_label",
+            "prompts": [
+              "yellow label",
+              "square yellow label",
+              "rounded-corner label",
+              "label with banana"
+            ],
+            "expected_count": 1,
+            "generic_prompt": "label"
+          }
+        ],
+        "anchor": null,
+        "reasoning": "The constraint refers to the fruit icon (a banana graphic) and the fruit icon label (the square yellow label containing it); both are visible once and must be located to verify centering."
+      },
+      "compare": {
+        "free_edges": []
+      },
+      "edge_type": null
+    },
+    "grid": null
+  },
+  "JB-L2c": {
+    "decomposition": {
+      "constraint": {
+        "constraint_id": "JB-L2c",
+        "category": "juice_bottle",
+        "text": "The {fruit} icon clearly indicates the type of {fruit} juice."
+      },
+      "comprehend": {
+        "taxonomy_class": "composition-based",
+        "binding_type": "property",
+        "masking_spec": {
+          "binding_type": "property",
+          "matching_criterion": "none",
+          "role_pairs": [],
+          "matching_program": [],
+          "color_scheme": "unique_per_type",
+          "id_scheme": "instance_index",
+          "primary_axis": null,
+          "rationale": "Each fruit type needs a distinct color for easy identification.",
+          "skip_label_roles": [],
+          "visual_property_roles": []
+        },
+        "reasoning": "The fruit icon can be independently verified by its type, indicating the juice type."
+      },
+      "locate": {
+        "targets": [
+          {
+            "name": "banana_icon",
+            "prompts": [
+              "banana",
+              "banana icon",
+              "banana label"
+            ],
+            "expected_count": 1,
+            "generic_prompt": "icon"
+          },
+          {
+            "name": "juice_text_label",
+            "prompts": [
+              "100% Juice",
+              "juice text",
+              "bottom label"
+            ],
+            "expected_count": 1,
+            "generic_prompt": "label"
+          }
+        ],
+        "anchor": null,
+        "reasoning": "To check that the fruit pictogram indicates the juice type the relevant visible components are the fruit pictogram (banana) on the upper label and the product's juice text label ('100% Juice') on the lower sticker."
+      },
+      "compare": {
+        "free_edges": []
+      },
+      "edge_type": null
+    },
+    "grid": null
+  },
+  "JB-L3a": {
+    "decomposition": {
+      "constraint": {
+        "constraint_id": "JB-L3a",
+        "category": "juice_bottle",
+        "text": "The text label is attached to the lower part of the bottle."
+      },
+      "comprehend": {
+        "taxonomy_class": "range-based",
+        "binding_type": null,
+        "masking_spec": null,
+        "reasoning": "The constraint describes a spatial region (lower part of the bottle) that must be learned from reference images."
+      },
+      "locate": {
+        "targets": [
+          {
+            "name": "text_label",
+            "prompts": [
+              "yellow label",
+              "rectangular label",
+              "lower front label",
+              "bottom text label"
+            ],
+            "expected_count": 1,
+            "generic_prompt": "label"
+          }
+        ],
+        "anchor": {
+          "name": "bottle",
+          "prompts": [
+            "glass bottle",
+            "clear bottle",
+            "tall bottle",
+            "bottle body"
+          ]
+        },
+        "reasoning": "The constraint references a label attached to the lower part of the bottle, so the bottle is the spatial anchor and the lower yellow rectangular label with text is the single target to detect."
+      },
+      "compare": {
+        "free_edges": [
+          {
+            "target": "text_label",
+            "edge": "top",
+            "reason": "recorded from the reference measurement this run performed"
+          },
+          {
+            "target": "text_label",
+            "edge": "bottom",
+            "reason": "recorded from the reference measurement this run performed"
+          },
+          {
+            "target": "text_label",
+            "edge": "left",
+            "reason": "recorded from the reference measurement this run performed"
+          },
+          {
+            "target": "text_label",
+            "edge": "right",
+            "reason": "recorded from the reference measurement this run performed"
+          }
+        ]
+      },
+      "edge_type": "rectangular"
+    },
+    "grid": null
+  },
+  "JB-L3b": {
+    "decomposition": {
+      "constraint": {
+        "constraint_id": "JB-L3b",
+        "category": "juice_bottle",
+        "text": "The text label reads \"100% Juice\"."
+      },
+      "comprehend": {
+        "taxonomy_class": "composition-based",
+        "binding_type": "property",
+        "masking_spec": {
+          "binding_type": "property",
+          "matching_criterion": "none",
+          "role_pairs": [],
+          "matching_program": [],
+          "color_scheme": "unique_per_type",
+          "id_scheme": "instance_index",
+          "primary_axis": null,
+          "rationale": "Each type of label needs a distinct color, and instances need unique IDs for verification.",
+          "skip_label_roles": [],
+          "visual_property_roles": []
+        },
+        "reasoning": "The text label can be verified independently by matching its content against the expected value."
+      },
+      "locate": {
+        "targets": [
+          {
+            "name": "label_100_percent_juice",
+            "prompts": [
+              "label",
+              "yellow label",
+              "rectangular yellow label",
+              "bottom text label",
+              "100% Juice label"
+            ],
+            "expected_count": 1,
+            "generic_prompt": "label"
+          }
+        ],
+        "anchor": null,
+        "reasoning": "The constraint references the text label reading '100% Juice', which corresponds to the lower rectangular yellow sticker on the bottle containing that text, so that label is the single target to detect."
+      },
+      "compare": {
+        "free_edges": []
+      },
+      "edge_type": null
+    },
+    "grid": null
+  },
+  "JB-L5": {
+    "decomposition": {
+      "constraint": {
+        "constraint_id": "JB-L5",
+        "category": "juice_bottle",
+        "text": "The juice fills at least 90% of the bottle, but not 100%."
+      },
+      "comprehend": {
+        "taxonomy_class": "range-based",
+        "binding_type": null,
+        "masking_spec": null,
+        "reasoning": "The constraint describes a continuous fill level that must be learned from reference images, specifically the range between 90% and 100%."
+      },
+      "locate": {
+        "targets": [
+          {
+            "name": "pale_liquid",
+            "prompts": [
+              "pale liquid",
+              "milky liquid",
+              "beige liquid",
+              "liquid level"
+            ],
+            "expected_count": null,
+            "generic_prompt": "liquid"
+          }
+        ],
+        "anchor": {
+          "name": "bottle",
+          "prompts": [
+            "glass bottle",
+            "transparent bottle",
+            "bottle neck",
+            "bottle outline"
+          ]
+        },
+        "reasoning": "Range-based anchor is the transparent bottle (spatial frame). The constraint references the visible liquid inside the bottle, so the liquid region is the target whose fill height will be measured against the bottle."
+      },
+      "compare": {
+        "free_edges": [
+          {
+            "target": "pale_liquid",
+            "edge": "top",
+            "reason": "recorded from the reference measurement this run performed"
+          }
+        ]
+      },
+      "edge_type": "horizontal"
+    },
+    "grid": null
+  },
+  "PP-L1": {
+    "decomposition": {
+      "constraint": {
+        "constraint_id": "PP-L1",
+        "category": "pushpins",
+        "text": "Each compartment of the box of pushpins contains exactly one pushpin."
+      },
+      "comprehend": {
+        "taxonomy_class": "composition-based",
+        "binding_type": "relational",
+        "masking_spec": {
+          "binding_type": "relational",
+          "matching_criterion": "nn_match",
+          "role_pairs": [
+            [
+              "compartment",
+              "pushpin"
+            ]
+          ],
+          "matching_program": [
+            {
+              "op": "nn_match",
+              "args": {
+                "a": "compartment",
+                "b": "pushpin",
+                "metric": "spatial"
+              }
+            }
+          ],
+          "color_scheme": "shared_per_match",
+          "id_scheme": "match_index",
+          "primary_axis": null,
+          "rationale": "Each compartment and its pushpin share color/ID to encode the containment match.",
+          "skip_label_roles": [],
+          "visual_property_roles": []
+        },
+        "reasoning": "Each compartment pairs with one pushpin; correspondence across the set."
+      },
+      "locate": {
+        "targets": [
+          {
+            "name": "compartment",
+            "prompts": [
+              "compartment",
+              "box compartment",
+              "plastic cell",
+              "grid cell",
+              "individual compartment"
+            ],
+            "expected_count": 15,
+            "generic_prompt": "compartment"
+          },
+          {
+            "name": "yellow_pushpin",
+            "prompts": [
+              "pushpin",
+              "yellow pushpin",
+              "yellow tack",
+              "thumbtack",
+              "pin"
+            ],
+            "expected_count": 15,
+            "generic_prompt": "pushpin"
+          }
+        ],
+        "anchor": null,
+        "reasoning": "The constraint references box compartments and the pushpins they contain. The image shows a 3x5 grid (15) compartments and 15 yellow pushpins; expected_count set to total visible instances because the constraint requires per-compartment correspondence (relational binding)."
+      },
+      "compare": {
+        "free_edges": []
+      },
+      "edge_type": null
+    },
+    "grid": null
+  },
+  "SB-L1": {
+    "decomposition": {
+      "constraint": {
+        "constraint_id": "SB-L1",
+        "category": "screw_bag",
+        "text": "A screw bag contains exactly two washers, two nuts, one long screw, and one short screw."
+      },
+      "comprehend": {
+        "taxonomy_class": "composition-based",
+        "binding_type": "property",
+        "masking_spec": {
+          "binding_type": "property",
+          "matching_criterion": "none",
+          "role_pairs": [],
+          "matching_program": [],
+          "color_scheme": "unique_per_type",
+          "id_scheme": "instance_index",
+          "primary_axis": null,
+          "rationale": "Types need distinct colors; instances need unique IDs for counting.",
+          "skip_label_roles": [],
+          "visual_property_roles": []
+        },
+        "reasoning": "Each object type is independently verifiable by count."
+      },
+      "locate": {
+        "targets": [
+          {
+            "name": "washer",
+            "prompts": [
+              "washer",
+              "flat metal washer",
+              "round silver washer"
+            ],
+            "expected_count": 2,
+            "generic_prompt": "washer"
+          },
+          {
+            "name": "nut",
+            "prompts": [
+              "nut",
+              "hex nut",
+              "metal hexagonal nut"
+            ],
+            "expected_count": 2,
+            "generic_prompt": "nut"
+          },
+          {
+            "name": "long_screw",
+            "prompts": [
+              "long screw",
+              "long threaded screw",
+              "long metal bolt"
+            ],
+            "expected_count": 1,
+            "generic_prompt": "screw"
+          },
+          {
+            "name": "short_screw",
+            "prompts": [
+              "short screw",
+              "short threaded screw",
+              "short metal bolt"
+            ],
+            "expected_count": 1,
+            "generic_prompt": "screw"
+          }
+        ],
+        "anchor": null,
+        "reasoning": "Composition-based constraint (anchor null). Mapped each listed component to visually corresponding items: two ring-shaped washers, two hexagonal nuts, one longer threaded screw and one shorter threaded screw inside the bag."
+      },
+      "compare": {
+        "free_edges": []
+      },
+      "edge_type": null
+    },
+    "grid": null
+  },
+  "SB-L2": {
+    "decomposition": {
+      "constraint": {
+        "constraint_id": "SB-L2",
+        "category": "screw_bag",
+        "text": "The long screw and the short screw are each longer than 3 times the diameter of the washer."
+      },
+      "comprehend": {
+        "taxonomy_class": "range-based",
+        "binding_type": null,
+        "masking_spec": null,
+        "reasoning": "The constraint requires learning the relationship between the lengths of the screws and the diameter of the washer, which involves continuous measurements."
+      },
+      "locate": {
+        "targets": [
+          {
+            "name": "long_screw",
+            "prompts": [
+              "long screw",
+              "long bolt",
+              "long threaded bolt"
+            ],
+            "expected_count": 1,
+            "generic_prompt": "screw"
+          },
+          {
+            "name": "short_screw",
+            "prompts": [
+              "short screw",
+              "short bolt",
+              "short threaded bolt"
+            ],
+            "expected_count": 1,
+            "generic_prompt": "screw"
+          },
+          {
+            "name": "washer",
+            "prompts": [
+              "washer",
+              "flat washer",
+              "metal ring washer"
+            ],
+            "expected_count": null,
+            "generic_prompt": "washer"
+          }
+        ],
+        "anchor": null,
+        "reasoning": "Measurement is an intrinsic size comparison (screw lengths vs washer diameter) so anchor is null. The constraint mentions a long screw, a short screw, and a washer \u2014 those three object types are mapped to visible screws and the ring-shaped washer(s) in the image."
+      },
+      "compare": {
+        "free_edges": [
+          {
+            "target": "long_screw",
+            "edge": "major",
+            "reason": "recorded from the reference measurement this run performed"
+          },
+          {
+            "target": "long_screw",
+            "edge": "minor",
+            "reason": "recorded from the reference measurement this run performed"
+          },
+          {
+            "target": "short_screw",
+            "edge": "major",
+            "reason": "recorded from the reference measurement this run performed"
+          },
+          {
+            "target": "short_screw",
+            "edge": "minor",
+            "reason": "recorded from the reference measurement this run performed"
+          },
+          {
+            "target": "washer",
+            "edge": "major",
+            "reason": "recorded from the reference measurement this run performed"
+          },
+          {
+            "target": "washer",
+            "edge": "minor",
+            "reason": "recorded from the reference measurement this run performed"
+          }
+        ]
+      },
+      "edge_type": "contour"
+    },
+    "grid": null
+  },
+  "SC-L1a": {
+    "decomposition": {
+      "constraint": {
+        "constraint_id": "SC-L1a",
+        "category": "splicing_connectors",
+        "text": "Exactly two splicing connectors are linked by exactly one cable."
+      },
+      "comprehend": {
+        "taxonomy_class": "composition-based",
+        "binding_type": "relational",
+        "masking_spec": {
+          "binding_type": "relational",
+          "matching_criterion": "nn_match",
+          "role_pairs": [
+            [
+              "splicing_connector",
+              "cable"
+            ]
+          ],
+          "matching_program": [
+            {
+              "op": "nn_match",
+              "args": {
+                "a": "splicing_connector",
+                "b": "cable",
+                "metric": "spatial"
+              }
+            }
+          ],
+          "color_scheme": "shared_per_match",
+          "id_scheme": "match_index",
+          "primary_axis": null,
+          "rationale": "Splicing connectors and the cable share color/ID to encode the connection match.",
+          "skip_label_roles": [],
+          "visual_property_roles": []
+        },
+        "reasoning": "Each splicing connector must correspond to one cable, requiring verification of the connection between them."
+      },
+      "locate": {
+        "targets": [
+          {
+            "name": "left_splicing_connector",
+            "prompts": [
+              "left orange connector",
+              "left 3-slot connector",
+              "left clear housing connector"
+            ],
+            "expected_count": 1,
+            "generic_prompt": "connector"
+          },
+          {
+            "name": "right_splicing_connector",
+            "prompts": [
+              "right orange connector",
+              "right 3-slot connector",
+              "right clear housing connector"
+            ],
+            "expected_count": 1,
+            "generic_prompt": "connector"
+          },
+          {
+            "name": "blue_linking_cable",
+            "prompts": [
+              "blue cable",
+              "thin blue wire",
+              "short blue cable"
+            ],
+            "expected_count": 1,
+            "generic_prompt": "cable"
+          }
+        ],
+        "anchor": null,
+        "reasoning": "The constraint references two splicing connectors and one cable; visually there is a distinct orange connector on the left and one on the right (split by role for relational binding) with a single blue cable connecting them, so anchor is null (composition-based)."
+      },
+      "compare": {
+        "free_edges": []
+      },
+      "edge_type": null
+    },
+    "grid": null
+  },
+  "SC-L1b": {
+    "decomposition": {
+      "constraint": {
+        "constraint_id": "SC-L1b",
+        "category": "splicing_connectors",
+        "text": "The two splicing connectors have the same number of cable clamps."
+      },
+      "comprehend": {
+        "taxonomy_class": "composition-based",
+        "binding_type": "property",
+        "masking_spec": {
+          "binding_type": "property",
+          "matching_criterion": "none",
+          "role_pairs": [],
+          "matching_program": [],
+          "color_scheme": "unique_per_type",
+          "id_scheme": "instance_index",
+          "primary_axis": null,
+          "rationale": "Each connector type needs distinct colors; instances need unique IDs for counting.",
+          "skip_label_roles": [],
+          "visual_property_roles": []
+        },
+        "reasoning": "Each splicing connector can be verified independently by counting its cable clamps."
+      },
+      "locate": {
+        "targets": [
+          {
+            "name": "splicing_connector",
+            "prompts": [
+              "splicing connector",
+              "orange connector",
+              "clear plastic connector",
+              "three-slot connector"
+            ],
+            "expected_count": 2,
+            "generic_prompt": "connector"
+          },
+          {
+            "name": "cable_clamp",
+            "prompts": [
+              "orange clamp",
+              "orange lever",
+              "clamp lever",
+              "connector clamp"
+            ],
+            "expected_count": 6,
+            "generic_prompt": "clamp"
+          }
+        ],
+        "anchor": null,
+        "reasoning": "Constraint compares the two visible splicing connectors and the number of cable clamps on them. Identify the two connector units (2) and all orange clamp levers (three per connector, 6 total) to verify equality."
+      },
+      "compare": {
+        "free_edges": []
+      },
+      "edge_type": null
+    },
+    "grid": null
+  },
+  "SC-L2": {
+    "decomposition": {
+      "constraint": {
+        "constraint_id": "SC-L2",
+        "category": "splicing_connectors",
+        "text": "The number of clamps has a one-to-one correspondence to the {color} of the cable."
+      },
+      "comprehend": {
+        "taxonomy_class": "composition-based",
+        "binding_type": "property",
+        "masking_spec": {
+          "binding_type": "property",
+          "matching_criterion": "none",
+          "role_pairs": [],
+          "matching_program": [],
+          "color_scheme": "unique_per_type",
+          "id_scheme": "instance_index",
+          "primary_axis": null,
+          "rationale": "Cable is rendered as outline only so its true colour remains visible; clamps are individually numbered for counting.",
+          "skip_label_roles": [],
+          "visual_property_roles": [
+            "cable"
+          ]
+        },
+        "reasoning": "Cable color is observed directly; clamp count verified per connector."
+      },
+      "locate": {
+        "targets": [
+          {
+            "name": "orange_clamp",
+            "prompts": [
+              "clamp",
+              "orange clamp",
+              "orange lever",
+              "stacked orange clamps",
+              "connector levers"
+            ],
+            "expected_count": 6,
+            "generic_prompt": "clamp"
+          },
+          {
+            "name": "blue_cable",
+            "prompts": [
+              "cable",
+              "blue cable",
+              "blue wire",
+              "single blue wire"
+            ],
+            "expected_count": 1,
+            "generic_prompt": "cable"
+          }
+        ],
+        "anchor": null,
+        "reasoning": "Constraint references 'clamps' and 'color of the cable' \u2014 the image shows six orange clamping levers (three on each connector) and one blue cable connecting them, so those two object types are mapped."
+      },
+      "compare": {
+        "free_edges": []
+      },
+      "edge_type": null
+    },
+    "grid": null
+  },
+  "SC-L3": {
+    "decomposition": {
+      "constraint": {
+        "constraint_id": "SC-L3",
+        "category": "splicing_connectors",
+        "text": "The cable connects to the same slot index on both the left connector and the right connector."
+      },
+      "comprehend": {
+        "taxonomy_class": "composition-based",
+        "binding_type": "relational",
+        "masking_spec": {
+          "binding_type": "relational",
+          "matching_criterion": "spatial_rank",
+          "role_pairs": [
+            [
+              "left_connector_slots",
+              "right_connector_slots"
+            ],
+            [
+              "left_connector",
+              "right_connector"
+            ]
+          ],
+          "matching_program": [
+            {
+              "op": "sort",
+              "args": {
+                "target": "left_connector_slots",
+                "key": "y"
+              }
+            },
+            {
+              "op": "sort",
+              "args": {
+                "target": "right_connector_slots",
+                "key": "y"
+              }
+            },
+            {
+              "op": "zip_align",
+              "args": {
+                "a": "left_connector_slots",
+                "b": "right_connector_slots"
+              }
+            },
+            {
+              "op": "sort",
+              "args": {
+                "target": "left_connector",
+                "key": "y"
+              }
+            },
+            {
+              "op": "sort",
+              "args": {
+                "target": "right_connector",
+                "key": "y"
+              }
+            },
+            {
+              "op": "zip_align",
+              "args": {
+                "a": "left_connector",
+                "b": "right_connector"
+              }
+            }
+          ],
+          "color_scheme": "shared_per_match",
+          "id_scheme": "match_index",
+          "primary_axis": "horizontal",
+          "rationale": "Slots (sub-parts) pair first so they receive low match IDs; connectors (containers) pair last and carry color without labels.",
+          "skip_label_roles": [
+            "left_connector",
+            "right_connector"
+          ],
+          "visual_property_roles": []
+        },
+        "reasoning": "Requires verifying slot-index correspondence across L/R roles; connectors are distinct objects with positional roles."
+      },
+      "locate": {
+        "targets": [
+          {
+            "name": "left_connector",
+            "prompts": [
+              "left connector",
+              "transparent housing left",
+              "orange levers left"
+            ],
+            "expected_count": 1,
+            "generic_prompt": "connector"
+          },
+          {
+            "name": "right_connector",
+            "prompts": [
+              "right connector",
+              "transparent housing right",
+              "orange levers right"
+            ],
+            "expected_count": 1,
+            "generic_prompt": "connector"
+          },
+          {
+            "name": "cable",
+            "prompts": [
+              "blue cable",
+              "blue wire",
+              "thin blue cord"
+            ],
+            "expected_count": 1,
+            "generic_prompt": "cable"
+          },
+          {
+            "name": "left_connector_slots",
+            "prompts": [
+              "left connector slots",
+              "left slot openings",
+              "left orange slots"
+            ],
+            "expected_count": 3,
+            "generic_prompt": "slot"
+          },
+          {
+            "name": "right_connector_slots",
+            "prompts": [
+              "right connector slots",
+              "right slot openings",
+              "right orange slots"
+            ],
+            "expected_count": 3,
+            "generic_prompt": "slot"
+          }
+        ],
+        "anchor": null,
+        "reasoning": "The constraint references the cable and the slot index within each connector. To verify it, detect the cable and both connectors (left/right) and the sets of visible slots in each connector (three slots per connector)."
+      },
+      "compare": {
+        "free_edges": []
+      },
+      "edge_type": null
+    },
+    "grid": null
+  },
+  "SC-L4": {
+    "decomposition": {
+      "constraint": {
+        "constraint_id": "SC-L4",
+        "category": "splicing_connectors",
+        "text": "The cable length is roughly longer than the length of the splicing connector terminal block."
+      },
+      "comprehend": {
+        "taxonomy_class": "range-based",
+        "binding_type": null,
+        "masking_spec": null,
+        "reasoning": "The constraint describes a spatial relationship (length) that must be learned from reference images, as 'roughly longer' does not provide exact numerical values."
+      },
+      "locate": {
+        "targets": [
+          {
+            "name": "blue_cable",
+            "prompts": [
+              "blue cable",
+              "blue wire",
+              "insulated blue cable",
+              "single blue conductor"
+            ],
+            "expected_count": 1,
+            "generic_prompt": "cable"
+          }
+        ],
+        "anchor": {
+          "name": "right_splicing_connector_terminal_block",
+          "prompts": [
+            "orange connector",
+            "right connector block",
+            "plastic terminal block",
+            "three-port connector"
+          ]
+        },
+        "reasoning": "The constraint compares the cable's length to the connector block length, so the connector block is the spatial anchor and the blue cable is the target being measured."
+      },
+      "compare": {
+        "free_edges": [
+          {
+            "target": "blue_cable",
+            "edge": "major",
+            "reason": "recorded from the reference measurement this run performed"
+          },
+          {
+            "target": "blue_cable",
+            "edge": "minor",
+            "reason": "recorded from the reference measurement this run performed"
+          }
+        ]
+      },
+      "edge_type": "contour"
+    },
+    "grid": null
+  }
+}

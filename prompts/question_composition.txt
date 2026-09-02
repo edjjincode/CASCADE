@@ -1,0 +1,89 @@
+# Verification — composition-based constraint
+#
+# Input   : the disambiguation scaffold (one image) and this text.
+# Model   : VLM (1 image + text)
+# Output  : a natural Yes/No, read out of [[FINAL ANSWER: ...]]
+# Paper   : Section VI-B (the disambiguation scaffold) and Section IV-A
+#           (one call per constraint)
+# Code    : cascade/question.py :: build() ; cascade/verify.py :: ask()
+#
+# This is the only call made at test time, and it is made once per
+# constraint. The image it accompanies already carries the constraint's
+# logical structure -- which instances belong together, and what the
+# numbering counts -- so the text does not have to describe the scene. It
+# states the rule as a question and says how to read the overlay.
+#
+# The question is the constraint sentence turned into an interrogative, and
+# nothing else. It is asked in the affirmative -- "does the rule hold?" --
+# because a leading question ("is anything wrong?") biases the answer. The
+# verdict is inverted afterwards in code: Yes means normal, No means anomaly.
+#
+# The **Visual Cues** block is generated from the Stage 1 masking_spec and the
+# Stage 2 targets, never from a per-category table. Two forms exist:
+#
+#   binding = property     each target type gets its own colour, and instances
+#                          of a type are numbered within that type. The cue
+#                          lists each target with its expected count and its
+#                          label prefix.
+#
+#   binding = relational   instances that were matched to each other share a
+#                          colour and an index, so a pair can be read off the
+#                          image directly. The cue names the roles and, when
+#                          the match runs along an axis, that axis.
+#
+# Label prefixes are derived from the target name (long_screw -> LS), and the
+# visual hint after each target is that target's first SAM3 prompt. Both come
+# from the constraint, so no category vocabulary appears in the code.
+#
+# The closing instruction is deliberate: the scaffold's colours are an aid,
+# but a mask can be wrong, so the model is told to confirm each item against
+# what it actually looks like rather than trusting the colour alone.
+#
+# ============================== TEMPLATE ============================
+
+**Visual Information:**
+Colored masks highlight the target objects. Use the scaffold's color/ID
+scheme to disambiguate instances and roles.
+
+**Visual Cues:**
+{visual_cues}
+
+**Question:** {question}
+
+**Instructions:**
+Let's think step-by-step. Examine the image carefully.
+Do not rely on mask color alone — verify each item by its actual visual
+appearance. Explain your reasoning before giving the final answer.
+
+**Answer Format:**
+(Reasoning) [Your step-by-step analysis]
+[[FINAL ANSWER: Yes/No]]
+
+# =========================== RENDERED EXAMPLE =======================
+#
+# PP-L1, "Each compartment of the box of pushpins contains exactly one
+# pushpin." -- composition-based, relational binding. Sent with the
+# scaffold in examples/pushpins_compartment/.
+
+**Visual Information:**
+Colored masks highlight the target objects. Use the scaffold's color/ID
+scheme to disambiguate instances and roles.
+
+**Visual Cues:**
+Matched instances across roles share the SAME color (relational binding).
+Same-color regions indicate paired instances to be compared.
+  - compartment: compartment — paired instances use ID Ck
+  - yellow_pushpin: pushpin — paired instances use ID YPk
+Check whether paired instances satisfy the constraint.
+
+**Question:** Does each compartment of the box of pushpins contain exactly one pushpin?
+
+**Instructions:**
+Let's think step-by-step. Examine the image carefully.
+Do not rely on mask color alone — verify each item by its actual visual
+appearance. Explain your reasoning before giving the final answer.
+
+**Answer Format:**
+(Reasoning) [Your step-by-step analysis]
+[[FINAL ANSWER: Yes/No]]
+

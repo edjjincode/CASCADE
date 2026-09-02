@@ -1,0 +1,123 @@
+# Stage 2 — Locate
+#
+# Input   : the constraint text, its category, the Stage 1 taxonomy_class and
+#           binding_type, and ONE reference image.
+# Model   : VLM (image + text)
+# Output  : targets[] (name, sam3_prompts, expected_count, generic_prompt)
+#           and anchor (or null)
+# Paper   : Section VI-A (target objects T) and Section VII-B
+#           (the object-anchored coordinate frame)
+# Code    : cascade/parse.py :: locate()
+#
+# Why this stage looks at an image rather than only at the text:
+#   The constraint names entities in the words of a person, not in the words a
+#   segmentation model accepts. This stage maps each entity the constraint
+#   references onto an object actually visible in a reference image, and emits
+#   the short noun phrases SAM3 needs to find it. The image is what lets the
+#   model name what it SEES rather than what the sentence happens to call it.
+#
+# Two fields carry the structure the later stages depend on:
+#   anchor          the object that defines the coordinate frame for a
+#                   range-based constraint -- a container that normalises
+#                   positions across images, or an object whose own dimension
+#                   is the unit of comparison. It is never itself measured, and
+#                   never appears among the targets. Composition-based
+#                   constraints have no anchor.
+#   generic_prompt  groups targets that a detector cannot tell apart into one
+#                   detection pass. Targets separated only by a relative
+#                   attribute -- size, position, role -- share a generic_prompt
+#                   (long_screw and short_screw are both "screw"), and the
+#                   distinction between them is resolved afterwards by
+#                   classification rather than by the detector.
+#
+# The prompt is a single user message; there is no separate system message.
+# Fields in braces -- {category}, {constraint_text}, {taxonomy_class},
+# {binding_type} -- are substituted before the call; everything else is
+# shown exactly as the model receives it.
+#
+# =============================== PROMPT =============================
+
+You are looking at a normal reference image of a "{category}" product.
+
+**Constraint**: "{constraint_text}"
+**Taxonomy**: {taxonomy_class}
+**Binding**: {binding_type}
+
+Map the entities mentioned in the constraint to objects visible in
+this image. Do NOT add objects just because they are visible — only
+extract what the constraint ACTUALLY REFERENCES.
+
+## STEP 1: ANCHOR (range-based only)
+- If taxonomy is "composition-based" → anchor = null. Skip to Step 2.
+- If taxonomy is "range-based": the anchor is any object that serves
+  as a REFERENCE but is NOT itself being measured/verified. Two
+  common forms:
+    (a) spatial reference frame — a container/backdrop that normalizes
+        target coordinates across images (e.g., the bottle for a label
+        on the bottle, the box for items inside the box).
+    (b) unit-scale reference — an object whose dimension is the unit
+        against which targets are compared (e.g., "screws longer than
+        3× the WASHER diameter" → washer is the anchor).
+  If the constraint is fully self-contained (target's own size
+  compared to an absolute number like pixels or cm) → anchor = null.
+
+## STEP 2: TARGETS
+For each entity in the constraint that must be physically detected
+to verify it, find the corresponding object in the image:
+- "name": short noun in snake_case. Name what you SEE (e.g., if the
+  constraint says "juice" and you see liquid in a bottle, name it
+  based on what it visually IS).
+- "expected_count": exact number if stated, null if not.
+- "sam3_prompts": 1-5 open-vocabulary text phrases a segmentation
+  model (SAM3) can use to locate THIS object in the image. SAM3
+  accepts SHORT, noun-centric phrases — use 1-3 words per phrase,
+  no full sentences, no parenthetical clauses, no relative clauses.
+  Provide phrases of varying specificity: start with the simplest
+  form, then list variants with added attributes (colour, shape, size).
+  Avoid the bare constraint wording if it is ambiguous.
+- "generic_prompt": ONE short (1-3 word) phrase naming the broader
+  visual CATEGORY this target belongs to. Targets that differ only
+  by a relative attribute (size, position, role) must share the
+  SAME generic_prompt — e.g. long_screw and short_screw both get
+  "screw"; left_connector and right_connector both get "connector".
+  Targets that are visually distinct object types must have different
+  generic_prompts. This groups targets for a shared detection step;
+  the specific distinction will be resolved later by classification.
+
+Rules:
+- ONLY include objects referenced by the constraint. The image may
+  contain other objects — ignore them.
+- The target is the component being checked, NOT the container.
+  Containers serve as anchors (range-based) or are omitted.
+- If a target is visually a UNIFIED REGION composed of multiple
+  sub-elements intermixed in one area, treat it as ONE target with a
+  combined name, and write sam3_prompts describing the region AS A
+  WHOLE (its spatial extent and composite nature), not each sub-element
+  separately. Do not hardcode any vocabulary; describe what you see.
+- Same-type objects → ONE entry with expected_count = total.
+  EXCEPTION: binding = "relational" → split by positional role
+  (e.g., left_X, right_X). Only split if binding is "relational".
+- If the constraint requires DISAMBIGUATING AMONG MULTIPLE visible
+  instances by index, position, or individual correspondence (e.g.,
+  "the N-th slot", "same index on both sides", "each compartment
+  holds one X"), set expected_count to the TOTAL visible instance
+  count (not the constraint-specific subset). Disambiguation happens
+  at verification time, not here.
+- If "each X contains Y", both X and Y are targets.
+- The anchor must NOT appear in the targets list.
+
+## STEP 3: ANCHOR PROMPTS (range-based only)
+If anchor is non-null, also provide "sam3_prompts" and "generic_prompt"
+for the anchor (same rules as target prompts).
+
+## OUTPUT
+Return STRICT JSON only, no prose, no markdown fences:
+{
+  "anchor":  {"name": "...", "sam3_prompts": ["..."], "generic_prompt": "..."} or null,
+  "targets": [
+    {"name": "...", "expected_count": <int or null>,
+      "sam3_prompts": ["phrase1", "phrase2", ...],
+      "generic_prompt": "..."}
+  ],
+  "reasoning": "brief justification"
+}

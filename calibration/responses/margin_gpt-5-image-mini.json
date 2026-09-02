@@ -1,0 +1,5406 @@
+{
+ "model": "openai/gpt-5-image-mini",
+ "probe": "margin",
+ "trials": [
+  {
+   "delta_d": 5,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 5,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 5,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 5,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 5,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 10,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 5,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 5,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 10,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 10,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 10,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 10,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 15,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 25,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 25,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 25,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 25,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 25,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 25,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 25,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 25,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 25,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 25,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 15,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 25,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 25,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 25,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 25,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 45,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 45,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 25,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 25,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 25,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 25,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 25,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 25,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 45,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 25,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 25,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 25,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 45,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 25,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 25,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 45,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 45,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 45,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 25,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 45,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 45,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 45,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 45,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 45,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 45,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 45,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 25,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 25,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 45,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 45,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 45,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 25,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 45,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 45,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 45,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 45,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 45,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 45,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 45,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 45,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 45,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 45,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 45,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 45,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 45,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 25,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "A",
+   "closer": "B",
+   "correct": false
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "A",
+   "closer": "B",
+   "correct": false
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 5,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 5,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 5,
+   "answer": "A",
+   "closer": "B",
+   "correct": false
+  },
+  {
+   "delta_d": 5,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 5,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 5,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 10,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 10,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 10,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 10,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 10,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 10,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 20,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 10,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 20,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 20,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 40,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 40,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 40,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 40,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 40,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 40,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 40,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 40,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 40,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 40,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 40,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 40,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 40,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 40,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 40,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 40,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 40,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 40,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 40,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 40,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 40,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 40,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 40,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 40,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 40,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 40,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 40,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 40,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 40,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 40,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "A",
+   "closer": "B",
+   "correct": false
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 5,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": null,
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 5,
+   "answer": "A",
+   "closer": "B",
+   "correct": false
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 5,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 5,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 5,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 15,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 15,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 15,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 15,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 15,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 35,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 35,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 15,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 35,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 15,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 35,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 35,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 35,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 35,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 35,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 35,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 35,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 35,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 35,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 35,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 35,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 35,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 35,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 35,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 35,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 35,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 35,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 35,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 35,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 35,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 35,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 35,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 35,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 35,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 35,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 35,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 35,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "A",
+   "closer": "B",
+   "correct": false
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "A",
+   "closer": "B",
+   "correct": false
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 10,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 10,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 10,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "A",
+   "closer": "B",
+   "correct": false
+  },
+  {
+   "delta_d": 10,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 5,
+   "answer": "A",
+   "closer": "B",
+   "correct": false
+  },
+  {
+   "delta_d": 10,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 30,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 30,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 30,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 30,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 5,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 30,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 30,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 30,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 30,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 30,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 30,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 30,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 30,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 30,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 30,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 30,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 30,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 30,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 30,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 30,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 30,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 30,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 30,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 30,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 30,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 25,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 25,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 30,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 30,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 30,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 25,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 30,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 25,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 25,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 25,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 25,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 25,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 25,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 25,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 25,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 25,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 25,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 25,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 25,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 25,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 25,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 25,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 25,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 25,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 25,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 25,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 25,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 30,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 25,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 25,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 25,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 25,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 25,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 25,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 25,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 30,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 15,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 10,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 45,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 20,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 45,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 45,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 45,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 45,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 45,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 45,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 45,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 45,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 45,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 45,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 45,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 45,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 45,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "A",
+   "closer": "A",
+   "correct": true
+  },
+  {
+   "delta_d": 45,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 45,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 45,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 45,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 45,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 45,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 40,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 45,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 40,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 40,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 45,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 45,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 45,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 45,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 40,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 45,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 45,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 45,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 40,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 40,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 45,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 40,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 40,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 40,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 40,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 40,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 40,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 45,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 40,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 40,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 40,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 40,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 40,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 40,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 40,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 40,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 40,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 40,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 35,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 40,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 40,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 40,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 35,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 35,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 35,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 40,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 40,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 35,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 40,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 35,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 35,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "B",
+   "closer": "A",
+   "correct": false
+  },
+  {
+   "delta_d": 35,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 35,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 35,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 35,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 35,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 40,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 35,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 35,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 35,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 40,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 35,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 35,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 35,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 35,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 35,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 35,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 35,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 30,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 35,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 35,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 35,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 35,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 35,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 30,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 35,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 30,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 30,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 30,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 30,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 30,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 35,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 35,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 30,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 30,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 30,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 30,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 30,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 30,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 30,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 30,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 30,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 30,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 30,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 30,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 30,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 30,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 30,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 30,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 30,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 30,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 30,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "A",
+   "closer": "B",
+   "correct": false
+  },
+  {
+   "delta_d": 20,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 30,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 30,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 30,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 30,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "A",
+   "closer": "B",
+   "correct": false
+  },
+  {
+   "delta_d": 20,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "A",
+   "closer": "B",
+   "correct": false
+  },
+  {
+   "delta_d": 20,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  },
+  {
+   "delta_d": 20,
+   "answer": "B",
+   "closer": "B",
+   "correct": true
+  }
+ ]
+}

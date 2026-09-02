@@ -1,0 +1,111 @@
+{
+  "_meta": {
+    "description": "Verbatim per-class normality rules from LogicQA, used as the natural-language constraint input for MVTec-LOCO.",
+    "source": "LogicQA (Kwon et al., ACL 2025 Industry), Appendix C.2 'MVTec LOCO AD Dataset - Normality Definition for each class'",
+    "paper_url": "https://aclanthology.org/2025.acl-industry.29.pdf",
+    "arxiv": "https://arxiv.org/abs/2503.20252",
+    "upstream": "MVTec LOCO AD (Bergmann et al., IJCV 2022, 'Beyond Dents and Scratches')",
+    "note": "Verbatim copy of LogicQA's bulleted per-class rules. Template slots {fruit}, {color} are kept as-is; they are specialized per-image at runtime.",
+    "count": 14
+  },
+  "bullets": [
+    {
+      "id": "BB-L1",
+      "category": "breakfast_box",
+      "text": "The breakfast box always contain exactly two tangerines and one nectarine that are always located on the left-hand side of the box.",
+      "source": "LogicQA Appendix C.2",
+      "mvtec_origin": "verbatim (split from single prose paragraph)"
+    },
+    {
+      "id": "BB-L2",
+      "category": "breakfast_box",
+      "text": "The ratio and relative position of the cereals and the mix of banana chips and almonds on the right-hand side are fixed.",
+      "source": "LogicQA Appendix C.2",
+      "mvtec_origin": "verbatim"
+    },
+    {
+      "id": "JB-L1",
+      "category": "juice_bottle",
+      "text": "The juice bottle is filled with {fruit} juice and carries exactly two labels.",
+      "source": "LogicQA Appendix C.2",
+      "mvtec_origin": "templated from MVTec 'one of three differently colored liquids ... carries exactly two labels'"
+    },
+    {
+      "id": "JB-L2",
+      "category": "juice_bottle",
+      "text": "The first label is attached to the center of the bottle, with the {fruit} icon positioned exactly at the center of the label, clearly indicating the type of {fruit} juice.",
+      "source": "LogicQA Appendix C.2",
+      "mvtec_origin": "expanded from MVTec 'displays an icon that determines the type of liquid'"
+    },
+    {
+      "id": "JB-L3",
+      "category": "juice_bottle",
+      "text": "The second is attached to the lower part of the bottle with the text \"100% Juice\" written on it.",
+      "source": "LogicQA Appendix C.2",
+      "mvtec_origin": "verbatim"
+    },
+    {
+      "id": "JB-L4",
+      "category": "juice_bottle",
+      "text": "The fill level is the same for each bottle.",
+      "source": "LogicQA Appendix C.2",
+      "mvtec_origin": "verbatim"
+    },
+    {
+      "id": "JB-L5",
+      "category": "juice_bottle",
+      "text": "The bottle is filled with at least 90% of its capacity with juice, but not 100%.",
+      "source": "LogicQA Appendix C.2",
+      "mvtec_origin": "NEW - added by LogicQA, not in MVTec"
+    },
+    {
+      "id": "PP-L1",
+      "category": "pushpins",
+      "text": "Each compartment of the box of pushpins contains exactly one pushpin.",
+      "source": "LogicQA Appendix C.2",
+      "mvtec_origin": "verbatim"
+    },
+    {
+      "id": "SB-L1",
+      "category": "screw_bag",
+      "text": "A screw bag contains exactly two washers, two nuts, one long screw, and one short screw.",
+      "source": "LogicQA Appendix C.2",
+      "mvtec_origin": "verbatim"
+    },
+    {
+      "id": "SB-L2",
+      "category": "screw_bag",
+      "text": "All bolts (screws) are longer than 3 times the diameter of the washer.",
+      "source": "LogicQA Appendix C.2",
+      "mvtec_origin": "NEW - added by LogicQA, not in MVTec"
+    },
+    {
+      "id": "SC-L1",
+      "category": "splicing_connectors",
+      "text": "Exactly two splicing connectors with the same number of cable clamps are linked by exactly one cable.",
+      "source": "LogicQA Appendix C.2",
+      "mvtec_origin": "verbatim"
+    },
+    {
+      "id": "SC-L2",
+      "category": "splicing_connectors",
+      "text": "In addition, the number of clamps has a one-to-one correspondence to the {color} of the cable.",
+      "source": "LogicQA Appendix C.2",
+      "mvtec_origin": "templated from MVTec 'color of the cable'"
+    },
+    {
+      "id": "SC-L3",
+      "category": "splicing_connectors",
+      "text": "The cable must be connected to the same position on both connectors to maintain mirror symmetry.",
+      "source": "LogicQA Appendix C.2",
+      "mvtec_origin": "paraphrase of MVTec 'terminate in the same relative position on its two ends such that the whole construction exhibits a mirror symmetry'"
+    },
+    {
+      "id": "SC-L4",
+      "category": "splicing_connectors",
+      "text": "The cable length is roughly longer than the length of the splicing connector terminal block.",
+      "source": "LogicQA Appendix C.2",
+      "mvtec_origin": "NEW - added by LogicQA, not in MVTec"
+    }
+  ]
+}

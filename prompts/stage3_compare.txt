@@ -1,0 +1,109 @@
+# Stage 3 — Compare
+#
+# Input   : the constraint text, the Stage 2 targets and anchor, and ALL K
+#           reference images at once (a single multi-image call).
+# Model   : VLM (K images + text)
+# Output  : free_edges[] -- {target, edge, reason}
+# Paper   : Section VII-B (the reference spread R the grid is calibrated to)
+# Code    : cascade/parse.py :: compare()
+#
+# Runs for range-based constraints only. A composition-based constraint
+# returns immediately with no call.
+#
+# What it decides:
+#   A range-based constraint measures something, and the grid is calibrated to
+#   how much that measurement moves across normal samples. But not every edge
+#   of a target is informative: an edge pressed against a container wall is
+#   held fixed by the container, while the edge facing open space is the one
+#   that actually varies. Measuring a fixed edge would report a spread of
+#   roughly zero and calibrate a grid to noise. This stage looks at the K
+#   references together and names the edges that are free to move.
+#
+#   The distinction is the difference between an object placed somewhere
+#   inside a region -- which translates as a rigid body, so all four of its
+#   edges move together -- and content filling a container, where only the
+#   open side is a fill line. A self-contained target measured by its own
+#   extent reports an axis of its minimum-area rectangle instead.
+#
+# The edge vocabulary is closed: top, bottom, left, right, major, minor,
+# length, diameter. Anything else the model returns is dropped in validation.
+#
+# The prompt is a single user message accompanying the K images; there is no
+# separate system message. Fields in braces -- {k}, {category},
+# {constraint_text}, {targets_str}, {anchor_str} -- are substituted before the
+# call; everything else is shown exactly as the model receives it.
+#
+# =============================== PROMPT =============================
+
+You are analyzing {k} normal reference images of a "{category}" product.
+
+**Constraint**: "{constraint_text}"
+**Targets**: {targets_str}
+**Anchor**: {anchor_str}
+
+The {k} images above are ALL normal (non-anomalous) samples.
+
+## TASK
+
+Identify which edges or dimensions of each target VARY across the
+{k} references. A normal product has natural manufacturing variation,
+so SOME edge or dimension is almost always free. Default to reporting
+AT LEAST ONE free edge per target unless the target is truly rigid
+(e.g. a printed label glued in a fixed position on every unit).
+
+Anchor-bounded edges (edges that touch a fixed container wall or
+anchor boundary) are FIXED. The opposite edges (facing empty space
+or another variable object) are FREE.
+
+Edge vocabulary:
+- "top", "bottom", "left", "right" — for target positioned relative
+  to an anchor (use when target edges can be compared to anchor box).
+- "major", "minor", "length", "diameter" — for self-contained targets
+  measured by their own minAreaRect.
+
+Common cases (apply the one that matches the constraint semantics):
+
+1) Rigid target placed somewhere within an anchor region
+   (e.g. a label glued on a bottle, a fruit in a compartment).
+   The target translates as a rigid body → ALL FOUR edges vary
+   in lockstep. Report all four: top, bottom, left, right.
+
+2) Granular / liquid content filling a compartment or container
+   (cereal, granola, nuts, liquid). Only the edge facing the
+   OPEN side varies (the fill line). Examples:
+     - Granola in right compartment → only "bottom" (touches mix below)
+     - Liquid in bottle → only "top" (fill level)
+   Other edges pressed against fixed walls are FIXED.
+
+3) Self-contained intrinsic size (contour edge_type)
+   - Cable length, screw length, bolt major axis → "major" only
+   - Occasionally both "major" and "minor" if both matter
+
+Default rule of thumb: if the target is a SOLID RIGID OBJECT that
+can be placed anywhere in the anchor, report 4 edges. If it is
+FILL CONTENT with an obvious OPEN SIDE, report just that 1 edge.
+
+## OUTPUT
+Return STRICT JSON only, no prose, no markdown fences. Use target
+names EXACTLY as provided (no suffixes like "(1)").
+
+**CRITICAL: each edge must be ONE SEPARATE OBJECT in the array.**
+Do NOT put multiple edges in one string. The "edge" field must
+contain exactly one value from: top, bottom, left, right, major,
+minor, length, diameter.
+
+Example (rigid rectangular target — 4 SEPARATE entries):
+{"free_edges": [
+  {"target": "label", "edge": "top",    "reason": "translates"},
+  {"target": "label", "edge": "bottom", "reason": "translates"},
+  {"target": "label", "edge": "left",   "reason": "translates"},
+  {"target": "label", "edge": "right",  "reason": "translates"}
+]}
+
+Example (fill content — 1 entry):
+{"free_edges": [
+  {"target": "granola", "edge": "bottom", "reason": "fill line varies"}
+]}
+
+Empty list ONLY if every edge is verifiably identical across all {k}
+images (rare — most industrial products have at least one free edge).
