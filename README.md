@@ -88,6 +88,14 @@ involved. Everything it produces is written to `examples/calibration.json`
 and reused for every query image afterwards, so verification costs one
 model call per rule per image and nothing more.
 
+The groundings for all 19 rules ship in that file already, so the only
+part of calibration you may want to redo is the measurement:
+
+```bash
+python run.py fit juice_bottle                    # re-measure; no API key
+python run.py fit juice_bottle a.png b.png c.png  # against your own references
+```
+
 `evaluate` needs no key — it reads the results file. It labels each image
 from where it sits on disk (`.../logical_anomalies/...` is anomalous) and
 reports precision, recall, F1, balanced accuracy and AUROC. An image is

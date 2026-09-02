@@ -62,10 +62,35 @@ def main() -> None:
     with tarfile.open(archive) as tar:
         tar.extractall(args.to, filter="data")
 
+    flatten(args.to)
+
     if not args.keep_archive:
         archive.unlink()
 
-    print(f"\ndone. If this is not ./data, set CASCADE_DATA={args.to.resolve()}")
+    found = sorted(d.name for d in args.to.iterdir()
+                   if d.is_dir() and (d / "train").is_dir())
+    print(f"\ndone. {len(found)} categories: {', '.join(found)}")
+    print(f"images are at {args.to}/<category>/test/logical_anomalies/000.png")
+    if args.to.resolve() != Path("data").resolve():
+        print(f"set CASCADE_DATA={args.to.resolve()}")
+
+
+def flatten(root: Path) -> None:
+    """Lift the archive's single top-level directory out of the way.
+
+    The tarball unpacks into one wrapper directory, which would make every
+    path a level deeper than the mask pack's keys and than every example
+    in the README. Moving the categories up keeps
+    `<root>/<category>/test/...` true however the dataset was obtained.
+    """
+    wrappers = [d for d in root.iterdir()
+                if d.is_dir() and not (d / "train").is_dir()
+                and any((c / "train").is_dir() for c in d.iterdir() if c.is_dir())]
+    if len(wrappers) != 1:
+        return
+    for category in wrappers[0].iterdir():
+        category.rename(root / category.name)
+    wrappers[0].rmdir()
 
 
 if __name__ == "__main__":

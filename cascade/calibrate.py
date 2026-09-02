@@ -118,6 +118,22 @@ def flatten_edge(samples: dict) -> dict:
     return {k: samples[k] for k in keys}
 
 
+def largest(instances: list[Instance]) -> Instance:
+    """Which instance of the measured role the range is read off.
+
+    A range rule constrains one quantity, so it needs one region, and a
+    segmenter often returns several overlapping candidates for the same
+    object. Taking the largest is deterministic and does not depend on
+    the order a mask source happens to return — which matters, because
+    that order is not part of the interface.
+
+    When the role genuinely holds several distinct objects, the rule has
+    not said which one it means; `run.py fit` says so rather than letting
+    the choice pass unremarked.
+    """
+    return max(instances, key=lambda i: int(np.asarray(i.mask).sum()))
+
+
 def measure_edges(masks: list[np.ndarray], edge_type: str,
                   origins: list | tuple = (0, 0)) -> tuple[list, list]:
     """Measure each constrained edge across the K reference masks.
@@ -239,13 +255,37 @@ def feasible_offsets(values: list, spacing: float,
     return [(start, end)] if start <= end else [(start, spacing), (0, end)]
 
 
-def common_offset(intervals: list, spacing: float) -> float | None:
-    """An offset every edge can live with, or None if there is none."""
-    for offset in range(int(spacing)):
+def common_offset(intervals: list, spacing: float,
+                  ceiling: float | None = None) -> float | None:
+    """An offset every edge can live with, or None if there is none.
+
+    `ceiling` is the smallest coordinate that has to be readable. The
+    grid's first tick sits at the offset and is numbered 1, so anything
+    above it lies in an unlabelled strip — cell 0, a row the model cannot
+    see and the question must not quote. Keeping the offset at or below
+    the smallest measurement puts every reference at cell 1 or later.
+    """
+    limit = int(spacing) if ceiling is None else min(int(spacing),
+                                                     int(math.floor(ceiling)) + 1)
+    for offset in range(max(limit, 0)):
         if all(any(lo - 1e-9 <= offset <= hi + 1e-9 for lo, hi in segments)
                for segments in intervals):
             return float(offset)
     return None
+
+
+POSITIONAL = ("top", "bottom", "left", "right")
+
+
+def readable_ceiling(groups: list) -> float | None:
+    """The largest offset that still leaves every value on a numbered cell.
+
+    Only positional edges have cells to fall in; an intrinsic dimension
+    is counted in ticks from the object's own centre, so no offset can
+    push it off the grid.
+    """
+    values = [v for g in groups if g["edge"] in POSITIONAL for v in g["values"]]
+    return min(values) if values else None
 
 
 def fit_grid(groups_y: list, groups_x: list,
@@ -289,7 +329,9 @@ def fit_grid(groups_y: list, groups_x: list,
                     break
                 intervals.append(segments)
             else:
-                offsets.append(common_offset(intervals, spacing) if intervals else 0.0)
+                offsets.append(
+                    common_offset(intervals, spacing, readable_ceiling(groups))
+                    if intervals else 0.0)
                 continue
             break
         if len(offsets) < 2 or any(o is None for o in offsets):
@@ -379,7 +421,7 @@ def calibrate(reference_roles: list[dict[str, list[Instance]]], edge_type: str,
     for n, roles in enumerate(reference_roles):
         if not roles.get(primary):
             continue
-        masks.append(roles[primary][0].mask)
+        masks.append(largest(roles[primary]).mask)
         frame = frames[n] if n < len(frames) else None
         origins.append((int(frame[0]), int(frame[1])) if frame else (0, 0))
     if not masks:

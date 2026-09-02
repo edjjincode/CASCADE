@@ -238,6 +238,26 @@ COLOR_WORDS = {
 }
 
 
+def distinct_colors(n: int) -> list[tuple]:
+    """`n` colours, no two of which read as the same colour.
+
+    A fixed palette cannot do this: fifteen compartments against ten
+    colours wraps, and then match 1 and match 11 are the same green while
+    the cue says a shared colour means a pair. Spacing hues by the golden
+    angle keeps consecutive ranks far apart and never repeats within a
+    run, and alternating lightness separates hues that are close anyway.
+    """
+    import colorsys
+
+    out = []
+    for i in range(max(n, 0)):
+        hue       = (i * 0.6180339887) % 1.0
+        lightness = (0.45, 0.62, 0.54)[i % 3]
+        r, g, b   = colorsys.hls_to_rgb(hue, lightness, 0.95)
+        out.append((int(b * 255), int(g * 255), int(r * 255)))    # BGR
+    return out
+
+
 def role_color(role: str) -> tuple | None:
     """The colour a role names, if it names one."""
     for word in role.lower().replace("-", "_").split("_"):
@@ -262,13 +282,23 @@ def assign_colors(scheme: str, roles: Roles,
 
     if scheme == "shared_per_match":
         # Matched instances share a colour, so the pairing is visible. The
-        # colour comes from the palette and never from a role's name: this
-        # scheme exists to tell matches apart, and a role called
-        # "yellow_pushpin" would otherwise paint every match the same
-        # yellow and erase the distinction it was chosen to draw.
+        # colour never comes from a role's name: this scheme exists to
+        # tell matches apart, and a role called "yellow_pushpin" would
+        # otherwise paint every match the same yellow and erase the
+        # distinction it was chosen to draw.
+        #
+        # Anything the matching left over continues the same sequence, so
+        # it ends up with a colour nothing else has — which is exactly
+        # what the visual cue tells the model to look for.
+        matched  = {key for pair in pairs for key in pair}
+        leftover = [key for key in _all_keys(roles) if key not in matched]
+        wheel    = distinct_colors(len(pairs) + len(leftover))
         for rank, pair in enumerate(pairs):
             for key in pair:
-                colors[key] = PALETTE[rank % len(PALETTE)]
+                colors[key] = wheel[rank]
+        for rank, key in enumerate(leftover):
+            colors[key] = wheel[len(pairs) + rank]
+        return colors
 
     elif scheme == "gradient_by_rank":
         # Order itself is the information, so shade along it.
@@ -279,17 +309,18 @@ def assign_colors(scheme: str, roles: Roles,
 
     elif scheme == "per_instance":
         # Every instance distinct: identity matters, type does not.
-        for n, key in enumerate(_all_keys(roles)):
-            colors[key] = role_color(key[0]) or PALETTE[n % len(PALETTE)]
+        keys  = _all_keys(roles)
+        wheel = distinct_colors(len(keys))
+        for n, key in enumerate(keys):
+            colors[key] = wheel[n]
 
     elif scheme != "unique_per_type":
         raise ValueError(f"unknown color_scheme {scheme!r}")
 
     # Instances the scheme left out — every instance under
-    # unique_per_type, and anything a matching left unpaired — take a
-    # colour standing for their role. Where the role's own name says a
-    # colour, use it: a rule about the red one is easier to check when
-    # the red one is red.
+    # unique_per_type — take a colour standing for their role. Where the
+    # role's own name says a colour, use it: a rule about the red one is
+    # easier to check when the red one is red.
     for n, role in enumerate(roles):
         color = role_color(role) or PALETTE[(len(pairs) + n) % len(PALETTE)]
         for index in range(len(roles[role])):
@@ -307,6 +338,18 @@ def assign_labels(scheme: str, roles: Roles,
         for rank, pair in enumerate(pairs):
             for key in pair:
                 labels[key] = f"#{rank + 1}"
+
+        # Whatever the matching left over continues the same sequence.
+        # Numbering it within its role instead would collide: the sixteenth
+        # pushpin, unmatched, would print #7 alongside the pushpin that
+        # really is match 7, and the surplus — the anomaly itself — would
+        # read as a duplicate of something else.
+        nxt = len(pairs) + 1
+        for key in _all_keys(roles):
+            if key not in labels:
+                labels[key] = f"#{nxt}"
+                nxt += 1
+        return labels
 
     elif scheme == "role_position":
         for role, items in roles.items():

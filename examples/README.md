@@ -41,10 +41,14 @@ In `scaffold.png` every compartment is tinted and numbered, and its
 pushpin carries the same colour and number — except one:
 
 ```
-compartment #14   green
-pushpin     #14   green      matched
-pushpin     #16   yellow     matched nothing — it is the second pin in #14's cell
+compartment #14   its own colour
+pushpin     #14   the same colour, the same number      matched
+pushpin     #16   a colour nothing else has             matched nothing
 ```
+
+`#16` is the second pin sitting in `#14`'s cell. Sixteen colours are
+generated for sixteen instances, so no two share one by accident — which
+is what lets "a colour nothing else has" mean "matched nothing".
 
 The greedy one-to-one matching is what makes this visible. A compartment
 takes one pushpin and no more, so the surplus is left over rather than
@@ -56,7 +60,8 @@ asked, verbatim, is what `run.py show PP-L1` prints.
 
 The three normal images it was calibrated on are
 `pushpins/train/good/{000,001,002}.png`, and the query is
-`pushpins/test/logical_anomalies/000.png`, in MVTec-LOCO's own layout.
+`pushpins/test/logical_anomalies/000.png` — MVTec-LOCO's own paths, which
+are also the keys the shipped mask pack uses.
 
 Figures derived from MVTec LOCO AD, CC BY-NC-SA 4.0 (Bergmann et al.,
 IJCV 2022).

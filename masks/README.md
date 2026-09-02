@@ -20,7 +20,7 @@ One gzipped JSON file per category:
   "category": "pushpins",
   "segmenter": "SAM3 promptable concept segmentation",
   "images": {
-    "normal/pushpins/pushpins_crop_000": {
+    "pushpins/test/logical_anomalies/000": {
       "size": [1000, 1650],
       "objects": {
         "compartment": [{"bbox": [x0, y0, x1, y1], "rle": "0 132 18 ..."}, ...],
@@ -32,8 +32,11 @@ One gzipped JSON file per category:
 ```
 
 - **Keys** are the image's path relative to the dataset root, without its
-  extension. A bare file name would not be unique — MVTec-LOCO reuses
-  `000.png` in every split.
+  extension, in MVTec-LOCO's own layout — the layout
+  `scripts/download_mvtec_loco.py` leaves behind. A bare file name would
+  not be unique: MVTec-LOCO reuses `000.png` in every split. If the
+  dataset lives elsewhere, point `CASCADE_DATA` at it; the keys are
+  relative, so they do not care where that is.
 - **`objects`** is keyed by *segmentation phrase*, not by role. The
   phrases are what Stage 2 returned for a constraint's targets; several
   targets often share one phrase, because a detector cannot see the
@@ -44,11 +47,23 @@ One gzipped JSON file per category:
   zeros. Masks are large flat regions, so this is a fraction of a bitmap
   and still readable when the file is opened by hand.
 
+## What is covered
+
+The packs cover the three reference images each category is calibrated on
+(`<category>/train/good/{000,001,002}.png`) and a sample of its test
+split, which is enough to run every command end to end. They are not a
+full segmentation of the dataset: to check an image outside the pack,
+either extend a pack with your own segmenter or pass a `MaskSource` that
+segments on demand.
+
+`MaskPack.covers(category)` lists the keys a pack holds.
+
 ## Reading it
 
 ```python
 from cascade.detect import MaskPack
 pack = MaskPack()
+print(sorted(pack.covers("pushpins"))[:3])
 found = pack.masks("data/pushpins/test/logical_anomalies/000.png", ["pushpin"])
 ```
 

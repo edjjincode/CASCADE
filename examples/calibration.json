@@ -384,7 +384,31 @@
       },
       "edge_type": "rectangular"
     },
-    "grid": null
+    "grid": {
+      "origin": [
+        0.0,
+        6.0
+      ],
+      "spacing": 129.0,
+      "normal_cells": {
+        "top": [
+          5,
+          5
+        ],
+        "bottom": [
+          7,
+          7
+        ],
+        "left": [
+          1,
+          1
+        ],
+        "right": [
+          3,
+          3
+        ]
+      }
+    }
   },
   "JB-L2b": {
     "decomposition": {
@@ -566,7 +590,31 @@
       },
       "edge_type": "rectangular"
     },
-    "grid": null
+    "grid": {
+      "origin": [
+        0.0,
+        8.0
+      ],
+      "spacing": 129.0,
+      "normal_cells": {
+        "top": [
+          5,
+          5
+        ],
+        "bottom": [
+          7,
+          7
+        ],
+        "left": [
+          1,
+          1
+        ],
+        "right": [
+          3,
+          3
+        ]
+      }
+    }
   },
   "JB-L3b": {
     "decomposition": {
@@ -666,7 +714,19 @@
       },
       "edge_type": "horizontal"
     },
-    "grid": null
+    "grid": {
+      "origin": [
+        0.0,
+        32.0
+      ],
+      "spacing": 69.0,
+      "normal_cells": {
+        "top": [
+          4,
+          4
+        ]
+      }
+    }
   },
   "PP-L1": {
     "decomposition": {
@@ -905,7 +965,23 @@
       },
       "edge_type": "contour"
     },
-    "grid": null
+    "grid": {
+      "origin": [
+        17.0,
+        26.0
+      ],
+      "spacing": 60.0,
+      "normal_cells": {
+        "major": [
+          7,
+          7
+        ],
+        "minor": [
+          1,
+          1
+        ]
+      }
+    }
   },
   "SC-L1a": {
     "decomposition": {
@@ -1291,6 +1367,22 @@
       },
       "edge_type": "contour"
     },
-    "grid": null
+    "grid": {
+      "origin": [
+        0.0,
+        102.0
+      ],
+      "spacing": 224.0,
+      "normal_cells": {
+        "major": [
+          3,
+          5
+        ],
+        "minor": [
+          1,
+          1
+        ]
+      }
+    }
   }
 }

@@ -7,12 +7,13 @@ CASCADE — command line.
     python run.py scaffold PP-L1 IMAGE        draw the scaffold  (no API key)
     python run.py check    PP-L1 IMAGE        draw it, ask, and report the verdict
     python run.py calibrate juice_bottle      ground and calibrate a category
+    python run.py fit       juice_bottle      re-fit the grids only (no API key)
     python run.py test     juice_bottle DIR   every constraint over every image
     python run.py evaluate RESULTS.json       score a test run
 
-`constraints`, `show`, `scaffold` and `evaluate` read what is already on
-disk and need no API key. `check`, `calibrate` and `test` call a model, so
-they need one — see .env.example.
+`constraints`, `show`, `scaffold`, `fit` and `evaluate` read what is
+already on disk and need no API key. `check`, `calibrate` and `test` call
+a model, so they need one — see .env.example.
 """
 from __future__ import annotations
 
@@ -164,14 +165,8 @@ def cmd_check(args) -> None:
 
 def cmd_calibrate(args) -> None:
     """Ground and calibrate every constraint of a category."""
-    references = sorted((config.DATA_ROOT / args.category).glob("*.png")) \
-                 [:config.K_REFERENCE]
-    if len(references) < config.K_REFERENCE:
-        sys.exit(f"need {config.K_REFERENCE} reference images in "
-                 f"{config.DATA_ROOT / args.category} (found {len(references)}). "
-                 f"See scripts/download_mvtec_loco.py")
-
-    pipeline = Pipeline()
+    references = references_for(args.category, args.references)
+    pipeline   = Pipeline()
     entries  = load_calibration()
     for u in load_units():
         if u["category"] != args.category:
@@ -184,6 +179,77 @@ def cmd_calibrate(args) -> None:
               f"{', grid ' + str(int(entry.grid.spacing)) + 'px' if entry.grid else ''}")
     save_calibration(entries)
     print(f"wrote {CALIBRATION}")
+
+
+def cmd_fit(args) -> None:
+    """Re-measure the normal range from the references. No model call.
+
+    Grounding is the expensive half and it does not depend on the
+    references, so a grid can be re-fitted on its own — after changing
+    `m` or `w_min`, or against reference images of your own. Only
+    range-based rules have a grid; the rest are unaffected.
+    """
+    pipeline  = Pipeline()
+    entries   = load_calibration()
+    reference = references_for(args.category, args.references)
+
+    fitted = 0
+    for constraint_id, entry in entries.items():
+        if entry.decomposition.constraint.category != args.category:
+            continue
+        if not entry.decomposition.comprehend.is_range:
+            continue
+        entry.grid = pipeline.fit(entry.decomposition, reference)
+        fitted += entry.grid is not None
+        if entry.grid:
+            print(f"  {constraint_id:8s} spacing {entry.grid.spacing:5.0f}px  "
+                  f"normal cells {entry.grid.normal_cells}")
+        else:
+            print(f"  {constraint_id:8s} no grid — no spacing keeps every "
+                  f"reference in one readable cell. The references disagree "
+                  f"about this target by more than a grid can hold.")
+        for note in ambiguous_targets(pipeline, entry, reference):
+            print(f"           note: {note}")
+    save_calibration(entries)
+    print(f"\nfitted {fitted}, wrote {CALIBRATION}")
+
+
+def ambiguous_targets(pipeline, entry, references: list) -> list[str]:
+    """Warn where the rule did not determine what gets measured.
+
+    A range is read off one region. Where the references hold several
+    instances of the measured role, the largest is taken — a tie-break,
+    not a decision the rule made — so it is worth saying out loud.
+    """
+    from cascade.detect import assign_roles
+
+    decomposition = entry.decomposition
+    role = decomposition.targets[0].name if decomposition.targets else None
+    if role is None:
+        return []
+    counts = [len(assign_roles(pipeline.masks, image, decomposition.targets)
+                  .get(role, [])) for image in references]
+    if max(counts, default=0) <= 1:
+        return []
+    return [f"'{role}' matched {counts} instances across the references; "
+            f"the largest is measured"]
+
+
+def references_for(category: str, given: list | None) -> list:
+    """The K normal images a category is calibrated on.
+
+    MVTec-LOCO's own `train/good` is the default, so the same three
+    images are used wherever the dataset was unpacked.
+    """
+    if given:
+        return [Path(p) for p in given]
+    folder = config.DATA_ROOT / category / "train" / "good"
+    chosen = sorted(folder.glob("*.png"))[:config.K_REFERENCE]
+    if len(chosen) < config.K_REFERENCE:
+        sys.exit(f"need {config.K_REFERENCE} reference images in {folder} "
+                 f"(found {len(chosen)}). See scripts/download_mvtec_loco.py, "
+                 f"or pass them explicitly.")
+    return chosen
 
 
 def cmd_test(args) -> None:
@@ -247,7 +313,16 @@ def main() -> None:
     p.add_argument("-v", "--verbose", action="store_true"); p.set_defaults(fn=cmd_check)
 
     p = sub.add_parser("calibrate", help="ground and calibrate a category")
-    p.add_argument("category", choices=config.CATEGORIES); p.set_defaults(fn=cmd_calibrate)
+    p.add_argument("category", choices=config.CATEGORIES)
+    p.add_argument("references", nargs="*", help="K normal images "
+                   "(default: <category>/train/good)")
+    p.set_defaults(fn=cmd_calibrate)
+
+    p = sub.add_parser("fit", help="re-fit the grids only (no API key)")
+    p.add_argument("category", choices=config.CATEGORIES)
+    p.add_argument("references", nargs="*", help="K normal images "
+                   "(default: <category>/train/good)")
+    p.set_defaults(fn=cmd_fit)
 
     p = sub.add_parser("test", help="every constraint over every image")
     p.add_argument("category", choices=config.CATEGORIES)

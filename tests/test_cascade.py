@@ -140,6 +140,34 @@ def test_nn_match_leaves_the_surplus_instance_unpaired():
     assert len(unpaired) == 1, "the surplus pushpin is left over, and shown so"
 
 
+def test_the_surplus_instance_gets_a_number_of_its_own():
+    """Under match_index a number names a pair, so the leftover must not
+    reuse one: the sixteenth pushpin printing #7 next to the real match 7
+    turns the anomaly into a duplicate of something else."""
+    roles = {
+        "compartment": [instance("compartment", i * 60, 0, i * 60 + 50, 50)
+                        for i in range(15)],
+        "pushpin":     [instance("pushpin", i * 60 + 10, 10, i * 60 + 30, 30)
+                        for i in range(15)]
+                       + [instance("pushpin", 100, 15, 120, 35)],
+    }
+    spec = MaskingSpec(binding_type="relational", matching_criterion="nn_match",
+                       role_pairs=[["compartment", "pushpin"]],
+                       color_scheme="shared_per_match", id_scheme="match_index")
+    spec.matching_program = plan.build_matching_program(
+        spec.matching_criterion, spec.role_pairs, None)
+
+    result = engine.execute(spec, roles)
+    labels = result["labels"]
+    assert len(set(labels.values())) == 16, "15 pairs plus one leftover"
+    assert "#16" in labels.values()
+
+    # and its colour is shared with nothing, as the visual cue promises
+    colors = result["colors"]
+    leftover = next(k for k, v in labels.items() if v == "#16")
+    assert sum(1 for c in colors.values() if c == colors[leftover]) == 1
+
+
 def test_mirror_pairs_across_the_axis_not_along_it():
     """Reflection is the point: leftmost pairs with rightmost."""
     roles = {
@@ -201,6 +229,34 @@ def test_a_grid_is_fine_enough_to_separate_normal_from_deviant():
     normal  = calibrate.cell_of(306.0, grid.origin[1], grid.spacing)
     deviant = calibrate.cell_of(506.0, grid.origin[1], grid.spacing)
     assert normal != deviant
+
+
+def test_no_reference_lands_on_a_cell_the_grid_never_draws():
+    """The first tick is numbered 1, so a value above it falls in cell 0 —
+    a row the model cannot read and the question must never quote.
+
+    These are BB-L2's real measurements, where the granola pile's bottom
+    edge disagrees by 458 px across the three references. No grid can
+    both hold that and stay readable, and the honest answer is no grid
+    rather than a cell that is not drawn.
+    """
+    groups_y = [{"edge": "top", "values": [87.0, 101.0]},
+                {"edge": "bottom", "values": [678.0, 1136.0]}]
+    groups_x = [{"edge": "left", "values": [613.0, 805.0]},
+                {"edge": "right", "values": [1315.0, 1410.0]}]
+    assert calibrate.fit_grid(groups_y, groups_x) is None
+
+
+def test_every_fitted_cell_is_one_the_grid_draws():
+    """The complement: where a grid *is* fitted, no cell may be 0."""
+    grid = calibrate.fit_grid(
+        [{"edge": "top", "values": [587.0, 602.0]},
+         {"edge": "bottom", "values": [843.0, 865.0]}],
+        [{"edge": "left", "values": [47.0, 64.0]},
+         {"edge": "right", "values": [316.0, 340.0]}])
+    assert grid is not None
+    assert min(min(bounds) for bounds in grid.normal_cells.values()) >= 1, \
+        grid.normal_cells
 
 
 def test_translation_is_measured_out_by_the_anchor():
