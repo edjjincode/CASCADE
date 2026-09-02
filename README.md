@@ -2,6 +2,8 @@
 
 **Constraint-Aware Scaffolded Decomposition for Logical Anomaly Detection**
 
+[Project page](https://edjjincode.github.io/CASCADE/) · [Paper](https://edjjincode.github.io/CASCADE/assets/cascade_icdm2026.pdf) · IEEE ICDM 2026
+
 A logical anomaly is not a defect in the pixels. Every object in the
 picture can be flawless and the product still wrong — two tangerines
 where there should be one, a cable in the wrong slot, juice filled to the
