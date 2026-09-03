@@ -130,10 +130,10 @@ MathJax = {tex:{inlineMath:[['\\(','\\)']], displayMath:[['\\[','\\]']]},
 
 <section id="backbones">
   <h2>C &nbsp;·&nbsp; The probes, on all three backbones</h2>
-  <p>Two of the analysis probes were run on three backbones. The paper had room for one panel
-    each and printed GPT-5-image-mini. The full versions are below, and they matter for a
-    reason the single panel cannot show: the failure being diagnosed is a property of the
-    <em>task</em>, not of one model's quirks.</p>
+  <p>The <a href="./#motivation">project page</a> prints one backbone per probe, for room. The
+    full versions are below, and they matter for a reason a single panel cannot show: the
+    failure being diagnosed is a property of the <em>task</em>, not of one model's quirks. The
+    onset differs by backbone; the shape does not.</p>
 
   <h3>Counting identical instances</h3>
   <figure>
@@ -142,6 +142,17 @@ MathJax = {tex:{inlineMath:[['\\(','\\)']], displayMath:[['\\[','\\]']]},
       backbone.</b> Accuracy on identical objects (solid) falls away as the count grows, while
       the same objects given distinct colours (dashed) stay near ceiling. The onset differs by
       backbone, but the shape does not.</figcaption>
+  </figure>
+
+  <h3>Reading a length across images</h3>
+  <figure>
+    <img src="assets/scale3.jpg" alt="Violin plots of measured length for three backbones. Within-image readings are tight around the ground truth of 320 pixels; cross-image readings are several times wider, with standard deviations rising from 6.5 to 37.3, 1.2 to 52.0, and 17.7 to 64.1 pixels.">
+    <figcaption><b>Cross-image readings spread on every backbone, and worst where within-image
+      readings are tightest.</b> A bar of true length 320&nbsp;px, read twice off one image
+      (\(\sigma\) = 6.5, 1.2, 17.7&nbsp;px) and off two separate renderings of the same length
+      (\(\sigma\) = 37.3, 52.0, 64.1&nbsp;px) — a spread of 5.7×, 43× and 3.6×. Gemini is the
+      most precise reader within an image and the least transferable across two, which is why
+      precision alone cannot close the gap; only a shared frame of reference can.</figcaption>
   </figure>
 
   <h3>Grid form under a shrinking violation</h3>

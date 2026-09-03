@@ -1,0 +1,235 @@
+/* CASCADE project page — sits on top of Bulma.
+   Bulma gives the grid and the type scale; everything here is the parts
+   Bulma has no opinion about: the hero, the result tables, the constraint
+   browser and the qualitative galleries. */
+
+:root {
+  --ink:       #1c1e21;
+  --ink-soft:  #55595f;
+  --ink-faint: #8b9096;
+  --line:      #e3e6ea;
+  --paper:     #ffffff;
+  --wash:      #f6f7f9;
+  --accent:    #1f6feb;
+  --accent-bg: #eaf1fd;
+  --bind:      #b3453f;
+  --calib:     #146b7d;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+}
+
+html { scroll-behavior: smooth; scroll-padding-top: 70px; }
+body { color: var(--ink); background: var(--paper); overflow-x: hidden; }
+
+.section { padding: 3rem 1.5rem; }
+.container { max-width: 1080px; }
+.narrow    { max-width: 760px; }
+
+h2.head {
+  font-size: 1.55rem; font-weight: 700; letter-spacing: -0.015em;
+  margin-bottom: .35rem;
+}
+h3.sub {
+  font-size: 1.08rem; font-weight: 650; margin: 2.2rem 0 .6rem;
+  letter-spacing: -0.01em;
+}
+.section-num {
+  font-family: var(--mono); font-size: .78rem; color: var(--ink-faint);
+  letter-spacing: .1em; text-transform: uppercase; display: block;
+  margin-bottom: .55rem;
+}
+.prose p { color: var(--ink-soft); line-height: 1.72; margin-bottom: .9rem; }
+.prose p b, .prose p strong { color: var(--ink); }
+.lede { font-size: 1.1rem; color: var(--ink) !important; }
+.alt { background: var(--wash); }
+
+/* ── hero ───────────────────────────────────────────────────────── */
+.hero-title {
+  font-size: clamp(2.1rem, 5vw, 3rem); font-weight: 750;
+  letter-spacing: -0.03em; line-height: 1.12; margin-bottom: .9rem;
+}
+.hero-title .mark { color: var(--accent); }
+.authors { font-size: 1.05rem; margin-bottom: .3rem; }
+.authors a { color: var(--ink); border-bottom: 1px solid var(--line); }
+.authors a:hover { color: var(--accent); border-color: var(--accent); }
+.affil { color: var(--ink-soft); margin-bottom: 1rem; }
+.venue {
+  display: inline-block; font-family: var(--mono); font-size: .8rem;
+  letter-spacing: .06em; padding: .3rem .7rem; border-radius: 999px;
+  background: var(--accent-bg); color: var(--accent); font-weight: 600;
+  margin-bottom: 1.6rem;
+}
+.linkbar { display: flex; flex-wrap: wrap; gap: .55rem; justify-content: center; }
+.linkbar .button { border-radius: 999px; font-weight: 550; }
+.linkbar .button.is-dark { background: #24292f; }
+
+/* ── TL;DR ──────────────────────────────────────────────────────── */
+.tldr {
+  border: 1px solid var(--line); border-left: 3px solid var(--accent);
+  border-radius: 6px; padding: 1.3rem 1.5rem; background: var(--paper);
+}
+.tldr p { margin-bottom: .7rem; }
+.tldr p:last-child { margin-bottom: 0; }
+.stats { display: flex; flex-wrap: wrap; gap: 2.2rem; margin-top: 1.1rem; }
+.stat .n {
+  font-size: 1.6rem; font-weight: 700; letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums; display: block; line-height: 1.1;
+}
+.stat .l { font-size: .82rem; color: var(--ink-faint); }
+
+/* ── figures ────────────────────────────────────────────────────── */
+figure { margin: 1.4rem 0 0; }
+figure.small img { max-width: 620px; }
+figure.small figcaption { max-width: 620px; }
+figure.small + figure.small { margin-top: 2rem; }
+figure img { display: block; margin: 0 auto; max-width: 100%; border-radius: 4px; }
+figcaption {
+  font-size: .875rem; color: var(--ink-soft); line-height: 1.6;
+  margin-top: .8rem; max-width: 860px; margin-left: auto; margin-right: auto;
+}
+figcaption b { color: var(--ink); }
+
+/* ── the three motivation probes, side by side ─────────────────── */
+.probes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.6rem; margin-top: 1.4rem; }
+.probes figure { margin: 0; min-width: 0; display: flex; flex-direction: column; }
+.probes img {
+  height: 240px; width: auto; max-width: 100%; object-fit: contain;
+  align-self: center; border-radius: 0;
+}
+.probes figcaption { margin-top: .9rem; max-width: none; font-size: .84rem; }
+.probes figcaption .k { color: var(--calib); font-weight: 600; }
+
+/* ── tables ─────────────────────────────────────────────────────── */
+.tablewrap { overflow-x: auto; margin-top: 1rem; }
+table.res {
+  width: 100%; border-collapse: collapse; font-size: .88rem;
+  font-variant-numeric: tabular-nums;
+}
+table.res th, table.res td { padding: .42rem .6rem; text-align: right; white-space: nowrap; }
+table.res th:first-child, table.res td:first-child { text-align: left; }
+table.res thead th {
+  border-bottom: 1.5px solid var(--ink); font-weight: 600; font-size: .8rem;
+  color: var(--ink-soft);
+}
+table.res tbody tr { border-bottom: 1px solid var(--line); }
+table.res tbody tr:last-child { border-bottom: 1.5px solid var(--ink); }
+table.res tr.block td {
+  text-align: left; font-size: .78rem; letter-spacing: .05em;
+  text-transform: uppercase; color: var(--ink-faint); padding-top: .8rem;
+  border-bottom: none;
+}
+table.res tr.ours { background: var(--accent-bg); font-weight: 650; }
+table.res .dim { color: var(--ink-faint); font-weight: 400; }
+table.res .best { font-weight: 700; }
+.backbone { font-family: var(--mono); font-size: .8rem; color: var(--ink-soft); }
+.tnote {
+  font-size: .82rem; color: var(--ink-soft); line-height: 1.6; margin-top: .7rem;
+}
+
+/* ── two-scaffold comparison ────────────────────────────────────── */
+table.pair { width: 100%; border-collapse: collapse; font-size: .9rem; margin-top: 1rem; }
+table.pair th, table.pair td {
+  padding: .7rem .8rem; text-align: left; vertical-align: top;
+  border-bottom: 1px solid var(--line);
+}
+table.pair thead th { border-bottom: 1.5px solid var(--ink); font-size: .95rem; }
+table.pair td:first-child, table.pair th:first-child {
+  color: var(--ink-faint); font-weight: 500; width: 15%; white-space: nowrap;
+}
+.pill {
+  display: inline-block; font-family: var(--mono); font-size: .72rem;
+  padding: .12rem .5rem; border-radius: 3px; font-weight: 600;
+  letter-spacing: .03em;
+}
+.pill.bind  { background: #fbecea; color: var(--bind); }
+.pill.calib { background: #e4f2f4; color: var(--calib); }
+
+/* ── worked example ─────────────────────────────────────────────── */
+.worked {
+  font-family: var(--mono); font-size: .85rem; line-height: 1.95; white-space: pre;
+  background: var(--wash); border: 1px solid var(--line); border-radius: 6px;
+  padding: 1.1rem 1.3rem; overflow-x: auto;
+}
+.worked .c { color: var(--ink-faint); }
+.worked .hl { color: var(--accent); font-weight: 600; }
+
+/* ── constraint browser ─────────────────────────────────────────── */
+.filters { display: flex; flex-wrap: wrap; gap: .4rem; margin: 1.1rem 0 .3rem; }
+.filters .chip {
+  font-size: .8rem; padding: .28rem .72rem; border-radius: 999px; cursor: pointer;
+  border: 1px solid var(--line); background: var(--paper); color: var(--ink-soft);
+  transition: all .12s;
+}
+.filters .chip:hover { border-color: var(--ink-faint); }
+.filters .chip.on { background: var(--ink); border-color: var(--ink); color: #fff; }
+.filters .sep { width: 1px; background: var(--line); margin: .2rem .4rem; }
+
+table.cons { width: 100%; border-collapse: collapse; font-size: .89rem; }
+table.cons thead th {
+  text-align: left; font-size: .78rem; text-transform: uppercase;
+  letter-spacing: .05em; color: var(--ink-faint); font-weight: 600;
+  padding: .5rem .6rem; border-bottom: 1.5px solid var(--ink);
+}
+table.cons tr.row { border-bottom: 1px solid var(--line); cursor: pointer; }
+table.cons tr.row:hover { background: var(--wash); }
+table.cons tr.row td { padding: .6rem; vertical-align: top; }
+table.cons td.id { font-family: var(--mono); font-size: .8rem; white-space: nowrap; }
+table.cons td.txt { color: var(--ink-soft); width: 52%; }
+table.cons td.tgt { font-size: .8rem; color: var(--ink-faint); }
+table.cons td.chev { width: 1.4rem; color: var(--ink-faint); text-align: right; }
+tr.detail > td { padding: 0 .6rem 1.2rem; background: var(--wash); }
+.detail-grid { display: flex; flex-wrap: wrap; gap: 1.2rem; padding-top: .9rem; }
+.detail-grid figure { margin: 0; }
+.detail-grid img { max-height: 300px; width: auto; border: 1px solid var(--line); }
+.detail-grid figcaption { margin-top: .4rem; font-size: .8rem; text-align: center; }
+.detail-note { font-size: .85rem; color: var(--ink-soft); line-height: 1.65; padding-top: .8rem; }
+.empty { color: var(--ink-faint); font-size: .9rem; padding: 1.4rem .6rem; }
+
+/* ── qualitative ────────────────────────────────────────────────── */
+.panels { display: grid; gap: 1rem; margin-top: 1.1rem; }
+.panels.p3 { grid-template-columns: repeat(3, 1fr); }
+.panels.p4 { grid-template-columns: repeat(4, 1fr); }
+.panels.p2 { grid-template-columns: repeat(2, 1fr); }
+.panel { text-align: center; min-width: 0; }
+.panel img { width: 100%; border: 1px solid var(--line); border-radius: 4px; }
+.panel .cap { font-size: .84rem; margin-top: .5rem; line-height: 1.45; }
+.panel .cap b { display: block; }
+.panel .cap .n {
+  font-family: var(--mono); font-size: .95rem; font-weight: 700;
+  display: block; margin-top: .2rem;
+}
+.panel.win .cap .n { color: var(--accent); }
+.panel.lose .cap .n { color: var(--bind); }
+.panel .cap small { color: var(--ink-faint); }
+
+.gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem 1.4rem; margin-top: 1rem; }
+.gallery .shot { min-width: 0; }
+.gallery .shot img { width: 100%; max-height: 290px; object-fit: contain;
+  border: 1px solid var(--line); border-radius: 4px; background: var(--paper); }
+.gallery .shot .cap { font-size: .82rem; color: var(--ink-soft); margin-top: .4rem; }
+.tallbox img { max-height: 380px; width: auto; }
+.panels.tallbox .panel { display: flex; flex-direction: column; align-items: center; }
+
+/* ── code ───────────────────────────────────────────────────────── */
+pre.term {
+  background: #1c1e21; color: #e6e8ea; border-radius: 6px;
+  padding: 1rem 1.2rem; font-size: .84rem; line-height: 1.65; overflow-x: auto;
+}
+pre.term .c { color: #8b9096; }
+code.inline {
+  font-family: var(--mono); font-size: .86em; background: var(--wash);
+  padding: .1rem .35rem; border-radius: 3px; color: var(--ink);
+}
+
+/* ── footer ─────────────────────────────────────────────────────── */
+footer.foot {
+  border-top: 1px solid var(--line); padding: 2.2rem 1.5rem 3rem;
+  font-size: .84rem; color: var(--ink-faint); line-height: 1.7;
+}
+footer.foot a { color: var(--ink-soft); text-decoration: underline; }
+
+@media (max-width: 760px) {
+  .panels.p3, .panels.p4 { grid-template-columns: repeat(2, 1fr); }
+  .gallery { grid-template-columns: 1fr; }
+  .stats { gap: 1.4rem; }
+  table.cons td.tgt { display: none; }
+}

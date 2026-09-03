@@ -1,0 +1,506 @@
+[
+ {
+  "dataset": "MVTec-LOCO",
+  "id": "BREAKFAST_BOX_C1",
+  "short": "BB-Count",
+  "cat": "BB",
+  "catFull": "Breakfast Box",
+  "kind": "binding",
+  "text": "The breakfast box contains exactly 2 tangerines and 1 nectarine in the left compartment.",
+  "targets": [
+   "tangerine",
+   "nectarine"
+  ],
+  "images": {}
+ },
+ {
+  "dataset": "MVTec-LOCO",
+  "id": "BREAKFAST_BOX_C2",
+  "short": "BB-Cereal",
+  "cat": "BB",
+  "catFull": "Breakfast Box",
+  "kind": "calibration",
+  "text": "In the right compartment of the box, cereal occupies the upper portion and banana_chip_almond_mix occupies the lower portion.",
+  "targets": [
+   "cereal",
+   "banana_chip_almond_mix"
+  ],
+  "images": {
+   "normal": "assets/qual/gal_breakfast_box_c2_normal.jpg",
+   "anomaly": "assets/qual/gal_breakfast_box_c2_anomaly.jpg"
+  },
+  "edge": "rectangular",
+  "measure": "position"
+ },
+ {
+  "dataset": "MVTec-LOCO",
+  "id": "BREAKFAST_BOX_C3",
+  "short": "BB-Content",
+  "cat": "BB",
+  "catFull": "Breakfast Box",
+  "kind": "binding",
+  "text": "The right compartment contains all three: cereal (granola), banana chips, and almonds.",
+  "targets": [
+   "cereal",
+   "banana_chip_almond_mix"
+  ],
+  "images": {}
+ },
+ {
+  "dataset": "MVTec-LOCO",
+  "id": "SCREW_BAG_C1",
+  "short": "SB-Count",
+  "cat": "SB",
+  "catFull": "Screw Bag",
+  "kind": "binding",
+  "text": "The screw bag contains exactly 2 washers, 2 nuts, 1 long screw, and 1 short screw.",
+  "targets": [
+   "washer",
+   "nut",
+   "long_screw",
+   "short_screw"
+  ],
+  "images": {}
+ },
+ {
+  "dataset": "MVTec-LOCO",
+  "id": "SCREW_BAG_C2",
+  "short": "SB-Length",
+  "cat": "SB",
+  "catFull": "Screw Bag",
+  "kind": "calibration",
+  "text": "Each screw in the bag has a specific size. The long screw and the short screw each have consistent dimensions.",
+  "targets": [
+   "long_screw",
+   "short_screw"
+  ],
+  "images": {
+   "normal": "assets/qual/gal_screw_bag_c2_normal.jpg",
+   "anomaly": "assets/qual/gal_screw_bag_c2_anomaly.jpg"
+  },
+  "edge": "contour",
+  "measure": "size"
+ },
+ {
+  "dataset": "MVTec-LOCO",
+  "id": "PUSHPINS_C1",
+  "short": "PP-Count",
+  "cat": "PP",
+  "catFull": "Pushpins",
+  "kind": "binding",
+  "text": "Each compartment contains exactly 1 pushpin.",
+  "targets": [
+   "compartment",
+   "pushpin"
+  ],
+  "images": {}
+ },
+ {
+  "dataset": "MVTec-LOCO",
+  "id": "SPLICING_CONNECTORS_C1",
+  "short": "SC-Slots",
+  "cat": "SC",
+  "catFull": "Splicing Connectors",
+  "kind": "binding",
+  "text": "The assembly contains exactly 1 cable and the correct number of slots (blue wire=6, orange wire=10, yellow wire=4).",
+  "targets": [
+   "cable",
+   "slot"
+  ],
+  "images": {}
+ },
+ {
+  "dataset": "MVTec-LOCO",
+  "id": "SPLICING_CONNECTORS_C2",
+  "short": "SC-SlotMatch",
+  "cat": "SC",
+  "catFull": "Splicing Connectors",
+  "kind": "binding",
+  "text": "The cable connects to the same slot index on both the left connector and the right connector.",
+  "targets": [
+   "cable",
+   "left_connector",
+   "right_connector"
+  ],
+  "images": {
+   "normal": "assets/qual/gal_sc_binding_normal.jpg",
+   "anomaly": "assets/qual/gal_sc_binding_anomaly.jpg"
+  }
+ },
+ {
+  "dataset": "MVTec-LOCO",
+  "id": "SPLICING_CONNECTORS_C3",
+  "short": "SC-Cable",
+  "cat": "SC",
+  "catFull": "Splicing Connectors",
+  "kind": "calibration",
+  "text": "The cable has a specific size (major_axis).",
+  "targets": [
+   "cable"
+  ],
+  "images": {
+   "normal": "assets/qual/gal_splicing_connectors_c3_normal.jpg",
+   "anomaly": "assets/qual/gal_splicing_connectors_c3_anomaly.jpg"
+  },
+  "edge": "contour",
+  "measure": "size"
+ },
+ {
+  "dataset": "MVTec-LOCO",
+  "id": "JUICE_BOTTLE_C1",
+  "short": "JB-Labels",
+  "cat": "JB",
+  "catFull": "Juice Bottle",
+  "kind": "binding",
+  "text": "The juice bottle has exactly 2 labels.",
+  "targets": [
+   "label"
+  ],
+  "images": {}
+ },
+ {
+  "dataset": "MVTec-LOCO",
+  "id": "JUICE_BOTTLE_C2",
+  "short": "JB-Fruit",
+  "cat": "JB",
+  "catFull": "Juice Bottle",
+  "kind": "calibration",
+  "text": "The label with fruit icon is positioned at a specific location on the bottle surface.",
+  "targets": [
+   "fruit_icon_label"
+  ],
+  "images": {
+   "normal": "assets/qual/gal_juice_bottle_c2_normal.jpg",
+   "anomaly": "assets/qual/gal_juice_bottle_c2_anomaly.jpg"
+  },
+  "edge": "rectangular",
+  "measure": "position"
+ },
+ {
+  "dataset": "MVTec-LOCO",
+  "id": "JUICE_BOTTLE_C3",
+  "short": "JB-Match",
+  "cat": "JB",
+  "catFull": "Juice Bottle",
+  "kind": "binding",
+  "text": "The fruit icon on the label matches the juice liquid color (white liquid = banana icon, red liquid = cherry icon, yellow liquid = orange icon).",
+  "targets": [
+   "fruit_icon_label"
+  ],
+  "images": {}
+ },
+ {
+  "dataset": "MVTec-LOCO",
+  "id": "JUICE_BOTTLE_C6",
+  "short": "JB-Liquid",
+  "cat": "JB",
+  "catFull": "Juice Bottle",
+  "kind": "calibration",
+  "text": "The liquid region occupies 90-99% of the bottle height; its y_start relative to bottle is near the top.",
+  "targets": [
+   "liquid"
+  ],
+  "images": {
+   "normal": "assets/qual/gal_juice_bottle_c6_normal.jpg",
+   "anomaly": "assets/qual/gal_juice_bottle_c6_anomaly.jpg"
+  },
+  "edge": "horizontal",
+  "measure": "position"
+ },
+ {
+  "dataset": "MVTec-LOCO",
+  "id": "JUICE_BOTTLE_C5",
+  "short": "JB-Icon",
+  "cat": "JB",
+  "catFull": "Juice Bottle",
+  "kind": "binding",
+  "text": "The fruit icon illustration is approximately centered within the fruit icon label (slight offset is acceptable).",
+  "targets": [
+   "fruit_icon_label"
+  ],
+  "images": {}
+ },
+ {
+  "dataset": "MVTec-LOCO",
+  "id": "JUICE_BOTTLE_C4",
+  "short": "JB-Text",
+  "cat": "JB",
+  "catFull": "Juice Bottle",
+  "kind": "calibration",
+  "text": "The label with '100% Juice' is positioned at a specific location on the bottle surface.",
+  "targets": [
+   "juice_text_label"
+  ],
+  "images": {
+   "normal": "assets/qual/gal_juice_bottle_c4_normal.jpg",
+   "anomaly": "assets/qual/gal_juice_bottle_c4_anomaly.jpg"
+  },
+  "edge": "rectangular",
+  "measure": "position"
+ },
+ {
+  "dataset": "MVTec-LOCO",
+  "id": "JUICE_BOTTLE_C7",
+  "short": "JB-Fill",
+  "cat": "JB",
+  "catFull": "Juice Bottle",
+  "kind": "binding",
+  "text": "The juice bottle contains liquid (colored juice inside the bottle).",
+  "targets": [
+   "liquid"
+  ],
+  "images": {}
+ },
+ {
+  "dataset": "VID-AD",
+  "id": "ST-L1",
+  "short": "ST-L1",
+  "cat": "ST",
+  "catFull": "Sticks",
+  "kind": "binding",
+  "text": "The scene contains exactly three sticks: two blue sticks and one red stick.",
+  "targets": [],
+  "vidadType": "Quantity",
+  "images": {}
+ },
+ {
+  "dataset": "VID-AD",
+  "id": "ST-L2",
+  "short": "ST-L2",
+  "cat": "ST",
+  "catFull": "Sticks",
+  "kind": "calibration",
+  "text": "The two blue sticks are long and the red stick is short, judged by relative comparison of stick lengths.",
+  "targets": [],
+  "vidadType": "Length",
+  "images": {}
+ },
+ {
+  "dataset": "VID-AD",
+  "id": "FR-L1",
+  "short": "FR-L1",
+  "cat": "FR",
+  "catFull": "Fruits",
+  "kind": "binding",
+  "text": "The scene contains exactly three oranges and two kiwifruits.",
+  "targets": [],
+  "vidadType": "Quantity",
+  "images": {}
+ },
+ {
+  "dataset": "VID-AD",
+  "id": "FR-L2",
+  "short": "FR-L2",
+  "cat": "FR",
+  "catFull": "Fruits",
+  "kind": "binding",
+  "text": "Only oranges and kiwifruits are present; no fruit of any other type appears.",
+  "targets": [],
+  "vidadType": "Type",
+  "images": {}
+ },
+ {
+  "dataset": "VID-AD",
+  "id": "TL-L1",
+  "short": "TL-L1",
+  "cat": "TO",
+  "catFull": "Tools",
+  "kind": "binding",
+  "text": "The scene has three discrete bins arranged left, middle, right. The left bin contains exactly two bolts, the middle bin contains exactly two washers, and the right bin contains exactly two nuts. All three bins must be identified as distinct containers.",
+  "targets": [],
+  "vidadType": "Quantity",
+  "images": {}
+ },
+ {
+  "dataset": "VID-AD",
+  "id": "TL-L2",
+  "short": "TL-L2",
+  "cat": "TO",
+  "catFull": "Tools",
+  "kind": "binding",
+  "text": "The scene has three discrete bins (left, middle, right). Two bolts are placed in the left bin; two washers are placed in the middle bin; two nuts are placed in the right bin. All three bins must be identified as distinct containers.",
+  "targets": [],
+  "vidadType": "Placement",
+  "images": {}
+ },
+ {
+  "dataset": "VID-AD",
+  "id": "CK-L1",
+  "short": "CK-L1",
+  "cat": "CO",
+  "catFull": "Cookies",
+  "kind": "binding",
+  "text": "The scene contains exactly two yellow cookies and one black cookie.",
+  "targets": [],
+  "vidadType": "Quantity",
+  "images": {}
+ },
+ {
+  "dataset": "VID-AD",
+  "id": "CK-L2",
+  "short": "CK-L2",
+  "cat": "CO",
+  "catFull": "Cookies",
+  "kind": "binding",
+  "text": "The yellow cookies are placed on the square dish and the black cookie is placed on the round dish.",
+  "targets": [],
+  "vidadType": "Relation",
+  "images": {}
+ },
+ {
+  "dataset": "VID-AD",
+  "id": "TP-L1",
+  "short": "TP-L1",
+  "cat": "TA",
+  "catFull": "Tapes",
+  "kind": "calibration",
+  "text": "The green tape is long and the red tape is short, where length is judged against reference tape lengths learned from normal samples.",
+  "targets": [],
+  "vidadType": "Length",
+  "images": {}
+ },
+ {
+  "dataset": "VID-AD",
+  "id": "TP-L2",
+  "short": "TP-L2",
+  "cat": "TA",
+  "catFull": "Tapes",
+  "kind": "binding",
+  "text": "Exactly one green tape and one red tape are present; no tape of any other color appears.",
+  "targets": [],
+  "vidadType": "Type",
+  "images": {}
+ },
+ {
+  "dataset": "VID-AD",
+  "id": "SN-L1",
+  "short": "SN-L1",
+  "cat": "ST",
+  "catFull": "Stationery",
+  "kind": "calibration",
+  "text": "The black pencil and the blue eraser are long; the red pencil and the red eraser are short, where length is judged against reference samples.",
+  "targets": [],
+  "vidadType": "Length",
+  "images": {}
+ },
+ {
+  "dataset": "VID-AD",
+  "id": "SN-L2",
+  "short": "SN-L2",
+  "cat": "ST",
+  "catFull": "Stationery",
+  "kind": "binding",
+  "text": "The scene has two discrete bins (left, right). The left bin contains a black pencil and a blue eraser. The right bin contains a red pencil and a red eraser. Both bins must be identified as distinct containers.",
+  "targets": [],
+  "vidadType": "Placement",
+  "images": {}
+ },
+ {
+  "dataset": "VID-AD",
+  "id": "SN-L3",
+  "short": "SN-L3",
+  "cat": "ST",
+  "catFull": "Stationery",
+  "kind": "binding",
+  "text": "Within each bin, the eraser is positioned to the left of the pencil. In the left bin, the blue eraser is on the left side and the black pencil is on the right side. In the right bin, the red eraser is on the left side and the red pencil is on the right side.",
+  "targets": [],
+  "vidadType": "Placement",
+  "images": {}
+ },
+ {
+  "dataset": "VID-AD",
+  "id": "RP-L1",
+  "short": "RP-L1",
+  "cat": "RO",
+  "catFull": "Ropes",
+  "kind": "calibration",
+  "text": "The rope length is similar to the length of the reference stick.",
+  "targets": [],
+  "vidadType": "Length",
+  "images": {}
+ },
+ {
+  "dataset": "VID-AD",
+  "id": "RP-L2",
+  "short": "RP-L2",
+  "cat": "RO",
+  "catFull": "Ropes",
+  "kind": "binding",
+  "text": "The rope's own visible color must match the color name printed on the text label. The rope's actual pixel color is the information being checked (do not hide it with a color overlay).",
+  "targets": [],
+  "vidadType": "Relation",
+  "images": {}
+ },
+ {
+  "dataset": "VID-AD",
+  "id": "BL-L1",
+  "short": "BL-L1",
+  "cat": "BL",
+  "catFull": "Blocks",
+  "kind": "binding",
+  "text": "The scene has three discrete bins (top, middle, bottom). Two blue circle blocks are placed in the top bin; two blue triangle blocks are placed in the middle bin; two blue square blocks are placed in the bottom bin. All six blocks are blue. All three bins and all six blocks must be identified as distinct entities.",
+  "targets": [],
+  "vidadType": "Type",
+  "images": {}
+ },
+ {
+  "dataset": "VID-AD",
+  "id": "BL-L2",
+  "short": "BL-L2",
+  "cat": "BL",
+  "catFull": "Blocks",
+  "kind": "binding",
+  "text": "The scene has three discrete bins (top, middle, bottom). Two circle blocks are placed in the top bin; two triangle blocks are placed in the middle bin; two square blocks are placed in the bottom bin. All three bins must be identified as distinct containers.",
+  "targets": [],
+  "vidadType": "Placement",
+  "images": {}
+ },
+ {
+  "dataset": "VID-AD",
+  "id": "DS-L1",
+  "short": "DS-L1",
+  "cat": "DI",
+  "catFull": "Dishes",
+  "kind": "binding",
+  "text": "The scene contains exactly one fork, one plate, and one spoon.",
+  "targets": [],
+  "vidadType": "Type",
+  "images": {}
+ },
+ {
+  "dataset": "VID-AD",
+  "id": "DS-L2",
+  "short": "DS-L2",
+  "cat": "DI",
+  "catFull": "Dishes",
+  "kind": "binding",
+  "text": "The fork occupies the leftmost slot, the plate occupies the middle slot, and the spoon occupies the rightmost slot (three discrete left-middle-right slots).",
+  "targets": [],
+  "vidadType": "Relation",
+  "images": {}
+ },
+ {
+  "dataset": "VID-AD",
+  "id": "BA-L1",
+  "short": "BA-L1",
+  "cat": "BA",
+  "catFull": "Balls",
+  "kind": "binding",
+  "text": "Each of the four compartments (top-left, top-right, bottom-left, bottom-right) contains exactly one ball.",
+  "targets": [],
+  "vidadType": "Placement",
+  "images": {}
+ },
+ {
+  "dataset": "VID-AD",
+  "id": "BA-L2",
+  "short": "BA-L2",
+  "cat": "BA",
+  "catFull": "Balls",
+  "kind": "binding",
+  "text": "Four individually-identified compartments are arranged in a 2x2 grid (top-left, top-right, bottom-left, bottom-right). Each compartment holds exactly one ball: the top-left holds an orange ball, the top-right holds an orange ball, the bottom-left holds a white ball, and the bottom-right holds a white ball. The compartments must be told apart by position; the balls are distinguished by their color (orange or white).",
+  "targets": [],
+  "vidadType": "Relation",
+  "images": {}
+ }
+]

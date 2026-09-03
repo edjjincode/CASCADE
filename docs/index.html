@@ -4,184 +4,559 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>CASCADE — Constraint-Aware Scaffolded Decomposition for Logical Anomaly Detection</title>
-<meta name="description" content="CASCADE redraws each image so a logical constraint can be read off it. Training-free logical anomaly detection with three reference images. ICDM 2026.">
+<meta name="description" content="CASCADE redraws each image so a logical constraint can be read off it. Training-free logical anomaly detection from three reference images. 93.2 AUROC on MVTec-LOCO, 94.5 on VID-AD. IEEE ICDM 2026.">
+<meta name="keywords" content="logical anomaly detection, visual scaffolding, vision-language models, training-free, MVTec-LOCO, VID-AD, ICDM 2026">
 <meta property="og:title" content="CASCADE: Constraint-Aware Scaffolded Decomposition for Logical Anomaly Detection">
 <meta property="og:description" content="Training-free logical anomaly detection. 93.2 AUROC on MVTec-LOCO with three references.">
 <meta property="og:image" content="assets/teaser.jpg">
 <meta property="og:type" content="website">
-<link rel="stylesheet" href="style.css">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<link rel="stylesheet" href="cascade.css">
+<script>
+MathJax = {tex: {inlineMath: [['\\(','\\)']]},
+           options: {skipHtmlTags: ['script','noscript','style','textarea','pre','code']}};
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
 
-<header>
-  <div class="wrap">
-    <h1><span class="name">CASCADE</span></h1>
-    <p class="sub">Constraint-Aware Scaffolded Decomposition<br>for Logical Anomaly Detection</p>
-    <p class="authors">Jinchan Kim &nbsp;·&nbsp; Jinhee Im &nbsp;·&nbsp; Hyunsouk Cho</p>
+<!-- ═══════════════════════════════ 1 · OVERVIEW ══════════════════ -->
+<section class="section" style="padding-top:3.4rem; padding-bottom:2rem">
+  <div class="container has-text-centered">
+    <h1 class="hero-title">
+      <span class="mark">CASCADE</span><br>
+      Constraint-Aware Scaffolded Decomposition<br>for Logical Anomaly Detection
+    </h1>
+
+    <p class="authors">
+      <a href="mailto:jinchank0959@ajou.ac.kr">Jinchan Kim</a> &nbsp;·&nbsp;
+      <a href="mailto:jinhee8553@ajou.ac.kr">Jinhee Im</a> &nbsp;·&nbsp;
+      <a href="mailto:hyunsouk@ajou.ac.kr">Hyunsouk Cho</a>
+    </p>
     <p class="affil">Ajou University, Suwon, Republic of Korea</p>
     <span class="venue">IEEE ICDM 2026</span>
 
-    <div class="links">
-      <a class="btn" href="assets/cascade_icdm2026.pdf">
-        <svg viewBox="0 0 16 16"><path d="M4 1h5l3 3v11H4V1zm5 1v3h3L9 2z"/></svg>
-        Paper
-      </a>
-      <a class="btn" href="https://github.com/edjjincode/CASCADE">
-        <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.4 7.4 0 014 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-        Code
-      </a>
-      <a class="btn ghost" href="supplement.html">Supplementary</a>
-      <a class="btn ghost" href="#bibtex">BibTeX</a>
+    <div class="linkbar">
+      <a class="button is-dark" href="assets/cascade_icdm2026.pdf">
+        <span class="icon"><i class="fas fa-file-pdf"></i></span><span>Paper</span></a>
+      <a class="button is-dark" href="https://github.com/edjjincode/CASCADE">
+        <span class="icon"><i class="fab fa-github"></i></span><span>Code</span></a>
+      <a class="button is-light" href="supplement.html">
+        <span class="icon"><i class="fas fa-book"></i></span><span>Supplementary</span></a>
+      <a class="button is-light" href="#constraints">
+        <span class="icon"><i class="fas fa-list-check"></i></span><span>Constraints</span></a>
+      <a class="button is-light" href="#bibtex">
+        <span class="icon"><i class="fas fa-quote-left"></i></span><span>BibTeX</span></a>
     </div>
   </div>
-</header>
-
-<div class="wrap">
-
-<section>
-  <figure>
-    <img src="assets/teaser.jpg" alt="Two rows. Top: nine pushpin compartments, first as a raw photo where a doubled pin is missed, then with each compartment tinted and numbered where the doubled pin is found. Bottom: a bolt, first as a raw photo where a short bolt is missed, then with numbered ticks along its axis where it is found.">
-    <figcaption><b>The same model, the same question, a different picture.</b>
-      On the raw photograph the doubled pin and the short bolt go unnoticed.
-      Redrawn so the rule is legible — one colour and number per compartment,
-      ticks along the bolt's own axis — they are found.</figcaption>
-  </figure>
 </section>
 
-<section>
-  <h2>Abstract</h2>
-  <p class="lede">Logical Anomaly Detection requires verifying whether all category-specific
-    constraints — object counts, pairing relations, measurement ranges — are satisfied by a
-    query image, given only a few normal references.</p>
-  <p>Recent methods based on large vision-language models formulate this as
-    <em>checklist verification</em>, decomposing the decision into independent textual checks.
-    This decomposition, however, is text-only. Every item still reads the same unmodified query
-    image, so the model must extract different forms of visual evidence from one raw picture.
-    We identify this text–image mismatch as a <b>constraint-specific perception gap</b>, the
-    source of two failure modes: <b>instance conflation</b> for binding constraints and
-    <b>scale drift</b> for calibration constraints.</p>
-  <p>To diagnose whether these failures stem from insufficient reasoning or insufficient
-    perception, we compare textual reasoning guides against visual perception guides in a
-    training-free setting. Reasoning over the same image provides little benefit, whereas
-    adapting the visual input to each constraint substantially improves accuracy. Building on
-    this, we propose <b>CASCADE</b>, a training-free framework that extends checklist
-    decomposition with constraint-specific visual scaffolds, and <b>CASCADE++</b>, which adapts
-    those scaffolds at the object level by deriving their configuration from the constraint
-    structure and the reference distribution.</p>
+<section class="section" style="padding-top:.5rem">
+  <div class="container">
+    <figure>
+      <img src="assets/teaser.jpg" alt="Two rows. Top: nine pushpin compartments, first as a raw photo where a doubled pin is missed, then with each compartment tinted and numbered where the doubled pin is found. Bottom: a bolt, first as a raw photo where a short bolt is missed, then with numbered ticks along its axis where it is found.">
+      <figcaption><b>The same model, the same question, a different picture.</b>
+        On the raw photograph the doubled pin and the short bolt go unnoticed. Redrawn so the
+        rule is legible — one colour and number per compartment, ticks along the bolt's own
+        axis — they are found.</figcaption>
+    </figure>
+  </div>
 </section>
 
-<section>
-  <h2>Two scaffolds, chosen by the rule</h2>
-  <p>Which scaffold a constraint gets is decided from the constraint's own wording. No part of
-    the pipeline branches on what the product is.</p>
-
-  <div class="cards">
-    <div class="card">
-      <span class="tag">Binding</span>
-      <h4>Disambiguation scaffold</h4>
-      <p>The difficulty is telling apart instances that look identical. Every instance is given
-        its own colour and number, and instances matched to each other share both — so a
-        correspondence can be read off the image instead of held in memory.</p>
-    </div>
-    <div class="card">
-      <span class="tag">Calibration</span>
-      <h4>Alignment scaffold</h4>
-      <p>The difficulty is judging a continuous quantity by eye. A grid fitted on the normal
-        references is drawn over the image with every intersection labelled, and the question
-        asks about an integer interval computed in code.</p>
+<section class="section" style="padding-top:1rem">
+  <div class="container narrow prose">
+    <div class="tldr">
+      <p class="lede"><b>TL;DR</b> — the bottleneck in checklist-based LVLM anomaly detection is
+        <b>perception, not reasoning</b>. Existing methods split the <em>text</em> into
+        per-constraint checks and leave the <em>image</em> untouched, so every check reads the
+        same raw picture.</p>
+      <p>CASCADE gives each constraint a visual scaffold of its own, and CASCADE++ derives that
+        scaffold's configuration from the constraint's structure and the reference
+        distribution. No training, three reference images, one model call per constraint.</p>
+      <div class="stats">
+        <div class="stat"><span class="n">93.2</span><span class="l">MVTec-LOCO AUROC &nbsp;(K=3)</span></div>
+        <div class="stat"><span class="n">94.5</span><span class="l">VID-AD AUROC &nbsp;(K=3)</span></div>
+        <div class="stat"><span class="n">+3.9</span><span class="l">over full-shot SOTA</span></div>
+        <div class="stat"><span class="n">0</span><span class="l">parameters trained</span></div>
+      </div>
     </div>
   </div>
-
-  <figure style="margin-top:26px">
-    <img src="assets/method.jpg" alt="Two-row diagram. Top row, the baseline: reference images and a logical constraint go to a checklist generator, then a checklist and the raw query image go to a verifier that emits a verdict. Bottom row, ours: a scaffold generator and overlay stage sit before both the generator and the verifier, so both read a scaffolded image.">
-    <figcaption><b>Where the scaffold enters.</b> The baseline (a) sends the raw query image to
-      the verifier. CASCADE (b) inserts a scaffold generator and an overlay stage, so the
-      checklist is written against, and verified on, an image drawn for that constraint.</figcaption>
-  </figure>
 </section>
 
-<section>
-  <h2>What the model actually sees</h2>
-  <figure>
-    <img src="assets/scaffold_full.jpg" alt="A box of fifteen pushpin compartments. Each compartment is tinted a distinct colour and numbered, and the pushpin resting in it carries the same colour and number. One extra pushpin, numbered 16 in a colour nothing else has, lies in the compartment numbered 14.">
-    <figcaption><b>Each compartment of the box of pushpins contains exactly one pushpin.</b>
-      Fifteen compartments, each with its own colour and number, each sharing them with its
-      pushpin. One pushpin — <b>#16</b>, in a colour nothing else has — sits unmatched in
-      compartment #14. The rule is violated, and the violation is visible without counting.</figcaption>
-  </figure>
-</section>
+<!-- ═══════════════════════════ 2 · MOTIVATION ════════════════════ -->
+<section class="section alt" id="motivation">
+  <div class="container prose">
+    <span class="section-num">2 · Motivation</span>
+    <h2 class="head">Why this is a perception problem</h2>
+    <p class="lede">If the failure were one of reasoning, a stronger reasoner would fix it. It
+      does not. Three probes hold the reasoning constant and vary only what the model is shown.
+      Each one names a repair, and the repairs are different — which is the split CASCADE is
+      built on.</p>
 
-<section id="results">
-  <h2>Results</h2>
-  <p>Image-level AUROC on the MVTec-LOCO logical subset, with <b>three reference images and no
-    training</b>. CASCADE++ exceeds the full-shot state of the art by 3.9 points.</p>
-
-  <div class="scroll">
-  <table>
-    <thead>
-      <tr><th>Method</th><th class="backbone">Backbone</th><th>Avg</th>
-          <th>BB</th><th>JB</th><th>PP</th><th>SB</th><th>SC</th></tr>
-    </thead>
-    <tbody>
-      <tr><td>PatchCore</td><td class="backbone">CNN</td><td>74.0</td><td>74.8</td><td>93.9</td><td>63.6</td><td>57.8</td><td>79.2</td></tr>
-      <tr><td>AST</td><td class="backbone">CNN</td><td>79.7</td><td>80.0</td><td>91.6</td><td>65.1</td><td>80.1</td><td>81.8</td></tr>
-      <tr><td>GCAD</td><td class="backbone">CNN</td><td>86.0</td><td>87.0</td><td>100.0</td><td>97.5</td><td>56.0</td><td>89.7</td></tr>
-      <tr><td>EfficientAD</td><td class="backbone">CNN</td><td>86.8</td><td>85.5</td><td>98.4</td><td>97.7</td><td>56.7</td><td>95.5</td></tr>
-      <tr class="rule-top"><td>WinCLIP</td><td class="backbone">CLIP</td><td>64.3</td><td>57.6</td><td>75.1</td><td>54.9</td><td>69.5</td><td>64.5</td></tr>
-      <tr><td>LogSAD</td><td class="backbone">GPT-4o</td><td>84.6</td><td>90.9</td><td>85.4</td><td>81.4</td><td>81.7</td><td>83.7</td></tr>
-      <tr><td>LogicAD</td><td class="backbone">GPT-4o</td><td>86.0</td><td>93.1</td><td>81.6</td><td>98.1</td><td>83.8</td><td>73.4</td></tr>
-      <tr><td>LogicQA</td><td class="backbone">GPT-4o</td><td>87.6</td><td>87.6</td><td>88.2</td><td>98.4</td><td>71.5</td><td>92.4</td></tr>
-      <tr><td>LogSAD <span class="c">(full-shot)</span></td><td class="backbone">GPT-4o</td><td>89.3</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
-      <tr class="rule-top"><td>LogicAD</td><td class="backbone">GPT-5-image-mini</td><td>85.5</td><td>94.7</td><td>80.5</td><td>97.6</td><td>79.3</td><td>75.3</td></tr>
-      <tr><td>LogicQA</td><td class="backbone">GPT-5-image-mini</td><td>86.2</td><td>91.6</td><td>88.7</td><td>97.3</td><td>68.0</td><td>85.3</td></tr>
-      <tr class="ours"><td>CASCADE++ <span class="c">(ours)</span></td><td class="backbone">GPT-5-image-mini</td><td>93.2</td><td>91.4</td><td>94.7</td><td>96.6</td><td>95.8</td><td>87.7</td></tr>
-    </tbody>
-  </table>
+    <div class="probes">
+      <figure>
+        <img src="assets/probe_count.jpg" alt="A line chart of count accuracy against the number of instances n. The identical-object curve falls away from 100 percent past n of about nine and reaches 20 percent; the distinct-colour curve stays near the top across the same range.">
+        <figcaption><b>Counting.</b> Instances that look alike stop being countable well before
+          the counts a real constraint asks about. The same objects <span class="k">told apart by
+          colour</span> stay near ceiling.<br>
+          <b>Repair:</b> distinguish instances in the picture.</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/probe_scale.jpg" alt="Violin plots of measured length for one backbone. The within-image reading is tight around the ground truth of 320 pixels with standard deviation 6.5; the cross-image reading is far wider with standard deviation 37.3.">
+        <figcaption><b>Measuring.</b> A bar of true length 320&nbsp;px. Read twice off
+          <em>one</em> image the model is consistent; read off two <em>separate</em> renderings
+          of the same length it is not — up to 43× wider.<br>
+          <b>Repair:</b> a frame of reference shared between images.</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/probe_grid.jpg" alt="A line chart of balanced accuracy against violation margin. The object-centric grid line sits near 95 percent and is flat; comparison, pixel and patch strategies sit between 40 and 80 percent and fluctuate.">
+        <figcaption><b>Judging a range.</b> Comparison, pixel values and patch indices all
+          degrade as the violation shrinks; a cell index read off a
+          <span class="k">grid anchored to the object</span> does not.<br>
+          <b>Repair:</b> make the frame of reference discrete.</figcaption>
+      </figure>
+    </div>
+    <p class="tnote">One backbone shown (GPT-5-image-mini). All three probes replicate on
+      Gemini-3.1-Flash-Lite and Qwen3-VL-32B — the full panels are in the
+      <a href="supplement.html#backbones">supplementary</a>, and they matter, because what is
+      being diagnosed is a property of the task rather than of one model.</p>
   </div>
-  <figcaption>BB breakfast box · JB juice bottle · PP pushpins · SB screw bag · SC splicing
-    connectors. CASCADE++ averages 93.2 ± 0.8 over three reference sets; the largest gain is on
-    screw bag (95.8), the category where measurement matters most. On VID-AD it reaches
-    94.5 ± 2.1, exceeding the strongest baseline by 11.4 points without any parameter
-    adjustment.</figcaption>
 </section>
 
-<section>
-  <h2>Run it</h2>
-  <p>Instance masks ship precomputed, so the pipeline runs from a plain install — no API key,
-    no GPU and no dataset needed to see what it does.</p>
-<pre><code>git clone https://github.com/edjjincode/CASCADE &amp;&amp; cd CASCADE
-pip install -r requirements.txt
+<!-- ═══════════════════════════ 3 · METHOD ════════════════════════ -->
+<section class="section" id="method">
+  <div class="container prose">
+    <span class="section-num">3 · Method</span>
+    <h2 class="head">Scaffold the image, not just the checklist</h2>
 
-python run.py constraints   <span class="c"># the 19 rules, and how each is classified</span>
-python run.py show PP-L1    <span class="c"># one rule: its decomposition, and the exact prompt sent</span>
-python -m pytest tests -q   <span class="c"># 26 tests, no key and no dataset</span></code></pre>
-  <p><code>show</code> prints the complete prompt the model receives — not a summary. Every
-    prompt lives in the repository as plain text, each with a header saying what goes in, what
-    comes out, and which function sends it.</p>
+    <figure>
+      <img src="assets/method.jpg" alt="Two-row diagram. Top row, the baseline: reference images and a logical constraint go to a checklist generator, then a checklist and the raw query image go to a verifier that emits a verdict. Bottom row, ours: a scaffold generator and an overlay stage sit before both the generator and the verifier, so both read a scaffolded image.">
+      <figcaption><b>Where the scaffold enters.</b> The baseline (a) sends the raw query image
+        to the verifier. CASCADE (b) inserts a scaffold generator and an overlay stage, so the
+        checklist is written against — and verified on — an image drawn for that
+        constraint.</figcaption>
+    </figure>
+
+    <h3 class="sub">Two stages, and only one of them runs per query</h3>
+    <p>The expensive half depends on the constraint and the references, not on the query, so it
+      happens once per category and is then reused for every image.</p>
+
+    <div class="tablewrap"><table class="pair">
+      <thead><tr><th></th><th>What runs</th><th>How often</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><b>Setup</b></td>
+          <td>parse the constraint &nbsp;→&nbsp; \(\Psi\) derives the scaffold configuration
+              &nbsp;→&nbsp; \(\Phi\) renders the \(K\) references &nbsp;→&nbsp; \(G\) writes the
+              checklist</td>
+          <td>once per category</td>
+        </tr>
+        <tr>
+          <td><b>Inference</b></td>
+          <td>SAM3 segments the target objects &nbsp;→&nbsp; \(\Phi\) renders the query
+              &nbsp;→&nbsp; \(V\) verifies each constraint &nbsp;→&nbsp; aggregate</td>
+          <td>per query image</td>
+        </tr>
+      </tbody>
+    </table></div>
+    <p class="tnote">The only per-query cost the baseline does not also pay is one segmentation
+      pass — <b>0.59&nbsp;s</b> and under <b>4&nbsp;GiB</b> of VRAM on a single RTX&nbsp;A5000,
+      computed once per image and shared across that image's constraints. Verification issues
+      <b>one</b> LVLM call per constraint, against LogicQA's five.</p>
+
+    <h3 class="sub">Two scaffolds, chosen by the rule</h3>
+    <p>Which scaffold a constraint gets is decided from the constraint's own wording. No part of
+      the pipeline branches on what the product is.</p>
+
+    <div class="tablewrap"><table class="pair">
+      <thead><tr>
+        <th></th>
+        <th><span class="pill bind">binding</span> &nbsp;Disambiguation</th>
+        <th><span class="pill calib">calibration</span> &nbsp;Alignment</th>
+      </tr></thead>
+      <tbody>
+        <tr><td>failure mode</td>
+            <td>instance conflation — repeated objects that look alike</td>
+            <td>scale drift — a quantity judged by eye across images</td></tr>
+        <tr><td>overlay</td>
+            <td>a colour and a numeric ID per mask</td>
+            <td>a 2D grid anchored to the object, every intersection labelled \((row, col)\)</td></tr>
+        <tr><td>\(\Psi\) derives</td>
+            <td>the numbering order, from the constraint's own correspondence structure</td>
+            <td>cell width \(w^{\ast}\) and offset \(a^{\ast}\), from the \(K\) references</td></tr>
+        <tr><td>verdict</td>
+            <td>the model's answer, checked against the rule in code</td>
+            <td>the model reports a cell index; the range test is arithmetic in code</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3 class="sub">The grid, worked through</h3>
+    <p>A cell must hold every reference reading and nothing more: narrower and the references
+      scatter across cells, flagging a normal query; wider and a violation slips into the
+      reference cell. Two backbone constants bound it — the reading margin \(m\), inside which a
+      mark cannot be reliably assigned to a side, and the legibility floor \(w_{\min}\), below
+      which cell labels stop being readable. Both are measured once per backbone on synthetic
+      probes, and are properties of the reader, not of any product.</p>
+
+<div class="worked">
+<span class="c">// SB-Length, the three reference screw endpoints</span>
+r  = 310, 318, 325 px          <span class="c">// K = 3 references</span>
+&rho;  = 325 &minus; 310 = 15 px          <span class="c">// how far the references scatter</span>
+
+<span class="c">// the finest cell that still holds all three with margin m = 25, floor w_min = 60</span>
+<span class="hl">w*</span> = max(w_min, &rho; + 2m) = max(60, 15 + 50) = <span class="hl">65 px</span>
+<span class="hl">a*</span> = 285                     <span class="c">// 285 + 25 &le; 310 and 325 &le; 285 + 65 &minus; 25</span>
+
+<span class="c">// so the question becomes an integer test the code can settle</span>
+normal cell = [285, 350] px    <span class="c">// query endpoint outside it &rarr; VIOLATED</span>
+</div>
+    <p class="tnote">The closed form above is the single-group case; the general solver, with the
+      two propositions that justify it, is in the
+      <a href="supplement.html#solver">supplementary</a> and shipped as
+      <a href="https://github.com/edjjincode/CASCADE/blob/main/cascade/calibrate.py"><code class="inline">cascade/calibrate.py</code></a>.</p>
+  </div>
 </section>
 
-<section id="bibtex">
-  <h2>BibTeX</h2>
-<pre><code>@inproceedings{kim2026cascade,
+<!-- ═══════════════════════════ 4 · CONSTRAINTS ═══════════════════ -->
+<section class="section alt" id="constraints">
+  <div class="container prose">
+    <span class="section-num">4 · Constraints</span>
+    <h2 class="head">Every rule the paper evaluates</h2>
+    <p>MVTec-LOCO contributes <b>16</b> constraints (10 binding, 6 calibration) and VID-AD
+      <b>21</b> (17 binding, 4 calibration). Click a row to see how it is scaffolded. The
+      machine-readable list is
+      <a href="assets/constraints.json">assets/constraints.json</a>.</p>
+
+    <div class="filters" id="f-dataset"></div>
+    <div class="filters" id="f-kind"></div>
+    <div class="filters" id="f-cat"></div>
+
+    <div class="tablewrap">
+      <table class="cons">
+        <thead><tr>
+          <th style="width:6.5rem">Constraint</th><th>Statement</th>
+          <th style="width:7rem">Type</th><th style="width:11rem">Targets</th><th></th>
+        </tr></thead>
+        <tbody id="cons-body">
+          <tr><td colspan="5" class="empty">Loading…</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ 5 · RESULTS ═══════════════════════ -->
+<section class="section" id="results">
+  <div class="container prose">
+    <span class="section-num">5 · Results</span>
+    <h2 class="head">Results</h2>
+
+    <h3 class="sub">MVTec-LOCO &nbsp;<span class="has-text-grey-light" style="font-weight:400">image-level AUROC</span></h3>
+    <div class="tablewrap">
+      <table class="res">
+        <thead><tr><th>Method</th><th class="backbone">Backbone</th><th>Avg</th>
+          <th>BB</th><th>JB</th><th>PP</th><th>SB</th><th>SC</th></tr></thead>
+        <tbody>
+          <tr class="block"><td colspan="8">Vision · full-shot</td></tr>
+          <tr><td>PatchCore</td><td class="backbone">CNN</td><td>74.0</td><td>74.8</td><td>93.9</td><td>63.6</td><td>57.8</td><td>79.2</td></tr>
+          <tr><td>AST</td><td class="backbone">CNN</td><td>79.7</td><td>80.0</td><td>91.6</td><td>65.1</td><td>80.1</td><td>81.8</td></tr>
+          <tr><td>GCAD</td><td class="backbone">CNN</td><td>86.0</td><td>87.0</td><td>100.0</td><td>97.5</td><td>56.0</td><td>89.7</td></tr>
+          <tr><td>EfficientAD</td><td class="backbone">CNN</td><td>86.8</td><td>85.5</td><td>98.4</td><td>97.7</td><td>56.7</td><td>95.5</td></tr>
+
+          <tr class="block"><td colspan="8">Vision-language</td></tr>
+          <tr><td>WinCLIP</td><td class="backbone">CLIP</td><td>64.3</td><td>57.6</td><td>75.1</td><td>54.9</td><td>69.5</td><td>64.5</td></tr>
+          <tr><td>LogicAD</td><td class="backbone">GPT-4o</td><td>86.0</td><td>93.1</td><td>81.6</td><td>98.1</td><td>83.8</td><td>73.4</td></tr>
+          <tr><td>LogicQA</td><td class="backbone">GPT-4o</td><td>87.6</td><td>87.6</td><td>88.2</td><td>98.4</td><td>71.5</td><td>92.4</td></tr>
+          <tr><td>LogSAD <span class="dim">full-shot</span></td><td class="backbone">GPT-4o</td><td>89.3</td><td class="dim">—</td><td class="dim">—</td><td class="dim">—</td><td class="dim">—</td><td class="dim">—</td></tr>
+          <tr><td>LogSAD<sup>†</sup></td><td class="backbone">GPT-4o</td><td>84.6</td><td>90.9</td><td>85.4</td><td>81.4</td><td>81.7</td><td>83.7</td></tr>
+          <tr><td>LogicAD<sup>†</sup></td><td class="backbone">GPT-5-image-mini</td><td>85.5</td><td class="best">94.7</td><td>80.5</td><td class="best">97.6</td><td>79.3</td><td>75.3</td></tr>
+          <tr><td>LogicQA<sup>†</sup></td><td class="backbone">GPT-5-image-mini</td><td>86.2</td><td>91.6</td><td>88.7</td><td>97.3</td><td>68.0</td><td>85.3</td></tr>
+          <tr><td>CASCADE<sup>†</sup></td><td class="backbone">GPT-5-image-mini</td><td>81.4</td><td>90.0</td><td>73.7</td><td>93.8</td><td>75.5</td><td>73.8</td></tr>
+          <tr class="ours"><td>CASCADE++<sup>†</sup></td><td class="backbone">GPT-5-image-mini</td><td>93.2</td><td>91.4</td><td class="best">94.7</td><td>96.6</td><td class="best">95.8</td><td class="best">87.7</td></tr>
+
+          <tr class="block"><td colspan="8">CASCADE++ across backbones</td></tr>
+          <tr><td>CASCADE++<sup>†</sup></td><td class="backbone">Gemini-3.1-Flash-Lite</td><td>92.7</td><td>89.9</td><td>92.9</td><td>96.3</td><td>95.2</td><td>89.2</td></tr>
+          <tr><td>CASCADE++<sup>†</sup></td><td class="backbone">Qwen3-VL-32B</td><td>90.6</td><td>91.4</td><td>84.5</td><td>100.0</td><td>91.3</td><td>85.6</td></tr>
+          <tr><td>CASCADE++<sup>†</sup></td><td class="backbone">Qwen3-VL-8B</td><td>83.2</td><td>87.7</td><td>75.7</td><td>82.1</td><td>86.0</td><td>84.4</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tnote"><sup>†</sup> we produced this result, keeping each method's own inference
+      procedure and reference budget; unmarked rows are quoted from the original papers. All
+      vision-language rows use \(K = 3\) references except LogicAD, which uses one by design,
+      and the row marked full-shot. Dashes are per-category scores LogSAD does not report.
+      CASCADE++ averages \(93.2 \pm 0.8\) over three reference sets.</p>
+
+    <p style="margin-top:1.3rem"><b>Base CASCADE lands at 81.4 — below both reproduced
+      baselines</b>, and we report it rather than hide it, because it is the clearest evidence
+      for the paper's own thesis: a scaffold whose configuration <em>misaligns</em> with the
+      constraint misleads the verifier more than no scaffold at all. Deriving that configuration
+      from the constraint and the references (CASCADE++) adds <b>+11.8</b> and reverses the
+      ordering. The gain concentrates exactly where a fixed default hurts most — Juice Bottle
+      +21.0, Screw Bag +20.3, Splicing Connector +13.9.</p>
+
+    <h3 class="sub">VID-AD &nbsp;<span class="has-text-grey-light" style="font-weight:400">transfer with no retuning</span></h3>
+    <div class="tablewrap">
+      <table class="res">
+        <thead><tr><th>Method</th><th>White</th><th>Cable</th><th>Mesh</th><th>Low-light</th><th>Blurry</th><th>Mean ± Std</th></tr></thead>
+        <tbody>
+          <tr class="block"><td colspan="7">Full-shot</td></tr>
+          <tr><td>PaDiM</td><td>34.8</td><td>35.4</td><td>42.8</td><td>35.4</td><td>40.3</td><td>37.8 ± 3.2</td></tr>
+          <tr><td>PatchCore</td><td>40.4</td><td>45.0</td><td>48.0</td><td>46.9</td><td>42.0</td><td>44.5 ± 2.9</td></tr>
+          <tr><td>VAE</td><td>44.8</td><td>49.4</td><td>45.4</td><td>47.2</td><td>39.3</td><td>45.2 ± 3.4</td></tr>
+          <tr><td>AnoGAN</td><td>48.9</td><td>54.8</td><td>49.2</td><td>47.4</td><td>46.8</td><td>49.4 ± 2.8</td></tr>
+          <tr><td>EfficientAD</td><td>52.6</td><td>60.2</td><td>60.8</td><td>47.9</td><td>48.0</td><td>53.9 ± 5.7</td></tr>
+          <tr><td>CSAD</td><td>69.3</td><td>62.4</td><td>64.1</td><td>69.4</td><td>65.7</td><td>66.2 ± 2.8</td></tr>
+          <tr><td>VID-AD baseline</td><td>82.5</td><td>81.1</td><td>84.8</td><td>84.2</td><td>82.6</td><td>83.1 ± 1.3</td></tr>
+          <tr class="block"><td colspan="7">Training-free</td></tr>
+          <tr><td>UniVAD</td><td>57.4</td><td>59.2</td><td>57.0</td><td>57.3</td><td>55.9</td><td>57.4 ± 1.1</td></tr>
+          <tr class="ours"><td>CASCADE++ <span class="dim">K=3</span></td><td class="best">94.7</td><td class="best">91.4</td><td class="best">97.1</td><td class="best">93.0</td><td class="best">96.2</td><td class="best">94.5 ± 2.1</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tnote">The identical pipeline, no parameter adjustment, three references against
+      the full training set every other method uses. The gain holds under low light (93.0) and
+      blur (96.2) — the conditions where feature-based methods fall hardest — because the
+      scaffold makes the constraint-relevant evidence explicit <em>before</em> the verifier has
+      to recover it from raw appearance.</p>
+
+    <h3 class="sub">Decomposition ablation &nbsp;<span class="has-text-grey-light" style="font-weight:400">a double dissociation</span></h3>
+    <div class="tablewrap">
+      <table class="res">
+        <thead><tr><th>Configuration</th><th>Disambig.</th><th>Alignment</th><th>Binding</th><th>Calibration</th><th>Overall</th></tr></thead>
+        <tbody>
+          <tr><td>No scaffold</td><td class="dim">—</td><td class="dim">—</td><td>72.6</td><td>62.7</td><td>74.5</td></tr>
+          <tr><td>Disambiguation only</td><td>✓</td><td class="dim">—</td><td>80.9</td><td>59.9</td><td>81.8</td></tr>
+          <tr><td>Alignment only</td><td class="dim">—</td><td>✓</td><td>72.9</td><td>70.0</td><td>79.5</td></tr>
+          <tr class="ours"><td>CASCADE++ (both)</td><td>✓</td><td>✓</td><td class="best">83.8</td><td class="best">74.5</td><td class="best">93.2</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tnote">Each scaffold moves its own constraint type and leaves the other alone:
+      disambiguation lifts binding <b>+8.3</b> while calibration is flat, alignment lifts
+      calibration <b>+7.3</b> while binding is flat. That independence is what licenses routing
+      each constraint to a single matched scaffold instead of applying both everywhere.</p>
+
+    <p class="tnote" style="margin-top:1.6rem">Two further ablations — how the binding
+      overlay's colour and ID channels divide the work, and what the reference-derived grid
+      parameters are worth against fixed or object-sized ones — are constraint-level rather than
+      image-level, and stay in the paper. What they come to is drawn out in
+      <a href="#qualitative">§6</a> below. Reference sensitivity, with the figure the paper had
+      no room for, is in the <a href="supplement.html#sensitivity">supplementary</a>.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════ 6 · QUALITATIVE ═══════════════════════ -->
+<section class="section alt" id="qualitative">
+  <div class="container prose">
+    <span class="section-num">6 · Qualitative</span>
+    <h2 class="head">What the model is actually shown</h2>
+    <p class="lede">Every image below is a pipeline output, not a diagram drawn for the paper.</p>
+
+    <h3 class="sub">6.1 &nbsp; The scaffold, per constraint</h3>
+    <p>Normal on the left, violating on the right. Every violating image was picked by the
+      <b>defect label in MVTec-LOCO's own ground-truth masks</b>, so the anomaly shown really is
+      the one that constraint is about — named under each.</p>
+
+    <div class="gallery">
+      <div class="shot"><img src="assets/qual/gal_sc_binding_normal.jpg" alt="Two splicing connectors joined by a blue cable. Three clamps on each connector, each tinted and numbered one to three, with matching numbers facing each other across the cable.">
+        <p class="cap"><span class="pill bind">binding</span> <b>SC-SlotMatch</b> — normal. Slot
+          <em>n</em> on the left carries the same number as slot <em>n</em> on the right, so the
+          correspondence sits on the image rather than in the model's memory.</p></div>
+      <div class="shot"><img src="assets/qual/gal_sc_binding_anomaly.jpg" alt="Two splicing connectors joined by a cable, clamps tinted and numbered one to three on each side, with the cable leaving slot one on the right and arriving at slot three on the left.">
+        <p class="cap"><span class="pill bind">binding</span> <b>SC-SlotMatch</b> — violating,
+          <code class="inline">wrong_cable_location</code>. The cable leaves <b>1</b> and arrives
+          at <b>3</b>; the check is a comparison of two printed numbers.</p></div>
+
+      <div class="shot"><img src="assets/qual/gal_breakfast_box_c2_normal.jpg" alt="A breakfast box with tangerines and a nectarine on the left and cereal above banana chips and almonds on the right, under a labelled grid.">
+        <p class="cap"><span class="pill calib">calibration</span> <b>BB-Cereal</b> — normal.
+          The grid is anchored to the compartment, so the boundary between the cereal and the
+          chip-and-almond mix falls in a cell the references agree on.</p></div>
+      <div class="shot"><img src="assets/qual/gal_breakfast_box_c2_anomaly.jpg" alt="The same breakfast box layout under the same labelled grid, with the cereal occupying a different fraction of the right compartment.">
+        <p class="cap"><span class="pill calib">calibration</span> <b>BB-Cereal</b> — violating,
+          <code class="inline">wrong_ratio</code>. The boundary lands in another cell, and the
+          range test is then arithmetic.</p></div>
+
+      <div class="shot"><img src="assets/qual/gal_screw_bag_c2_normal.jpg" alt="A bag of screws, nuts and washers, each screw carrying tick marks along its own axis and each part numbered.">
+        <p class="cap"><span class="pill calib">calibration</span> <b>SB-Length</b> — normal.
+          The ticks run along the screw's <em>own</em> axis, so length is read in cells rather
+          than estimated against the frame.</p></div>
+      <div class="shot"><img src="assets/qual/gal_screw_bag_c2_anomaly.jpg" alt="A bag of screws with the parts numbered and ticks along each screw, where one screw runs past the tick the references end at.">
+        <p class="cap"><span class="pill calib">calibration</span> <b>SB-Length</b> — violating,
+          <code class="inline">screw_too_long</code>. The screw runs past the tick every
+          reference stopped at.</p></div>
+    </div>
+    <p class="tnote">The grid is fitted per <em>constraint</em>, not per category: juice bottle
+      alone carries three calibration rules and gets three different grids, because a grid coarse
+      enough for the loosest of them would miss the tightest.</p>
+
+    <h3 class="sub" id="numbering">6.2 &nbsp; Sequential numbering versus constraint-derived numbering</h3>
+    <p>One violating image (<code class="inline">wrong_cable_location</code>: the cable leaves
+      the top slot on the right and arrives at the bottom slot on the left), one question, three
+      overlays. The figure under each is balanced accuracy on the linking constraint.</p>
+
+    <div class="panels p3">
+      <div class="panel"><img src="assets/qual/num_color.jpg" alt="Two splicing connectors joined by a cable. Each clamp is tinted a distinct colour, but the two connectors use different colours and there are no numbers.">
+        <p class="cap"><b>Colour only</b><small>instances separated, correspondence not expressed</small><span class="n">74.3</span></p></div>
+      <div class="panel lose"><img src="assets/qual/num_som.jpg" alt="The same pair of connectors, clamps numbered one, three and five on the right and two, four and six on the left, in raster order across the whole image.">
+        <p class="cap"><b>SoM · sequential</b><small>1,3,5 ‖ 2,4,6 — the cable runs 1 → 6, and would in a normal image too</small><span class="n">66.7</span></p></div>
+      <div class="panel win"><img src="assets/qual/num_ours.jpg" alt="The same pair of connectors, clamps numbered one, two and three on each side, so corresponding slots carry the same number, and the cable runs from one to three.">
+        <p class="cap"><b>CASCADE++ · constraint-derived</b><small>1,2,3 ‖ 1,2,3 — the cable runs 1 → 3, so the rule fails on its face</small><span class="n">88.3</span></p></div>
+    </div>
+    <p class="tnote">SoM numbers instances in raster order, which is a decision about the
+      <em>image</em>. Here that makes the cable run from <b>1</b> to <b>6</b> — but it would
+      also run between two different numbers in a perfectly normal image, so the number carries
+      no information about the rule at all. Under constraint-derived numbering the same cable
+      runs from <b>1</b> to <b>3</b>, and equality is the whole test. That is why sequential
+      numbering scores <em>below</em> colour with no numbers (66.7 against 74.3): an ID that
+      contradicts the rule is not a missing cue, it is a false one the verifier then trusts.
+      Making the numbering follow the rule rather than the raster is exactly what \(\Psi\) does,
+      and it is worth +21.6 over SoM here.</p>
+
+    <h3 class="sub">6.3 &nbsp; Fixed grid versus reference-calibrated grid</h3>
+    <p>The same violating juice bottle under four alignment guides.</p>
+
+    <div class="panels p4 tallbox">
+      <div class="panel"><img src="assets/qual/grid_viser.jpg" alt="A juice bottle with five red horizontal lines drawn across it at positions unrelated to the liquid surface.">
+        <p class="cap"><b>VISER</b><small>lines re-placed per image — a reference and a query cannot be compared</small></p></div>
+      <div class="panel"><img src="assets/qual/grid_bboxcoords.jpg" alt="A juice bottle with a yellow box around the liquid region, labelled with absolute pixel coordinates at its corners.">
+        <p class="cap"><b>Bbox + coords</b><small>anchored, but reports absolute pixels — nothing calibrates them</small></p></div>
+      <div class="panel"><img src="assets/qual/grid_fixed.jpg" alt="A juice bottle under a coarse uniform grid of about eight rows, whose cell boundaries fall far from the liquid surface.">
+        <p class="cap"><b>Fixed uniform grid</b><small>comparable across images, but its cells ignore the references</small></p></div>
+      <div class="panel win"><img src="assets/qual/grid_calibrated.jpg" alt="The same juice bottle under a fine labelled grid of about twenty-six rows, fitted so the normal liquid surface falls in one cell.">
+        <p class="cap"><b>CASCADE++</b><small>\(w^{\ast}, a^{\ast}\) fitted on the K references</small></p></div>
+    </div>
+    <p class="tnote">An alignment guide has to do two things, and only the last panel does both.
+      It must be <b>anchorable</b> — the same mark means the same thing in a reference and in a
+      query, which rules out VISER — and it must be <b>calibrated</b> — its cells must sit where
+      the normal range actually ends, which rules out both a fixed grid and absolute pixel
+      coordinates. Note that the fixed grid is not merely coarser: its boundaries fall wherever
+      the origin happens to put them, so a normal reading and a violating one can share a cell.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ BIBTEX ════════════════════════════ -->
+<section class="section" id="bibtex">
+  <div class="container prose">
+    <h2 class="head">BibTeX</h2>
+<pre class="term">@inproceedings{kim2026cascade,
   title     = {CASCADE: Constraint-Aware Scaffolded Decomposition
                for Logical Anomaly Detection},
   author    = {Kim, Jinchan and Im, Jinhee and Cho, Hyunsouk},
   booktitle = {IEEE International Conference on Data Mining (ICDM)},
   year      = {2026}
-}</code></pre>
+}</pre>
+  </div>
 </section>
 
-<footer>
-  <p>Figures on this page are derived from the
-    <a href="https://www.mvtec.com/company/research/datasets/mvtec-loco">MVTec LOCO AD</a>
-    dataset (Bergmann et al., IJCV 2022) and carry its
-    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> licence.
-    Constraint wording is quoted from LogicQA (Kwon et al., ACL 2025 Industry).</p>
-  <p>Code is released under the MIT licence; the shipped mask packs and example scaffolds are
-    CC BY-NC-SA 4.0. See <a href="https://github.com/edjjincode/CASCADE/blob/main/LICENSE">LICENSE</a>
-    for which file falls under which.</p>
+<footer class="foot">
+  <div class="container">
+    <p>Images on this page are derived from
+      <a href="https://www.mvtec.com/company/research/datasets/mvtec-loco">MVTec LOCO AD</a>
+      (Bergmann et al., IJCV 2022) and carry its
+      <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> licence.
+      Constraint wording for MVTec-LOCO is quoted from LogicQA (Kwon et al., ACL 2025 Industry);
+      VID-AD constraints are derived from the dataset authors' category specifications.</p>
+    <p>Code is released under the MIT licence; the shipped mask packs and example
+      scaffolds are CC BY-NC-SA 4.0. See
+      <a href="https://github.com/edjjincode/CASCADE/blob/main/LICENSE">LICENSE</a> for which
+      file falls under which. Page template after
+      <a href="https://github.com/eliahuhorwitz/Academic-project-page-template">Horwitz's academic project page</a>,
+      itself after <a href="https://nerfies.github.io">Nerfies</a>.</p>
+  </div>
 </footer>
 
-</div>
+<script>
+/* ── constraint browser ──────────────────────────────────────────── */
+(function () {
+  const body = document.getElementById("cons-body");
+  const state = { dataset: "MVTec-LOCO", kind: "all", cat: "all" };
+  let rows = [];
+
+  const chip = (host, label, key, value) => {
+    const b = document.createElement("button");
+    b.className = "chip" + (state[key] === value ? " on" : "");
+    b.textContent = label;
+    b.onclick = () => { state[key] = value; if (key === "dataset") state.cat = "all"; draw(); };
+    host.appendChild(b);
+    return b;
+  };
+
+  function filters() {
+    for (const id of ["f-dataset", "f-kind", "f-cat"]) document.getElementById(id).innerHTML = "";
+    const d = document.getElementById("f-dataset");
+    for (const v of ["MVTec-LOCO", "VID-AD"]) chip(d, v, "dataset", v);
+
+    const k = document.getElementById("f-kind");
+    chip(k, "all types", "kind", "all");
+    chip(k, "binding", "kind", "binding");
+    chip(k, "calibration", "kind", "calibration");
+
+    const c = document.getElementById("f-cat");
+    chip(c, "all categories", "cat", "all");
+    const seen = new Map();
+    rows.filter(r => r.dataset === state.dataset)
+        .forEach(r => seen.set(r.cat, r.catFull));
+    [...seen].forEach(([k2, full]) => chip(c, full, "cat", k2));
+  }
+
+  const esc = s => String(s).replace(/[&<>]/g, m => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[m]));
+
+  function detail(r) {
+    const shots = Object.entries(r.images).map(([split, src]) =>
+      `<figure><img src="${src}" alt="The ${esc(r.short)} scaffold on a ${split} image">
+         <figcaption>${split}</figcaption></figure>`).join("");
+    const note = r.kind === "calibration"
+      ? `Routed to the <b>alignment</b> scaffold: a grid anchored to the target, with cell width
+         and offset fitted on the three references, so the verifier reports a cell index and the
+         range test happens in code.`
+      : `Routed to the <b>disambiguation</b> scaffold: every instance the rule names gets its own
+         colour and a numeric ID, ordered so that instances the rule pairs share a number.`;
+    return `<td colspan="5">
+       ${shots ? `<div class="detail-grid">${shots}</div>` : ""}
+       <p class="detail-note">${note}${r.targets.length
+         ? ` Targets segmented for it: <b>${r.targets.map(esc).join(", ")}</b>.` : ""}
+         ${r.vidadType ? ` VID-AD calls this a <b>${esc(r.vidadType)}</b> constraint.` : ""}</p></td>`;
+  }
+
+  function draw() {
+    filters();
+    const shown = rows.filter(r =>
+      r.dataset === state.dataset &&
+      (state.kind === "all" || r.kind === state.kind) &&
+      (state.cat === "all" || r.cat === state.cat));
+
+    if (!shown.length) { body.innerHTML = `<tr><td colspan="5" class="empty">Nothing matches those filters.</td></tr>`; return; }
+
+    body.innerHTML = shown.map((r, i) => `
+      <tr class="row" data-i="${i}">
+        <td class="id">${esc(r.short)}</td>
+        <td class="txt">${esc(r.text)}</td>
+        <td><span class="pill ${r.kind === "binding" ? "bind" : "calib"}">${r.kind}</span></td>
+        <td class="tgt">${r.targets.length ? esc(r.targets.join(", ")) : "—"}</td>
+        <td class="chev">＋</td>
+      </tr>
+      <tr class="detail" data-d="${i}" hidden>${detail(r)}</tr>`).join("");
+
+    body.querySelectorAll("tr.row").forEach(tr => tr.onclick = () => {
+      const d = body.querySelector(`tr.detail[data-d="${tr.dataset.i}"]`);
+      d.hidden = !d.hidden;
+      tr.querySelector(".chev").textContent = d.hidden ? "＋" : "−";
+    });
+  }
+
+  fetch("assets/constraints.json")
+    .then(r => r.json())
+    .then(j => { rows = j; draw(); })
+    .catch(() => {
+      body.innerHTML = `<tr><td colspan="5" class="empty">The constraint list loads from
+        <code>assets/constraints.json</code>, which a browser will not fetch over
+        <code>file://</code>. Open this page over http, or read the file directly.</td></tr>`;
+    });
+})();
+</script>
 </body>
 </html>
