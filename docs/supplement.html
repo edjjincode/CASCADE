@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="style.css">
 <script>
 MathJax = {tex:{inlineMath:[['\\(','\\)']], displayMath:[['\\[','\\]']]},
-           options:{skipHtmlTags:['script','noscript','style','textarea','pre','code']}};
+           options:{skipHtmlTags:['script','noscript','style','textarea','code']}};
 </script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
@@ -25,10 +25,9 @@ MathJax = {tex:{inlineMath:[['\\(','\\)']], displayMath:[['\\[','\\]']]},
 <div class="wrap">
 
 <section>
-  <p class="lede">A conference paper has a page limit; a project page does not. Everything below
-    was written for the paper and cut for space — the grid solver's proofs, the reference
-    sensitivity study's figure, and the versions of two probes that were run on three backbones
-    rather than the one the paper had room to print.</p>
+  <p class="lede">A conference paper has a page limit; a project page does not. Both pieces below
+    were written for the paper and cut for space: the two propositions that justify the
+    calibration grid solver, and the figure behind the reference sensitivity study.</p>
   <p class="note">Notation follows the paper: \(w\) is the grid's cell width, \(a\) its offset,
     \(m\) the reading margin and \(w_{\min}\) the legibility floor. Two of the figures were
     drawn before the notation settled and still label the cell width \(\Delta\); it is the same
@@ -126,48 +125,6 @@ MathJax = {tex:{inlineMath:[['\\(','\\)']], displayMath:[['\\[','\\]']]},
     from finitely many references, which is why the parameter converging translates into stable
     accuracy. Beyond \(K = 3\), going to 5 or 10 yields negligible gain, so we fix
     \(K = 3\) — the point where reference acquisition cost and accuracy balance.</p>
-</section>
-
-<section id="backbones">
-  <h2>C &nbsp;·&nbsp; The probes, on all three backbones</h2>
-  <p>The <a href="./#motivation">project page</a> prints one backbone per probe, for room. The
-    full versions are below, and they matter for a reason a single panel cannot show: the
-    failure being diagnosed is a property of the <em>task</em>, not of one model's quirks. The
-    onset differs by backbone; the shape does not.</p>
-
-  <h3>Counting identical instances</h3>
-  <figure>
-    <img src="assets/count3.jpg" alt="Three line charts, one per backbone, of counting accuracy against number of instances n. In each, the identical-instance curve falls away sharply beyond about nine instances while the distinct-colour curve stays near the top.">
-    <figcaption><b>Counting collapses on identical instances, and colour holds it up — on every
-      backbone.</b> Accuracy on identical objects (solid) falls away as the count grows, while
-      the same objects given distinct colours (dashed) stay near ceiling. The onset differs by
-      backbone, but the shape does not.</figcaption>
-  </figure>
-
-  <h3>Reading a length across images</h3>
-  <figure>
-    <img src="assets/scale3.jpg" alt="Violin plots of measured length for three backbones. Within-image readings are tight around the ground truth of 320 pixels; cross-image readings are several times wider, with standard deviations rising from 6.5 to 37.3, 1.2 to 52.0, and 17.7 to 64.1 pixels.">
-    <figcaption><b>Cross-image readings spread on every backbone, and worst where within-image
-      readings are tightest.</b> A bar of true length 320&nbsp;px, read twice off one image
-      (\(\sigma\) = 6.5, 1.2, 17.7&nbsp;px) and off two separate renderings of the same length
-      (\(\sigma\) = 37.3, 52.0, 64.1&nbsp;px) — a spread of 5.7×, 43× and 3.6×. Gemini is the
-      most precise reader within an image and the least transferable across two, which is why
-      precision alone cannot close the gap; only a shared frame of reference can.</figcaption>
-  </figure>
-
-  <h3>Grid form under a shrinking violation</h3>
-  <figure>
-    <img src="assets/grid3.jpg" alt="Three line charts, one per backbone, of balanced accuracy against the violation margin in pixels. The object-centric grid line stays near the top and flat in all three panels, while the comparison, pixel and patch lines fluctuate well below it.">
-    <figcaption><b>Only the object-centric grid holds as the violation shrinks.</b> Comparison,
-      pixel-coordinate and patch forms fluctuate across margins and across backbones; the
-      object-anchored grid stays flat and near ceiling on all three.</figcaption>
-  </figure>
-
-  <p class="note">These are the probes behind the paper's two design claims — that instance
-    conflation is what the disambiguation scaffold has to fix, and that an object-anchored
-    discrete grid is the form the alignment scaffold has to take. Seeing them replicate across
-    three backbones is the evidence that the scaffolds are addressing the task rather than one
-    model.</p>
 </section>
 
 <footer>

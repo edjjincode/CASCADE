@@ -96,33 +96,46 @@ MathJax = {tex: {inlineMath: [['\\(','\\)']]},
       Each one names a repair, and the repairs are different — which is the split CASCADE is
       built on.</p>
 
-    <div class="probes">
-      <figure>
-        <img src="assets/probe_count.jpg" alt="A line chart of count accuracy against the number of instances n. The identical-object curve falls away from 100 percent past n of about nine and reaches 20 percent; the distinct-colour curve stays near the top across the same range.">
+    <div class="deck" id="probes" aria-roledescription="carousel" aria-label="The three probes">
+      <button class="nav prev" aria-label="Previous probe">&#8249;</button>
+      <button class="nav next" aria-label="Next probe">&#8250;</button>
+
+      <figure class="slide" data-i="0">
+        <img src="assets/count3.jpg" alt="Three line charts, one per backbone. Count accuracy against the number of instances n. The identical-object curve falls away from 100 percent past n of about nine and reaches near zero; the distinct-colour curve stays high across the same range.">
         <figcaption><b>Counting.</b> Instances that look alike stop being countable well before
-          the counts a real constraint asks about. The same objects <span class="k">told apart by
-          colour</span> stay near ceiling.<br>
-          <b>Repair:</b> distinguish instances in the picture.</figcaption>
+          the counts a real constraint asks about; the same objects
+          <span class="k">told apart by colour</span> stay near ceiling. The onset differs by
+          backbone, the shape does not.
+          <span class="fix"><b>Repair:</b> distinguish instances in the picture.</span></figcaption>
       </figure>
-      <figure>
-        <img src="assets/probe_scale.jpg" alt="Violin plots of measured length for one backbone. The within-image reading is tight around the ground truth of 320 pixels with standard deviation 6.5; the cross-image reading is far wider with standard deviation 37.3.">
+
+      <figure class="slide" data-i="1" hidden>
+        <img src="assets/scale3.jpg" alt="Violin plots of measured length for three backbones. Within-image readings are tight around the ground truth of 320 pixels; cross-image readings are several times wider, with standard deviations rising from 6.5 to 37.3, 1.2 to 52.0, and 17.7 to 64.1 pixels.">
         <figcaption><b>Measuring.</b> A bar of true length 320&nbsp;px. Read twice off
-          <em>one</em> image the model is consistent; read off two <em>separate</em> renderings
-          of the same length it is not — up to 43× wider.<br>
-          <b>Repair:</b> a frame of reference shared between images.</figcaption>
+          <em>one</em> image the model is consistent (\(\sigma\) = 1.2–17.7&nbsp;px); read off two
+          <em>separate</em> renderings of the same length it is not (37.3–64.1&nbsp;px) — 3.6× to
+          43× wider. Gemini is the most precise reader within an image and the least transferable
+          across two, so precision alone cannot close this.
+          <span class="fix"><b>Repair:</b> a frame of reference shared between images.</span></figcaption>
       </figure>
-      <figure>
-        <img src="assets/probe_grid.jpg" alt="A line chart of balanced accuracy against violation margin. The object-centric grid line sits near 95 percent and is flat; comparison, pixel and patch strategies sit between 40 and 80 percent and fluctuate.">
-        <figcaption><b>Judging a range.</b> Comparison, pixel values and patch indices all
-          degrade as the violation shrinks; a cell index read off a
-          <span class="k">grid anchored to the object</span> does not.<br>
-          <b>Repair:</b> make the frame of reference discrete.</figcaption>
+
+      <figure class="slide" data-i="2" hidden>
+        <img src="assets/grid3.jpg" alt="Three line charts of balanced accuracy against violation margin. The object-centric grid line sits near 95 to 100 percent and is flat; comparison, pixel and patch strategies sit between 40 and 80 percent and fluctuate.">
+        <figcaption><b>Judging a range.</b> Comparison, pixel values and patch indices all degrade
+          as the violation shrinks; a cell index read off a
+          <span class="k">grid anchored to the object</span> does not, on any backbone.
+          <span class="fix"><b>Repair:</b> make that frame of reference discrete.</span></figcaption>
       </figure>
+
+      <div class="dots" role="tablist" aria-label="Choose a probe">
+        <button role="tab" aria-selected="true"  aria-controls="probes">Counting</button>
+        <button role="tab" aria-selected="false" aria-controls="probes">Measuring</button>
+        <button role="tab" aria-selected="false" aria-controls="probes">Judging a range</button>
+      </div>
     </div>
-    <p class="tnote">One backbone shown (GPT-5-image-mini). All three probes replicate on
-      Gemini-3.1-Flash-Lite and Qwen3-VL-32B — the full panels are in the
-      <a href="supplement.html#backbones">supplementary</a>, and they matter, because what is
-      being diagnosed is a property of the task rather than of one model.</p>
+    <p class="tnote">Each panel within a figure is a different backbone — GPT-5-image-mini,
+      Gemini-3.1-Flash-Lite, Qwen3-VL-32B. That they agree is the point: what is being diagnosed
+      is a property of the task, not of one model's quirks.</p>
   </div>
 </section>
 
@@ -470,6 +483,34 @@ normal cell = [285, 350] px    <span class="c">// query endpoint outside it &rar
 </footer>
 
 <script>
+/* ── the motivation deck: three probes, one at a time ────────────── */
+(function () {
+  const deck   = document.getElementById("probes");
+  if (!deck) return;
+  const slides = [...deck.querySelectorAll(".slide")];
+  const dots   = [...deck.querySelectorAll(".dots button")];
+  let at = 0;
+
+  function show(i) {
+    at = (i + slides.length) % slides.length;
+    slides.forEach((s, k) => { s.hidden = k !== at; });
+    dots.forEach((d, k) => d.setAttribute("aria-selected", k === at));
+  }
+
+  deck.querySelector(".prev").onclick = () => show(at - 1);
+  deck.querySelector(".next").onclick = () => show(at + 1);
+  dots.forEach((d, k) => d.onclick = () => show(k));
+
+  // arrow keys, but only while the deck is the thing being looked at
+  deck.tabIndex = 0;
+  deck.addEventListener("keydown", e => {
+    if (e.key === "ArrowLeft")  { show(at - 1); e.preventDefault(); }
+    if (e.key === "ArrowRight") { show(at + 1); e.preventDefault(); }
+  });
+
+  show(0);
+})();
+
 /* ── constraint browser ──────────────────────────────────────────── */
 (function () {
   const body = document.getElementById("cons-body");
